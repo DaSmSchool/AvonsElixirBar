@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=3 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Envirnoments/tavern.blend" id="1_52mtd"]
+[ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/cauldron.tscn" id="2_oywtu"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Tavern" type="Node3D"]
 
 [node name="tavern" parent="." instance=ExtResource("1_52mtd")]
+
+[node name="Cauldron" parent="." instance=ExtResource("2_oywtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4729, 3.33719, -4.72229)
+
+[node name="Cauldron2" parent="." instance=ExtResource("2_oywtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -6.722)
+
+[node name="Cauldron3" parent="." instance=ExtResource("2_oywtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -8.722)
+
+[node name="Cauldron4" parent="." instance=ExtResource("2_oywtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -10.722)
+
+[node name="Cauldron5" parent="." instance=ExtResource("2_oywtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -12.722)

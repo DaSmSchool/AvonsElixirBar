@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://vloa7nwhjpmb"]
+
+[ext_resource type="PackedScene" uid="uid://ogvuupmf3bc0" path="res://blends/Objects/cauldron.blend" id="1_tquwd"]
+
+[node name="Cauldron" type="Node3D"]
+
+[node name="cauldron" parent="." instance=ExtResource("1_tquwd")]
