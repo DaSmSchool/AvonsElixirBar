@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2dndps1rjvde"]
+
+[ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Envirnoments/tavern.blend" id="1_52mtd"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="tavern" parent="." instance=ExtResource("1_52mtd")]
