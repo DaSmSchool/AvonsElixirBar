@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://di2ctaqhk1gy2"]
+
+[ext_resource type="PackedScene" uid="uid://cytiv0h6i7syx" path="res://blends/Objects/potion.blend" id="1_nwogf"]
+
+[node name="potion" instance=ExtResource("1_nwogf")]
