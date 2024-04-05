@@ -47,4 +47,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 1.04909)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
 
 [node name="ViewCam" parent="." instance=ExtResource("4_rpvd2")]
+transform = Transform3D(1.27955e-07, 0.492424, -0.870356, 2.33627e-08, 0.870356, 0.492424, 1, -8.33418e-08, 9.98617e-08, 16.892, 7.116, 5.13215)
+
+[node name="CameraViewSpots" type="Node" parent="."]
+
+[node name="Bar_SeatView" type="Node3D" parent="CameraViewSpots"]
 transform = Transform3D(-4.37114e-08, -0.267238, 0.96363, 0, 0.96363, 0.267238, -1, 1.16814e-08, -4.21216e-08, 16.892, 7.116, -3.275)
+
+[node name="Bar_CauldronView" type="Node3D" parent="CameraViewSpots"]
+transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356, 0.492424, 1, -6.40197e-08, 6.571e-08, 16.892, 7.116, 5.13215)
