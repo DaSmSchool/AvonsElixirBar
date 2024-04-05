@@ -1,29 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=6 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Envirnoments/tavern.blend" id="1_52mtd"]
 [ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/seat.tscn" id="2_e8n62"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/cauldron.tscn" id="2_oywtu"]
+[ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_rpvd2"]
+
+[sub_resource type="Environment" id="Environment_wy8pr"]
+background_mode = 1
+background_color = Color(0.0470588, 0.113725, 0.211765, 1)
 
 [node name="Tavern" type="Node3D"]
 
 [node name="tavern" parent="." instance=ExtResource("1_52mtd")]
 
 [node name="Cauldron" parent="." instance=ExtResource("2_oywtu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4729, 3.33719, -4.72229)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4729, 3.33719, 9.27771)
 
 [node name="Cauldron2" parent="." instance=ExtResource("2_oywtu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -6.722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 7.278)
 
 [node name="Cauldron3" parent="." instance=ExtResource("2_oywtu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -8.722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 5.278)
 
 [node name="Cauldron4" parent="." instance=ExtResource("2_oywtu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -10.722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 3.278)
 
 [node name="Cauldron5" parent="." instance=ExtResource("2_oywtu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, -12.722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 1.278)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wy8pr")
 
 [node name="Seat1" parent="." instance=ExtResource("2_e8n62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
@@ -39,3 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 1.04909)
 
 [node name="Seat5" parent="." instance=ExtResource("2_e8n62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
+
+[node name="ViewCam" parent="." instance=ExtResource("4_rpvd2")]
+transform = Transform3D(-4.37114e-08, -0.267238, 0.96363, 0, 0.96363, 0.267238, -1, 1.16814e-08, -4.21216e-08, 16.892, 7.116, -3.275)
