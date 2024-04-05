@@ -2,6 +2,8 @@ extends Camera3D
 
 @export var maxRayDist = 2000
 
+@export var raycast_result = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -22,7 +24,7 @@ func ScreenPointToRay():
 	ray_query.from = from
 	ray_query.to = to
 	ray_query.collide_with_areas = true
-	var raycast_result = space.intersect_ray(ray_query)
+	raycast_result = space.intersect_ray(ray_query)
 	print(raycast_result)
 	if (raycast_result.has("position")):
 		return raycast_result["position"]
