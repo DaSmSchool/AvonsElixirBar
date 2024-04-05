@@ -25,6 +25,5 @@ func ScreenPointToRay():
 	ray_query.to = to
 	ray_query.collide_with_areas = true
 	raycast_result = space.intersect_ray(ray_query)
-	print(raycast_result)
 	if (raycast_result.has("position")):
 		return raycast_result["position"]

@@ -1,6 +1,6 @@
 extends Node
 
-var hasMouseOver = false
+@export var hasMouseOver = false
 @export var staticColCheck : StaticBody3D
 var camera
 var colID
@@ -18,10 +18,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	if camera != null and camera.raycast_result.has("collider_id"):
 		hasMouseOver = camera.raycast_result["collider_id"] == colID
-		
-	print(get_parent().name + ": " + str(hasMouseOver))
-	print(colID)
-	print("-----------------")
