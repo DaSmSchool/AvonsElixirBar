@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgwvfv8xt628y"]
+[gd_scene load_steps=3 format=3 uid="uid://cgwvfv8xt628y"]
 
 [ext_resource type="PackedScene" uid="uid://bu4ncxtjhy8st" path="res://blends/Objects/seat.blend" id="1_x87mq"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_vo7ny"]
 
 [node name="Seat" instance=ExtResource("1_x87mq")]
 
 [node name="SeatPosition" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.32304, 0)
+
+[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("staticColCheck") instance=ExtResource("2_vo7ny")]
+staticColCheck = NodePath("../Seat /StaticBody3D")
