@@ -23,7 +23,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	ScreenPointToRay()
-	print(camPoints)
 	updateCamViewSwitch(delta)
 	if camPoints.size() != 0:
 		position = oldCameraTransitionPosition.lerp(camPoints[camIndex].position, sin(camSwitchProg))
@@ -31,7 +30,6 @@ func _process(delta):
 
 func ScreenPointToRay():
 	var camera = get_tree().root.get_camera_3d()
-	print(camera)
 	var mouse_pos = get_viewport().get_mouse_position()
 	var from = camera.project_ray_origin(mouse_pos)
 	var to = from + camera.project_ray_normal(mouse_pos) * maxRayDist
