@@ -24,9 +24,7 @@ func _ready():
 func _process(delta):
 	ScreenPointToRay()
 	updateCamViewSwitch(delta)
-	if camPoints.size() != 0:
-		position = oldCameraTransitionPosition.lerp(camPoints[camIndex].position, sin(camSwitchProg))
-		rotation = oldCameraTransitionRotation.lerp(camPoints[camIndex].rotation, sin(camSwitchProg))
+	
 
 func ScreenPointToRay():
 	var camera = get_tree().root.get_camera_3d()
