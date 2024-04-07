@@ -6,7 +6,7 @@ extends Camera3D
 
 @export var camPointsParent : Node
 var camPoints = {}
-var camIndex = 1
+var camIndex = 0
 var camSwitchProg = 0
 var oldCameraTransitionPosition
 var oldCameraTransitionRotation
@@ -24,15 +24,7 @@ func _ready():
 func _process(delta):
 	ScreenPointToRay()
 	print(camPoints)
-	camSwitchProg+=delta*4
-	if camSwitchProg > PI/2:
-		camSwitchProg = 0
-		camIndex += 1
-		if camIndex >= camPoints.size():
-			camIndex = 0
-		oldCameraTransitionPosition = position
-		oldCameraTransitionRotation = rotation
-	
+	updateCamViewSwitch(delta)
 	if camPoints.size() != 0:
 		position = oldCameraTransitionPosition.lerp(camPoints[camIndex].position, sin(camSwitchProg))
 		rotation = oldCameraTransitionRotation.lerp(camPoints[camIndex].rotation, sin(camSwitchProg))
@@ -51,3 +43,31 @@ func ScreenPointToRay():
 	raycast_result = space.intersect_ray(ray_query)
 	if (raycast_result.has("position")):
 		return raycast_result["position"]
+
+func initTransitionToNextView():
+	camSwitchProg = 0
+	oldCameraTransitionPosition = position
+	oldCameraTransitionRotation = rotation
+	
+func viewIndUpdate(amnt):
+	camIndex += amnt
+	if (camIndex < 0):
+		camIndex += camPoints.size()
+	if camIndex >= camPoints.size():
+		camIndex -= camPoints.size()
+
+func updateCamViewSwitch(delta):
+	if camSwitchProg < PI/2:
+		camSwitchProg += delta*4
+		position = oldCameraTransitionPosition.lerp(camPoints[camIndex].position, sin(camSwitchProg))
+		rotation = oldCameraTransitionRotation.lerp(camPoints[camIndex].rotation, sin(camSwitchProg))
+	else:
+		camSwitchProg = PI/2
+
+func _on_hud_left_press():
+	viewIndUpdate(-1)
+	initTransitionToNextView()
+
+func _on_hud_right_press():
+	viewIndUpdate(1)
+	initTransitionToNextView()

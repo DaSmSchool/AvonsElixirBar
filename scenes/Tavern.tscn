@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=7 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Envirnoments/tavern.blend" id="1_52mtd"]
 [ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/seat.tscn" id="2_e8n62"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/cauldron.tscn" id="2_oywtu"]
 [ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_rpvd2"]
+[ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_wq0gf"]
 
 [sub_resource type="Environment" id="Environment_wy8pr"]
 background_mode = 1
@@ -63,3 +64,8 @@ transform = Transform3D(-4.37114e-08, 0.177085, -0.984196, 0, 0.984196, 0.177085
 
 [node name="Bar_CauldronView" type="Node3D" parent="CameraViewSpots"]
 transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356, 0.492424, 1, -6.40197e-08, 6.571e-08, 16.892, 7.116, 5.13215)
+
+[node name="HUD" parent="." instance=ExtResource("5_wq0gf")]
+
+[connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
+[connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]
