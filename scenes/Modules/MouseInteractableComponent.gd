@@ -1,4 +1,5 @@
-extends Node
+class_name MouseInteractable
+extends Component
 
 @export var hasMouseOver = false
 @export var staticColCheck : StaticBody3D
@@ -10,7 +11,6 @@ func _ready():
 	var read_camera = get_tree().root.get_camera_3d()
 	assert(read_camera.name == "ViewCam", "You should be using a ViewCam scene! Or you just renamed your Camera3D object.")
 	camera = read_camera
-		
 	
 	if (staticColCheck != null):
 		colID = staticColCheck.get_instance_id()
