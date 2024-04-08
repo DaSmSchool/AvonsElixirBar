@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c8bsix4p1vn25"
-path="res://.godot/imported/tavern.blend-5559dcc965658414ceb947d0bb5d3663.scn"
+path="res://.godot/imported/tavern.blend-21c70660391a61121335cff46a3f9865.scn"
 
 [deps]
 
-source_file="res://blends/Envirnoments/tavern.blend"
-dest_files=["res://.godot/imported/tavern.blend-5559dcc965658414ceb947d0bb5d3663.scn"]
+source_file="res://blends/Environments/tavern.blend"
+dest_files=["res://.godot/imported/tavern.blend-21c70660391a61121335cff46a3f9865.scn"]
 
 [params]
 
