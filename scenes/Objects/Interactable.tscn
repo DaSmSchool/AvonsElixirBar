@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b62jdmgsiv2cb"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Interactable.gd" id="1_mqiix"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_cmw4f"]
+
+[node name="Interactable" type="Node3D"]
+script = ExtResource("1_mqiix")
+
+[node name="MouseInteractableComponent" parent="." instance=ExtResource("2_cmw4f")]

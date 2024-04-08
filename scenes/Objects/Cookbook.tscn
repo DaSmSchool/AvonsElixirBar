@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnixajqe7o5ut"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Cookbook.gd" id="1_mv4gm"]
+
+[node name="Cookbook" type="Node3D"]
+script = ExtResource("1_mv4gm")

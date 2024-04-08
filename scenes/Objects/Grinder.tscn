@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djievddjlpffp"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Grinder.gd" id="1_7qnjh"]
+
+[node name="Grinder" type="Node3D"]
+script = ExtResource("1_7qnjh")

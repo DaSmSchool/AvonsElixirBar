@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://br1u80y1kolfv"]
+
+[ext_resource type="Script" path="res://scenes/Objects/EnchantmentStation.gd" id="1_q3i6b"]
+
+[node name="EnchantmentStation" type="Node3D"]
+script = ExtResource("1_q3i6b")
