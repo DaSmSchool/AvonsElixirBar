@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_52mtd"]
-[ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/seat.tscn" id="2_e8n62"]
-[ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/cauldron.tscn" id="2_oywtu"]
+[ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/seat.tscn" id="2_e8n62"]
+[ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_oywtu"]
 [ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_rpvd2"]
 [ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_wq0gf"]
 
