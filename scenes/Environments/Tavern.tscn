@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2dndps1rjvde"]
 
-[ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_52mtd"]
-[ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/seat.tscn" id="2_e8n62"]
-[ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_oywtu"]
-[ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_rpvd2"]
-[ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_wq0gf"]
+[ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_1ak4i"]
+[ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_do6pd"]
+[ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/seat.tscn" id="3_bx3d4"]
+[ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_hqwv2"]
+[ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_ljkx7"]
 
 [sub_resource type="Environment" id="Environment_wy8pr"]
 background_mode = 1
@@ -12,42 +12,42 @@ background_color = Color(0.0470588, 0.113725, 0.211765, 1)
 
 [node name="Tavern" type="Node3D"]
 
-[node name="tavern" parent="." instance=ExtResource("1_52mtd")]
+[node name="tavern" parent="." instance=ExtResource("1_1ak4i")]
 
-[node name="Cauldron" parent="." instance=ExtResource("2_oywtu")]
+[node name="Cauldron" parent="." instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4729, 3.33719, 9.27771)
 
-[node name="Cauldron2" parent="." instance=ExtResource("2_oywtu")]
+[node name="Cauldron2" parent="." instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 7.278)
 
-[node name="Cauldron3" parent="." instance=ExtResource("2_oywtu")]
+[node name="Cauldron3" parent="." instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 5.278)
 
-[node name="Cauldron4" parent="." instance=ExtResource("2_oywtu")]
+[node name="Cauldron4" parent="." instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 3.278)
 
-[node name="Cauldron5" parent="." instance=ExtResource("2_oywtu")]
+[node name="Cauldron5" parent="." instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 1.278)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wy8pr")
 
-[node name="Seat1" parent="." instance=ExtResource("2_e8n62")]
+[node name="Seat1" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
 
-[node name="Seat2" parent="." instance=ExtResource("2_e8n62")]
+[node name="Seat2" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -6.95091)
 
-[node name="Seat3" parent="." instance=ExtResource("2_e8n62")]
+[node name="Seat3" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -2.95091)
 
-[node name="Seat4" parent="." instance=ExtResource("2_e8n62")]
+[node name="Seat4" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 1.04909)
 
-[node name="Seat5" parent="." instance=ExtResource("2_e8n62")]
+[node name="Seat5" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
 
-[node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_rpvd2")]
+[node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 15.597, 10.051, -8.603)
 camPointsParent = NodePath("../CameraViewSpots")
 
@@ -65,7 +65,7 @@ transform = Transform3D(-4.37114e-08, 0.177085, -0.984196, 0, 0.984196, 0.177085
 [node name="Bar_CauldronView" type="Node3D" parent="CameraViewSpots"]
 transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356, 0.492424, 1, -6.40197e-08, 6.571e-08, 16.892, 7.116, 5.13215)
 
-[node name="HUD" parent="." instance=ExtResource("5_wq0gf")]
+[node name="HUD" parent="." instance=ExtResource("5_ljkx7")]
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]
