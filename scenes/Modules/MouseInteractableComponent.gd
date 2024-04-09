@@ -3,11 +3,13 @@ extends Component
 
 @export var hasMouseOver = false
 @export var staticColCheck : StaticBody3D
+@export var raycastResult = {}
 var camera
 var colID
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super._ready()
 	var read_camera = get_tree().root.get_camera_3d()
 	assert(read_camera.name == "ViewCam", "You should be using a ViewCam scene! Or you just renamed your Camera3D object.")
 	camera = read_camera
@@ -20,3 +22,10 @@ func _ready():
 func _process(delta):
 	if camera != null and camera.raycast_result.has("collider_id"):
 		hasMouseOver = camera.raycast_result["collider_id"] == colID
+		raycastResult = camera.raycast_result
+		if (hasMouseOver): 
+			print(raycastResult)
+		
+	else:
+		raycastResult = {}
+	
