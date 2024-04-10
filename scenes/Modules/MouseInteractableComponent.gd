@@ -1,6 +1,9 @@
 class_name MouseInteractable
 extends Component
 
+signal left_clicked
+signal right_clicked
+
 @export var hasMouseOver = false
 @export var staticColCheck : StaticBody3D
 @export var raycastResult = {}
@@ -24,6 +27,11 @@ func _process(delta):
 		hasMouseOver = camera.raycast_result["collider_id"] == colID
 		raycastResult = camera.raycast_result
 		if (hasMouseOver): 
+			if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+				emit_signal("left_clicked", raycastResult["collider"])
+				get_node(raycastResult[colID])
+			if (Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
+				emit_signal("right_clicked", raycastResult["collider"])
 			print(raycastResult)
 		
 	else:
