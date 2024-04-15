@@ -8,5 +8,5 @@
 [node name="SeatPosition" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.32304, 0)
 
-[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("staticColCheck") instance=ExtResource("2_vo7ny")]
-staticColCheck = NodePath("../Seat /StaticBody3D")
+[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("colCheck") instance=ExtResource("2_vo7ny")]
+colCheck = NodePath("../Seat /StaticBody3D")
