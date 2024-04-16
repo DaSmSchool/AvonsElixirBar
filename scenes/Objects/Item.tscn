@@ -4,6 +4,3 @@
 
 [node name="Item" type="Node3D"]
 script = ExtResource("1_vgcnn")
-
-[connection signal="just_left_clicked" from="." to="." method="_on_just_left_clicked"]
-[connection signal="just_right_clicked" from="." to="." method="_on_just_right_clicked"]

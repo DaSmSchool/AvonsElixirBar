@@ -13,16 +13,19 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	if !mouseRay.is_empty():
-		if holdingItem == null:
-			position = position
-		elif holdingItem == self:
+		holding_item_logic()
+
+func holding_item_logic():
+	if holdingItem == null:
+		position = position
+	elif holdingItem == self:
+		if (Station.hoveringStation == null):
 			position = mouseRay["position"]
-			if Input.is_action_just_pressed("action"):
-				holdingItem = null
-				itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
+		else:
+			position = Station.hoveringStation.itemSpotMarker.global_position
 
 
-func _on_just_left_clicked():
+func on_just_left_clicked():
 	print("Hi there!")
 	print(mouseRay["collider"])
 	print(itemCollisionParent)
@@ -36,8 +39,13 @@ func _on_just_left_clicked():
 				print("Self!")
 			else:
 				print("Mix!")
+		else:
+			print("gh...")
+			holdingItem = null
+			itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
+
 	print(holdingItem)
 
 
-func _on_just_right_clicked():
+func on_just_right_clicked():
 	pass # Replace with function body.

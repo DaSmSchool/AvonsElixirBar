@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://djievddjlpffp"]
+[gd_scene load_steps=3 format=3 uid="uid://djievddjlpffp"]
 
 [ext_resource type="Script" path="res://scenes/Objects/Grinder.gd" id="1_7qnjh"]
+[ext_resource type="PackedScene" uid="uid://hepohxnwlfrs" path="res://blends/Objects/grinder.blend" id="2_swqw4"]
 
-[node name="Grinder" type="Node3D"]
+[node name="grinder" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("2_swqw4")]
 script = ExtResource("1_7qnjh")
+stationCollisionParent = NodePath("Bowl /StaticBody3D")
+itemSpotMarker = NodePath("Mark")

@@ -31,24 +31,35 @@ func _ready():
 func _process(delta):
 	mouseRay = instMouseInteract.raycastResult
 	if (instMouseInteract.clickResults["just_press_left"]):
-		_on_just_left_clicked()
+		print("xcv?!")
+		just_left_clicked.emit()
+		on_just_left_clicked()
+	if (instMouseInteract.clickResults["just_press_right"]):
+		print("tgasd!")
+		just_right_clicked.emit()
+		on_just_right_clicked()
+	if (instMouseInteract.clickResults["press_left"]):
+		print("hi!")
+		left_clicked.emit()
+		on_left_clicked()
+	if (instMouseInteract.clickResults["press_right"]):
+		print("tg!")
+		right_clicked.emit()
+		on_right_clicked()
+
+func on_just_left_clicked():
+	pass
+	
+	
+func on_just_right_clicked():
+	pass
+	
+	
+func on_left_clicked():
+	pass
 
 
-func _on_left_clicked():
-	print("hi!")
-	left_clicked.emit()
-
-
-func _on_right_clicked():
-	print("tg!")
-	right_clicked.emit()
-
-
-func _on_just_left_clicked():
-	print("xcv?!")
-	just_left_clicked.emit()
-
-
-func _on_just_right_clicked():
-	print("tgasd!")
-	just_right_clicked.emit()
+func on_right_clicked():
+	pass
+	
+	

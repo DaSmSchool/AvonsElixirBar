@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=9 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_1ak4i"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_do6pd"]
 [ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/seat.tscn" id="3_bx3d4"]
 [ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_hqwv2"]
 [ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_ljkx7"]
+[ext_resource type="PackedScene" uid="uid://djievddjlpffp" path="res://scenes/Objects/Grinder.tscn" id="5_ntxo5"]
 [ext_resource type="PackedScene" uid="uid://di2ctaqhk1gy2" path="res://scenes/Objects/potion.tscn" id="6_fng3w"]
 
 [sub_resource type="Environment" id="Environment_wy8pr"]
@@ -50,6 +51,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
 
 [node name="potion" parent="." instance=ExtResource("6_fng3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 5.68849, -14.0308)
+
+[node name="Grinder" parent="." instance=ExtResource("5_ntxo5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -8.78996)
 
 [node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 15.597, 10.051, -8.603)

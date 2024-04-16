@@ -1,11 +1,26 @@
 extends Interactable
 class_name Station
 
+signal item_hovering(station:Station)
+
+@export var stationCollisionParent : Node
+@export var itemSpotMarker : Node3D
+static var hoveringStation : Station
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	super._ready()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	super._process(delta)
+	if !mouseRay.is_empty():
+		var hoverObj = mouseRay["collider"].get_parent().get_parent()
+		if (hoverObj is Station):
+			print("IN!!")
+			if (hoverObj == self):
+				hoveringStation = self
+		else:
+			print("OUT!!")
+			hoveringStation = null
