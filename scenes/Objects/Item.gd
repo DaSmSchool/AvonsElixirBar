@@ -2,6 +2,9 @@ extends Interactable
 class_name Item
 
 static var holdingItem : Item
+
+var itemColor : Color
+
 @export var itemCollisionParent : Node
 
 # Called when the node enters the scene tree for the first time.
