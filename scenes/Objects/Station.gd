@@ -18,9 +18,9 @@ func _process(delta):
 	if !mouseRay.is_empty():
 		var hoverObj = mouseRay["collider"].get_parent().get_parent()
 		if (hoverObj is Station):
-			print("IN!!")
+			#print("IN!!")
 			if (hoverObj == self):
 				hoveringStation = self
 		else:
-			print("OUT!!")
+			#print("OUT!!")
 			hoveringStation = null
