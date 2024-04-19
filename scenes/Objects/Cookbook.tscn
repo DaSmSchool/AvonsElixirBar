@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnixajqe7o5ut"]
 
 [ext_resource type="PackedScene" uid="uid://cqghkamn0rr23" path="res://blends/Objects/cookbook.blend" id="1_n6gkx"]
-[ext_resource type="Script" path="res://cookbook.gd" id="2_2ddoj"]
+[ext_resource type="Script" path="res://scenes/Objects/Cookbook.gd" id="2_qvgce"]
 
-[node name="cookbook" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("1_n6gkx")]
-script = ExtResource("2_2ddoj")
-stationCollisionParent = NodePath("Cookbook /StaticBody3D")
-itemSpotMarker = NodePath("Spot")
+[node name="cookbook" instance=ExtResource("1_n6gkx")]
+script = ExtResource("2_qvgce")
