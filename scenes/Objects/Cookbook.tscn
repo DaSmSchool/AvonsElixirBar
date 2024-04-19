@@ -3,5 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cqghkamn0rr23" path="res://blends/Objects/cookbook.blend" id="1_n6gkx"]
 [ext_resource type="Script" path="res://scenes/Objects/Cookbook.gd" id="2_qvgce"]
 
-[node name="cookbook" instance=ExtResource("1_n6gkx")]
+[node name="cookbook" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("1_n6gkx")]
 script = ExtResource("2_qvgce")
+stationCollisionParent = NodePath("Cookbook /StaticBody3D")
+itemSpotMarker = NodePath("Spot")
