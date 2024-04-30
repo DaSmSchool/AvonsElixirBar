@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=11 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_1ak4i"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_do6pd"]
+[ext_resource type="Material" uid="uid://bke16plupyout" path="res://materials/tavernwood.material" id="2_fdtsa"]
 [ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/seat.tscn" id="3_bx3d4"]
 [ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/view_cam.tscn" id="4_hqwv2"]
 [ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_ljkx7"]
@@ -16,6 +17,36 @@ background_color = Color(0.0470588, 0.113725, 0.211765, 1)
 [node name="Tavern" type="Node3D"]
 
 [node name="tavern" parent="." instance=ExtResource("1_1ak4i")]
+
+[node name="TarvernBody " parent="tavern" index="0"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="Table - col" parent="tavern" index="1"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="BarForntShelf " parent="tavern" index="2"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="BarBackShelf " parent="tavern" index="3"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="Cube_004 " parent="tavern" index="4"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="BarSideShelf_001 " parent="tavern" index="6"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="Shelf1 " parent="tavern" index="7"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="BarSideShelf_001 _002" parent="tavern" index="8"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="Shelf2 " parent="tavern" index="9"]
+surface_material_override/0 = ExtResource("2_fdtsa")
+
+[node name="Shelf3 " parent="tavern" index="10"]
+surface_material_override/0 = ExtResource("2_fdtsa")
 
 [node name="HUD" parent="." instance=ExtResource("5_ljkx7")]
 
@@ -82,3 +113,5 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.817
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]
+
+[editable path="tavern"]

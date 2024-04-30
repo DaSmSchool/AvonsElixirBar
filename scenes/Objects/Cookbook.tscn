@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnixajqe7o5ut"]
+[gd_scene load_steps=5 format=3 uid="uid://cnixajqe7o5ut"]
 
 [ext_resource type="PackedScene" uid="uid://cqghkamn0rr23" path="res://blends/Objects/cookbook.blend" id="1_n6gkx"]
 [ext_resource type="Script" path="res://scenes/Objects/Cookbook.gd" id="2_qvgce"]
+[ext_resource type="Material" uid="uid://dtinx3l3od7p2" path="res://materials/cookbookcover.material" id="3_8feqb"]
+[ext_resource type="Material" uid="uid://dvgqq4jx1nosg" path="res://materials/toonmaterial.material" id="3_87lvc"]
 
 [node name="cookbook" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("1_n6gkx")]
 script = ExtResource("2_qvgce")
 stationCollisionParent = NodePath("Cookbook /StaticBody3D")
 itemSpotMarker = NodePath("Spot")
+
+[node name="Cookbook " parent="." index="0"]
+surface_material_override/0 = ExtResource("3_8feqb")
+surface_material_override/1 = ExtResource("3_87lvc")

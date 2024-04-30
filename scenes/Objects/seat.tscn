@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgwvfv8xt628y"]
+[gd_scene load_steps=5 format=3 uid="uid://cgwvfv8xt628y"]
 
 [ext_resource type="PackedScene" uid="uid://bu4ncxtjhy8st" path="res://blends/Objects/seat.blend" id="1_x87mq"]
+[ext_resource type="Material" uid="uid://cwak8h4rgpoix" path="res://materials/seatwood.material" id="2_d2g2j"]
 [ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_vo7ny"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu00i"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.207843, 0.207843, 0.207843, 1)
+roughness = 0.0
+rim_enabled = true
+
 [node name="Seat" instance=ExtResource("1_x87mq")]
+
+[node name="Seat " parent="." index="0"]
+surface_material_override/0 = ExtResource("2_d2g2j")
+surface_material_override/1 = SubResource("StandardMaterial3D_xu00i")
 
 [node name="SeatPosition" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.32304, 0)
