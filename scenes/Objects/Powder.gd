@@ -15,6 +15,7 @@ func item_interact(itemHit : Item):
 		print(itemHit.itemColor)
 		itemHit.update_item_color()
 		holdingItem = null
+		itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
 		hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

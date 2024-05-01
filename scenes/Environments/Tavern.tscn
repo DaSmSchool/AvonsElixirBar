@@ -113,10 +113,34 @@ transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356,
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.8179, 3.3387, -13.8387)
 
 [node name="powder" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8618, 6.0212, -14.0146)
 
 [node name="powder2" parent="." instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 6, -14)
+
+[node name="powder3" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5768, 7.68849, -14.4722)
+
+[node name="powder4" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9652, 7.68849, -14.1039)
+
+[node name="powder5" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
+
+[node name="powder6" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5433, 7.68849, -13.7709)
+
+[node name="powder7" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00308923, 0, 0.00308923, 0.999995, 11.9064, 9.68849, -13.9253)
+
+[node name="powder8" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3386, 9.68849, -14.0262)
+
+[node name="powder9" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5026, 9.68849, -14.016)
+
+[node name="powder10" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]

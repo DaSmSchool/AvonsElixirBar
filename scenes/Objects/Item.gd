@@ -53,8 +53,13 @@ func holding_item_logic():
 				item_interact(hitNode)
 			elif hitNode.get_parent() is Item:
 				item_interact(hitNode.get_parent())
-			holdingItem = null
-			itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
+			
+			if visible:
+				let_item_go()
+
+func let_item_go():
+	holdingItem = null
+	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
 
 
 func item_interact(itemHit : Item):
