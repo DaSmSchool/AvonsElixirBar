@@ -1,5 +1,6 @@
 ## Describes an action performed onto an Item.
 extends Node
+class_name ItemAction
 
 ## Set to true if this action hasn't actually been performed. 
 ##[br]

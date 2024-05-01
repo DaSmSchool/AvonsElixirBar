@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=12 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://blends/Environments/tavern.blend" id="1_1ak4i"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/cauldron.tscn" id="2_do6pd"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djievddjlpffp" path="res://scenes/Objects/Grinder.tscn" id="5_ntxo5"]
 [ext_resource type="PackedScene" uid="uid://di2ctaqhk1gy2" path="res://scenes/Objects/potion.tscn" id="6_fng3w"]
 [ext_resource type="PackedScene" uid="uid://cnixajqe7o5ut" path="res://scenes/Objects/Cookbook.tscn" id="8_yib0v"]
+[ext_resource type="PackedScene" uid="uid://du6sqhyt6bxcf" path="res://scenes/Objects/Powder.tscn" id="10_r4a1q"]
 
 [sub_resource type="Environment" id="Environment_wy8pr"]
 background_mode = 1
@@ -110,6 +111,12 @@ transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356,
 
 [node name="cookbook" parent="." instance=ExtResource("8_yib0v")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.8179, 3.3387, -13.8387)
+
+[node name="powder" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6, -14)
+
+[node name="powder2" parent="." instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 6, -14)
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]

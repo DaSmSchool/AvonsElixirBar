@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://du6sqhyt6bxcf"]
+
+[ext_resource type="PackedScene" uid="uid://brn3xjjk1li3l" path="res://blends/Objects/powder.blend" id="1_54yu1"]
+[ext_resource type="Script" path="res://scenes/Objects/Powder.gd" id="2_4um3h"]
+[ext_resource type="Material" uid="uid://bi8ienlkwmw5a" path="res://materials/powder.material" id="3_0t63a"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="3_xbkqd"]
+
+[node name="powder" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_54yu1")]
+script = ExtResource("2_4um3h")
+itemCollisionParent = NodePath("Powder /StaticBody3D")
+
+[node name="Powder " parent="." index="0"]
+surface_material_override/0 = ExtResource("3_0t63a")
+
+[node name="MouseInteractableComponent" parent="." index="1" node_paths=PackedStringArray("colCheck") instance=ExtResource("3_xbkqd")]
+colCheck = NodePath("../Powder /StaticBody3D")

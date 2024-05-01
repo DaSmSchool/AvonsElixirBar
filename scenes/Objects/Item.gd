@@ -3,7 +3,7 @@ class_name Item
 
 static var holdingItem : Item
 
-var itemColor : Color
+var itemColor : Color = Color()
 
 @export var itemCollisionParent : Node
 
@@ -12,13 +12,26 @@ var itemColor : Color
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	give_random_color()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
+	print(self.name)
 	if !mouseRay.is_empty():
 		holding_item_logic()
+
+
+func give_random_color():
+	itemColor.r = randf()
+	itemColor.g = randf()
+	itemColor.b = randf()
+	var mat : Material = itemCollisionParent.get_parent().get_surface_override_material(0)
+	mat.albedo_color = itemColor
+	itemCollisionParent.get_parent().set_surface_override_material(0, mat)
+
 
 func holding_item_logic():
 	if holdingItem == null:
@@ -29,10 +42,17 @@ func holding_item_logic():
 		else:
 			position = Station.hoveringStation.itemSpotMarker.global_position
 		if Input.is_action_just_pressed("action"):
+			var hitNode = mouseRay["collider"].get_parent()
+			if hitNode is Item:
+				item_interact(hitNode)
+			elif hitNode.get_parent() is Item:
+				item_interact(hitNode.get_parent())
 			holdingItem = null
 			itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
 
 
+func item_interact(itemHit : Item):
+	pass
 
 func on_just_left_clicked():
 	print("Hi there!")
@@ -48,7 +68,6 @@ func on_just_left_clicked():
 				print("Self!")
 			else:
 				print("Mix!")
-
 	print(holdingItem)
 
 
