@@ -16,7 +16,6 @@ func _ready():
 	instMouseInteract = preLoadMouseInteract.instantiate()
 	instMouseInteract.name = "mouse_interact"
 	add_child(instMouseInteract)
-	print(instMouseInteract.name)
 	#instMouseInteract.mouse_just_left_clicked.connect(_on_just_left_clicked)
 	#instMouseInteract.connect("mouse_just_left_clicked", _on_just_left_clicked)
 	#print(instMouseInteract.mouse_just_left_clicked.is_connected(_on_just_left_clicked))
@@ -31,19 +30,15 @@ func _ready():
 func _process(delta):
 	mouseRay = instMouseInteract.raycastResult
 	if (instMouseInteract.clickResults["just_press_left"]):
-		print("xcv?!")
 		just_left_clicked.emit()
 		on_just_left_clicked()
 	if (instMouseInteract.clickResults["just_press_right"]):
-		print("tgasd!")
 		just_right_clicked.emit()
 		on_just_right_clicked()
 	if (instMouseInteract.clickResults["press_left"]):
-		print("hi!")
 		left_clicked.emit()
 		on_left_clicked()
 	if (instMouseInteract.clickResults["press_right"]):
-		print("tg!")
 		right_clicked.emit()
 		on_right_clicked()
 
