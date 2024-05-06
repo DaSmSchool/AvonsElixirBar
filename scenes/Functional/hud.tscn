@@ -73,5 +73,7 @@ text = "blahblahahahahashdoaishdoih"
 fit_content = true
 autowrap_mode = 0
 
+[node name="ItemActionDrawPanels" type="Node" parent="ItemDescribe"]
+
 [connection signal="pressed" from="MoveLeftView" to="." method="_on_move_left_view_pressed"]
 [connection signal="pressed" from="MoveRightView" to="." method="_on_move_right_view_pressed"]

@@ -5,6 +5,8 @@ static var holdingItem : Item
 
 var itemColor : Color = Color()
 
+var itemName : String = "DefItemName"
+
 @export var itemCollisionParent : Node
 
 @export var itemActionsApplied = []

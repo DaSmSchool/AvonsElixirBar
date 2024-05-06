@@ -6,13 +6,15 @@ class_name ItemAction
 ##[br]
 ## False should be used for actions that have been valid, and performed.
 var blankAction = true
-## Describes the action performed.
+## The action performed.
 @export var actionType : String
-## Describes how long the action was performed.
+## The message used for displaying this ItemAction.
+@export var actionMessage : String
+## How long the action was performed.
 @export var duration : float
-## Describes an associated item that was referenced during the action.
+## An associated item that was referenced during the action.
 @export var assocItem : Item
-## Describes the station used to perform the action.
+## The station used to perform the action.
 @export var stationPerformed : Station
 ## Accuracy of the action out of 100
 @export var accuracy : int

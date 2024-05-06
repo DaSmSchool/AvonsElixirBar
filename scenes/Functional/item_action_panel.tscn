@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqevv52j7cx73"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0s3y"]
+bg_color = Color(0.105882, 0.105882, 0.203922, 0.815686)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[node name="ItemDescribe" type="Panel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o0s3y")
+
+[node name="Text" type="RichTextLabel" parent="."]
+layout_direction = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 50.0
+offset_bottom = 31.0
+bbcode_enabled = true
+text = "blahblahahahahashdoaishdoih"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ItemActionDrawPanels" type="Node" parent="."]
