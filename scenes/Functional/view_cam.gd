@@ -1,4 +1,5 @@
 extends Camera3D
+class_name ViewCam
 
 @export var maxRayDist = 2000
 
@@ -28,6 +29,7 @@ func _process(delta):
 		_on_hud_left_press()
 	if Input.is_action_just_pressed("switch_view_right"):
 		_on_hud_right_press()
+	
 
 func ScreenPointToRay():
 	var camera = get_tree().root.get_camera_3d()

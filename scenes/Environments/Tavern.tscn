@@ -49,7 +49,8 @@ surface_material_override/0 = ExtResource("2_fdtsa")
 [node name="Shelf3 " parent="tavern" index="10"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
-[node name="HUD" parent="." instance=ExtResource("5_ljkx7")]
+[node name="HUD" parent="." node_paths=PackedStringArray("ViewCameraReference") instance=ExtResource("5_ljkx7")]
+ViewCameraReference = NodePath("../ViewCam")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wy8pr")
