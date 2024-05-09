@@ -27,8 +27,8 @@ func _process(delta):
 func update_item_hover_hud():
 	update_item_name_draw()
 	if $"ItemDescribe".visible:
-		pass
-	elif $"ItemDescribe/ItemActionDrawPanels".get_children().is_empty():
+		update_item_action_panels()
+	elif not $"ItemDescribe/ItemActionDrawPanels".get_children().is_empty():
 		# remove all panels related to drawing ItemAtion related material
 		for child in $"ItemDescribe/ItemActionDrawPanels".get_children():
 			child.queue_free()
@@ -53,11 +53,26 @@ func update_item_action_panels():
 	var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
 	if hit_obj is Item:
 		var heightOffset = itemBox.size.y
-		for objInd in hit_obj.itemActionsApplied.size():
-			var currItemAction : ItemAction = hit_obj.itemActionsApplied[objInd]
+		var deepItemActionList = get_item_actions_deep(hit_obj)
+		for objInd in deepItemActionList.size():
+			var currItemAction : ItemAction = deepItemActionList[objInd]
 			var currPanel = itemActionPanel.instantiate()
-			currPanel.position.y = heightOffset + (objInd*currPanel.position.size.y)
+			itemBox.get_node("ItemActionDrawPanels").add_child(currPanel)
+			currPanel.position.y = heightOffset + (objInd*currPanel.size.y)
 			currPanel.get_node("Text").text = currItemAction.actionMessage
+			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
+
+
+func get_item_actions_deep(item : Item):
+	var itemActionList = []
+	var furtherItems = []
+	for action in item.itemActionsApplied:
+		itemActionList.append(action)
+		if action.assocItem != null:
+			furtherItems.append(action.assocItem)
+	for deepItem in furtherItems:
+		itemActionList.append_array(get_item_actions_deep(deepItem))
+	return itemActionList
 
 
 func _on_move_left_view_pressed():

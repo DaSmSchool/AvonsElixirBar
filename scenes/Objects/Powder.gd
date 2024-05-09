@@ -10,7 +10,8 @@ func item_interact(itemHit : Item):
 	if itemHit is Powder:
 		var combineItemAction = ItemAction.new()
 		combineItemAction.assign_vals("ItemCombine", 0, self, null, 100)
-		itemHit.itemActionsApplied.append_array(itemActionsApplied)
+		itemHit.itemActionsApplied.append(combineItemAction)
+		print_rich("[color=#FF0000]" + str(itemHit.itemActionsApplied) + "[/color]")
 		itemHit.itemColor = ColorHelper.average_color(self.itemColor, itemHit.itemColor)
 		print(itemHit.itemColor)
 		itemHit.update_item_color()
