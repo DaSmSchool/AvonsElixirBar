@@ -82,3 +82,7 @@ func on_just_left_clicked():
 
 func on_just_right_clicked():
 	pass
+
+
+func set_item_name(name : String):
+	itemName = name

@@ -31,9 +31,10 @@ func _process(delta):
 
 
 ## Provides the action with all action variables.
-func assign_vals(action:String, dur:float, assoc:Item, statPerf:Station, acc:int):
+func assign_vals(action:String, msg:String, dur:float, assoc:Item, statPerf:Station, acc:int):
 	clear_blank()
 	actionType = action
+	actionMessage = msg
 	duration = dur
 	assocItem = assoc
 	stationPerformed = statPerf

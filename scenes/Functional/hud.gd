@@ -59,7 +59,13 @@ func update_item_action_panels():
 			var currPanel = itemActionPanel.instantiate()
 			itemBox.get_node("ItemActionDrawPanels").add_child(currPanel)
 			currPanel.position.y = heightOffset + (objInd*currPanel.size.y)
+			
 			currPanel.get_node("Text").text = currItemAction.actionMessage
+			var textGet : RichTextLabel = currPanel.get_node("Text")
+			print(textGet)
+			if currPanel.get_node("Text") != null:
+				print(textGet.get_class())
+				print(textGet.text)
 			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
 
 
