@@ -43,7 +43,7 @@ func update_item_name_draw():
 		var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
 		if (hit_obj is Item):
 			itemBox.show()
-			itemBoxText.text = hit_obj.name
+			itemBoxText.text = hit_obj.itemName
 		else:
 			itemBox.hide()
 

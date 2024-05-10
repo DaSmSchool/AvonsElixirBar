@@ -11,13 +11,12 @@ var itemName : String = "DefItemName"
 
 @export var itemActionsApplied = []
 
-var toonMatTemplate = load("res://materials/toonmaterial.material")
+var matTemplate = load("res://materials/toonmaterial.material")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	var mat : Material = toonMatTemplate.duplicate()
-	itemCollisionParent.get_parent().set_surface_override_material(0, mat)
+	set_base_material()
 	give_random_color()
 
 
@@ -27,6 +26,10 @@ func _process(delta):
 	if !mouseRay.is_empty():
 		holding_item_logic()
 
+
+func set_base_material():
+	var mat : Material = matTemplate.duplicate()
+	itemCollisionParent.get_parent().set_surface_override_material(0, mat)
 
 func give_random_color():
 	itemColor.r = randf()
@@ -86,3 +89,8 @@ func on_just_right_clicked():
 
 func set_item_name(name : String):
 	itemName = name
+
+
+func set_used_mat(mat : Material):
+	mat = matTemplate
+	set_base_material()

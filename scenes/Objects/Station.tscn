@@ -4,3 +4,5 @@
 
 [node name="Station" type="Node3D"]
 script = ExtResource("1_l1351")
+
+[connection signal="just_left_clicked" from="." to="." method="_on_just_left_clicked"]

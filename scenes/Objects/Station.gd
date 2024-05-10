@@ -24,3 +24,10 @@ func _process(delta):
 		else:
 			#print("OUT!!")
 			hoveringStation = null
+
+
+func perform_station_action():
+	push_warning("Station " + self.get_class() + " needs to have an overloaded version of perform_station_action!")
+
+func _on_just_left_clicked():
+	perform_station_action()
