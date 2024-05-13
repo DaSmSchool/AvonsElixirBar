@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vrs7wd5qlgv8"]
-
-[ext_resource type="Script" path="res://scenes/Functional/view_cam.gd" id="1_qw8vu"]
-
-[node name="ViewCam" type="Camera3D"]
-script = ExtResource("1_qw8vu")

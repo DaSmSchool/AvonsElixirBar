@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://djievddjlpffp"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Grinder/Grinder.gd" id="1_7qnjh"]
+[ext_resource type="PackedScene" uid="uid://hepohxnwlfrs" path="res://data/blends/Objects/Grinder/grinder.blend" id="2_swqw4"]
+[ext_resource type="Material" uid="uid://yd3veowjp43f" path="res://materials/grindermain.material" id="3_b75x2"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="4_atafm"]
+[ext_resource type="Material" uid="uid://cul1ro1ovsh8x" path="res://materials/stationpestle.material" id="5_t3jfn"]
+
+[node name="grinder" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("2_swqw4")]
+script = ExtResource("1_7qnjh")
+stationCollisionParent = NodePath("Bowl /StaticBody3D")
+itemSpotMarker = NodePath("Mark")
+
+[node name="Bowl " parent="." index="0"]
+surface_material_override/0 = ExtResource("3_b75x2")
+
+[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("colCheck") instance=ExtResource("4_atafm")]
+colCheck = NodePath("../Bowl /StaticBody3D")
+
+[node name="Pestle" parent="." index="3"]
+transform = Transform3D(0.482091, 0, 0.574534, 0, 0.75, 0, -0.574533, 0, 0.482091, -2, 0.307611, 0.329889)
+surface_material_override/0 = ExtResource("5_t3jfn")

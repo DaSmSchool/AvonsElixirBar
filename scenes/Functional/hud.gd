@@ -1,5 +1,6 @@
 extends Control
 class_name Hud
+##UI functionality for the main game loop
 
 signal left_press
 signal right_press
@@ -33,6 +34,7 @@ func update_item_hover_hud():
 		for child in $"ItemDescribe/ItemActionDrawPanels".get_children():
 			child.queue_free()
 
+
 func update_item_name_draw():
 	var itemBox : Panel = $"ItemDescribe"
 	var itemBoxText : RichTextLabel = $"ItemDescribe/Text"
@@ -44,6 +46,9 @@ func update_item_name_draw():
 		if (hit_obj is Item):
 			itemBox.show()
 			itemBoxText.text = hit_obj.itemName
+		elif (hit_obj is Station):
+			itemBox.show()
+			itemBoxText.text = hit_obj.stationName
 		else:
 			itemBox.hide()
 
@@ -68,7 +73,7 @@ func update_item_action_panels():
 				print(textGet.text)
 			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
 
-
+## Returns a list of all [ItemAction] within an [Item]
 func get_item_actions_deep(item : Item):
 	var itemActionList = []
 	var furtherItems = []
