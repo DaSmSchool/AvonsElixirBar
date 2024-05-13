@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgwvfv8xt628y"]
 
-[ext_resource type="PackedScene" uid="uid://bu4ncxtjhy8st" path="res://blends/Objects/seat.blend" id="1_x87mq"]
+[ext_resource type="PackedScene" uid="uid://bu4ncxtjhy8st" path="res://data/blends/Objects/Seat/seat.blend" id="1_x87mq"]
 [ext_resource type="Material" uid="uid://cwak8h4rgpoix" path="res://materials/seatwood.material" id="2_d2g2j"]
 [ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_vo7ny"]
 

@@ -14,8 +14,9 @@ itemSpotMarker = NodePath("Mark")
 [node name="Bowl " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_b75x2")
 
-[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("colCheck") instance=ExtResource("4_atafm")]
+[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("colCheck", "parent") instance=ExtResource("4_atafm")]
 colCheck = NodePath("../Bowl /StaticBody3D")
+parent = NodePath("..")
 
 [node name="Pestle" parent="." index="3"]
 transform = Transform3D(0.482091, 0, 0.574534, 0, 0.75, 0, -0.574533, 0, 0.482091, -2, 0.307611, 0.329889)

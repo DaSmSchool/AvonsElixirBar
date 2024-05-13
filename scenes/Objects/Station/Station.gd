@@ -38,4 +38,6 @@ func set_station_name(name : String):
 
 
 func on_just_left_clicked():
-	perform_station_action()
+	if mouseRay != {}:
+		if mouseRay["collider"].get_parent().get_parent() == self:
+			perform_station_action()
