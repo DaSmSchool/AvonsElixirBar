@@ -11,6 +11,9 @@ var oldRayDict = {}
 
 var itemActionPanel = preload("res://scenes/Functional/item_action_panel.tscn")
 
+static var viewButtonsHidden : bool
+static var viewButtonsHiddenProg : float
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -21,6 +24,8 @@ func _process(delta):
 	if oldRayDict != ViewCameraReference.raycast_result:
 		item_changed.emit(ViewCameraReference.raycast_result)
 		update_item_hover_hud()
+	
+	process_view_buttons()
 	
 	oldRayDict = ViewCameraReference.raycast_result
 
@@ -84,6 +89,29 @@ func get_item_actions_deep(item : Item):
 	for deepItem in furtherItems:
 		itemActionList.append_array(get_item_actions_deep(deepItem))
 	return itemActionList
+
+
+func on_station_update(enteringStation : bool):
+	viewButtonsHidden = enteringStation
+	view_switch_buttons_on_station_change()
+
+
+func process_view_buttons():
+	var viewButtonGroup : Control = $ViewSwitchButtonControl
+	var timer : Timer = $ViewSwitchButtonControl/PosSwitch
+	var timerProgress = timer.time_left/timer.wait_time
+	print(viewButtonsHidden)
+	print(1-timerProgress)
+	if viewButtonsHidden:
+		viewButtonGroup.position = viewButtonGroup.position.lerp(Vector2(0, 80), 1-timerProgress)
+	else:
+		viewButtonGroup.position = viewButtonGroup.position.lerp(Vector2(0, 0), 1-timerProgress)
+
+
+func view_switch_buttons_on_station_change():
+	var viewButtonGroup = $ViewSwitchButtonControl
+	var timer : Timer = viewButtonGroup.get_node("PosSwitch")
+	timer.start()
 
 
 func _on_move_left_view_pressed():

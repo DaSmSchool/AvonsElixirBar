@@ -8,6 +8,7 @@ var stationName : String = "DefStationName"
 @export var stationCollisionParent : Node
 @export var itemSpotMarker : Node3D
 static var hoveringStation : Station
+static var activeStation : Station
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +30,12 @@ func _process(delta):
 			hoveringStation = null
 
 
+func enter_station_outside_action():
+	var hud : Hud = get_tree().current_scene.get_node("HUD")
+	assert(hud != null, "Could not find the HUD in the root scene!")
+	hud.on_station_update(true)
+
+
 func perform_station_action():
 	push_warning("Station " + self.get_class() + " needs to have an overloaded version of perform_station_action!")
 
@@ -41,3 +48,5 @@ func on_just_left_clicked():
 	if mouseRay != {}:
 		if mouseRay["collider"].get_parent().get_parent() == self:
 			perform_station_action()
+			enter_station_outside_action()
+			activeStation = self

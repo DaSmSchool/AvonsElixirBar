@@ -24,33 +24,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v2gw6")
 
-[node name="MoveLeftView" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -70.0
-offset_right = 165.0
-offset_bottom = -20.0
-grow_vertical = 0
-text = "Left"
-
-[node name="MoveRightView" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -165.0
-offset_top = -70.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Right"
-
 [node name="ItemDescribe" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -75,5 +48,40 @@ autowrap_mode = 0
 
 [node name="ItemActionDrawPanels" type="Node" parent="ItemDescribe"]
 
-[connection signal="pressed" from="MoveLeftView" to="." method="_on_move_left_view_pressed"]
-[connection signal="pressed" from="MoveRightView" to="." method="_on_move_right_view_pressed"]
+[node name="ViewSwitchButtonControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0001
+
+[node name="MoveLeftView" type="Button" parent="ViewSwitchButtonControl"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 610.0
+offset_right = 165.0
+offset_bottom = 660.0
+grow_vertical = 0
+text = "Left"
+
+[node name="MoveRightView" type="Button" parent="ViewSwitchButtonControl"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1075.0
+offset_top = 610.0
+offset_right = 1220.0
+offset_bottom = 660.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Right"
+
+[node name="PosSwitch" type="Timer" parent="ViewSwitchButtonControl"]
+one_shot = true
+
+[connection signal="pressed" from="ViewSwitchButtonControl/MoveLeftView" to="." method="_on_move_left_view_pressed"]
+[connection signal="pressed" from="ViewSwitchButtonControl/MoveRightView" to="." method="_on_move_right_view_pressed"]
