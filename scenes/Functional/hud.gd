@@ -44,7 +44,7 @@ func update_item_name_draw():
 	var itemBox : Panel = $"ItemDescribe"
 	var itemBoxText : RichTextLabel = $"ItemDescribe/Text"
 	
-	if (ViewCameraReference.raycast_result == {}):
+	if (ViewCameraReference.raycast_result == {} or ViewCameraReference.raycast_result == null):
 		itemBoxText.text = ""
 	else:
 		var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
@@ -60,6 +60,7 @@ func update_item_name_draw():
 
 func update_item_action_panels():
 	var itemBox : Panel = $"ItemDescribe"
+	if ViewCameraReference.raycast_result in [null, {}]: return
 	var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
 	if hit_obj is Item:
 		var heightOffset = itemBox.size.y

@@ -15,16 +15,17 @@ static var clickResults = {
 	"just_press_right" : false,
 	"press_right" : false
 }
-var camera
+static var camera
 var colID
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
 	set_block_signals(false)
-	var read_camera = get_tree().root.get_camera_3d()
-	assert(read_camera.name == "ViewCam", "You should be using a ViewCam scene! Or you just renamed your Camera3D object.")
-	camera = read_camera
+	if camera == null:
+		var read_camera = get_tree().root.get_camera_3d()
+		assert(read_camera.name == "ViewCam", "You should be using a ViewCam scene! Or you just renamed your Camera3D object.")
+		camera = read_camera
 	
 	if (colCheck != null):
 		colID = colCheck.get_instance_id()
@@ -32,6 +33,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if camera == null or camera.raycast_result == null: return
 	if camera != null and camera.raycast_result.has("collider_id"):
 		hasMouseOver = camera.raycast_result["collider_id"] == colID
 		raycastResult = camera.raycast_result

@@ -8,7 +8,7 @@ signal just_right_clicked
 
 @export var mouseRay = {}
 var preLoadMouseInteract = load("res://scenes/Modules/MouseInteractableComponent.tscn")
-var instMouseInteract
+var instMouseInteract : MouseInteractable
 #var mouseInteract: MouseInteractable
 
 # Called when the node enters the scene tree for the first time.
@@ -57,4 +57,6 @@ func on_left_clicked():
 func on_right_clicked():
 	pass
 	
-	
+
+func get_assoc_cam():
+	return instMouseInteract.camera

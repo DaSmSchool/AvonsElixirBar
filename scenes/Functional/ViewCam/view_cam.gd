@@ -8,9 +8,13 @@ class_name ViewCam
 @export var camPointsParent : Node
 var camPoints = {}
 var camIndex = 0
+var viewTarget : Node3D
 var camSwitchProg = 0
 var oldCameraTransitionPosition
 var oldCameraTransitionRotation
+
+var preStationPosition
+var preStationRotation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +39,8 @@ func ScreenPointToRay():
 	var camera = get_tree().root.get_camera_3d()
 	var mouse_pos = get_viewport().get_mouse_position()
 	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * maxRayDist
+	var norm_proj = camera.project_ray_normal(mouse_pos)
+	var to = from + norm_proj * maxRayDist
 	var space = get_world_3d().direct_space_state
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = from
@@ -56,19 +61,31 @@ func viewIndUpdate(amnt):
 		camIndex += camPoints.size()
 	if camIndex >= camPoints.size():
 		camIndex -= camPoints.size()
+	viewTarget = camPoints[camIndex]
+
 
 func updateCamViewSwitch(delta):
+	if viewTarget == null: return
 	if camSwitchProg < PI/2:
 		camSwitchProg += delta*4
-		position = oldCameraTransitionPosition.lerp(camPoints[camIndex].position, sin(camSwitchProg))
-		rotation = oldCameraTransitionRotation.lerp(camPoints[camIndex].rotation, sin(camSwitchProg))
+		position = oldCameraTransitionPosition.lerp(viewTarget.position, sin(camSwitchProg))
+		rotation = oldCameraTransitionRotation.lerp(viewTarget.rotation, sin(camSwitchProg))
 	else:
 		camSwitchProg = PI/2
+		
+		
+func switch_to_station_view(station : Station):
+	initTransitionToNextView()
+	viewTarget = station.AssocView
+
 
 func _on_hud_left_press():
-	viewIndUpdate(-1)
-	initTransitionToNextView()
+	if Station.activeStation == null:
+		viewIndUpdate(-1)
+		initTransitionToNextView()
+
 
 func _on_hud_right_press():
-	viewIndUpdate(1)
-	initTransitionToNextView()
+	if Station.activeStation == null:
+		viewIndUpdate(1)
+		initTransitionToNextView()

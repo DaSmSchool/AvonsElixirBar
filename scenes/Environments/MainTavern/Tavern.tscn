@@ -89,8 +89,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
 [node name="potion" parent="." instance=ExtResource("6_fng3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 5.68849, -14.0308)
 
-[node name="Grinder" parent="." instance=ExtResource("5_ntxo5")]
+[node name="Grinder" parent="." node_paths=PackedStringArray("AssocView") instance=ExtResource("5_ntxo5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -10.79)
+AssocView = NodePath("../CameraViewSpots/StationSpots/GrinderView")
 
 [node name="CameraViewSpots" type="Node" parent="."]
 
@@ -112,11 +113,6 @@ transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356,
 
 [node name="GrinderView" type="Node3D" parent="CameraViewSpots/StationSpots"]
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
-
-[node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
-transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
-current = true
-camPointsParent = NodePath("../CameraViewSpots/CamCycle")
 
 [node name="powder" parent="." instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
@@ -150,6 +146,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
 
 [node name="crystal" parent="." instance=ExtResource("11_qxj8y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7616, 5.68849, -13.9869)
+
+[node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
+transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
+current = true
+camPointsParent = NodePath("../CameraViewSpots/CamCycle")
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]

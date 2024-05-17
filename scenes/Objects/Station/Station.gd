@@ -7,6 +7,7 @@ var stationName : String = "DefStationName"
 
 @export var stationCollisionParent : Node
 @export var itemSpotMarker : Node3D
+@export var AssocView : Node3D
 static var hoveringStation : Station
 static var activeStation : Station
 
@@ -30,10 +31,22 @@ func _process(delta):
 			hoveringStation = null
 
 
-func enter_station_outside_action():
+func enter_hud_behaviour():
 	var hud : Hud = get_tree().current_scene.get_node("HUD")
 	assert(hud != null, "Could not find the HUD in the root scene!")
 	hud.on_station_update(true)
+	
+	
+func enter_cam_behaviour():
+	if AssocView != null:
+		var cam : ViewCam = get_assoc_cam()
+		assert(cam != null, "Could not find a ViewCam object in the root scene!")
+		cam.switch_to_station_view(self)
+	
+
+func enter_station_outside_action():
+	enter_hud_behaviour()
+	enter_cam_behaviour()
 
 
 func perform_station_action():
