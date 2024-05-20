@@ -18,7 +18,6 @@ background_color = Color(0.0470588, 0.113725, 0.211765, 1)
 [node name="Tavern" type="Node3D"]
 
 [node name="tavern" parent="." instance=ExtResource("1_1ak4i")]
-metadata/_edit_group_ = true
 
 [node name="TarvernBody " parent="tavern" index="0"]
 surface_material_override/0 = ExtResource("2_fdtsa")
@@ -41,13 +40,10 @@ surface_material_override/0 = ExtResource("2_fdtsa")
 [node name="Shelf1 " parent="tavern" index="7"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
-[node name="BarSideShelf_001 _002" parent="tavern" index="8"]
+[node name="Shelf2 " parent="tavern" index="8"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
-[node name="Shelf2 " parent="tavern" index="9"]
-surface_material_override/0 = ExtResource("2_fdtsa")
-
-[node name="Shelf3 " parent="tavern" index="10"]
+[node name="Shelf3 " parent="tavern" index="9"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
 [node name="HUD" parent="." node_paths=PackedStringArray("ViewCameraReference") instance=ExtResource("5_ljkx7")]
