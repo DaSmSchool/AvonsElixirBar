@@ -15,19 +15,25 @@ func item_interact(itemHit : Item):
 	if itemHit is Powder:
 		var combineItemAction : ItemAction = ItemAction.new()
 		var newItem : Item = itemInst.instantiate()
+		newItem.insert_to_tree()
 		newItem.set_item_name("Blend")
+		
+		disassociate_station()
+		itemHit.disassociate_station()
+		
 		combineItemAction.assign_vals("ItemCombine", itemHit.itemName + " + " + self.itemName, 0, newItem, null, 100)
 		newItem.previousItemsInvolved.append(itemHit)
 		newItem.previousItemsInvolved.append(self)
 		itemHit.itemActionsApplied.append(combineItemAction)
 		self.itemActionsApplied.append(combineItemAction)
+		
 		print_rich("[color=#FF0000]" + str(itemHit.itemActionsApplied) + "[/color]")
 		newItem.itemColor = ColorHelper.average_color(self.itemColor, itemHit.itemColor)
 		print(itemHit.itemColor)
 		newItem.update_item_color()
 		holdingItem = newItem
+		
 		newItem.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
-		newItem.insert_to_tree()
 		newItem.global_position = itemHit.global_position
 		itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
 		hide()

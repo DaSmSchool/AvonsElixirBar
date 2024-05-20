@@ -6,14 +6,12 @@ static var holdingItem : Item
 var itemColor : Color = Color()
 
 @export var itemName : String = "DefItemName"
-
 @export var itemCollisionParent : Node
-
 @export var itemActionsApplied = []
-
 @export var previousItemsInvolved = []
+@export var mutationAge = 1
 
-@export var mutationAge = 0
+var stationIn : Station
 
 static var itemsNode
 
@@ -21,11 +19,16 @@ var matTemplate = load("res://materials/toonmaterial.material")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super._ready()
+	itemActionsApplied = []
+	previousItemsInvolved = []
+	itemName = "DefItemName"
+	mutationAge = 1
 	if itemsNode == null:
 		itemsNode = get_tree().current_scene.get_node("Items")
 		print(itemsNode.get_children())
 	assert(itemCollisionParent != null, "Collision for all Items are not defined! Check the Stack Frames to see which one needs it.")
-	super._ready()
+	
 	set_base_material()
 	give_random_color()
 
@@ -66,14 +69,24 @@ func update_item_color():
 	itemCollisionParent.get_parent().set_surface_override_material(0, mat)
 
 
+func disassociate_station():
+	if stationIn != null:
+		stationIn.heldItem = null
+		stationIn = null
+
+
 func holding_item_logic():
 	if holdingItem == null:
 		position = position
 	elif holdingItem == self:
 		if (Station.hoveringStation == null):
 			position = mouseRay["position"]
-		else:
+		elif Station.hoveringStation.heldItem in [null, self]:
 			position = Station.hoveringStation.itemSpotMarker.global_position
+			Station.hoveringStation.heldItem = self
+			stationIn = Station.hoveringStation
+		elif Station.hoveringStation.heldItem != null:
+			position = mouseRay["position"]
 		if Input.is_action_just_pressed("action"):
 			var hitNode = mouseRay["collider"].get_parent()
 			if hitNode is Item:
@@ -99,6 +112,9 @@ func on_just_left_clicked():
 			colNode.set_deferred("disabled", true)
 			if (holdingItem == null):
 				holdingItem = self
+				if stationIn != null:
+					stationIn.heldItem = null
+					stationIn = null
 			elif (holdingItem == self):
 				print("Self!")
 			else:

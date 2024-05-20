@@ -15,6 +15,11 @@ func _process(delta):
 	
 
 func perform_station_action():
-	if !%AnimationPlayer.is_playing() and self != Station.activeStation: 
-		%AnimationPlayer.play("Pickup")
-	
+	%AnimationPlayer.play("Pickup")
+
+func mash_action():
+	%AnimationPlayer.play("Smash")
+
+
+func leave_station():
+	%AnimationPlayer.play_backwards("Pickup")

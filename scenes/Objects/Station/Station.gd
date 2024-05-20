@@ -9,6 +9,7 @@ var stationName : String = "DefStationName"
 @export var itemSpotMarker : Node3D
 @export var AssocView : Node3D
 @export var assocHud : StationHud
+@export var heldItem : Item
 static var hoveringStation : Station
 static var activeStation : Station
 
@@ -21,6 +22,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
+	print(heldItem)
 	if !mouseRay.is_empty():
 		var hoverObj = mouseRay["collider"].get_parent().get_parent()
 		if (hoverObj is Station):
@@ -60,6 +62,7 @@ func set_station_name(newName : String):
 
 func set_assoc_hud(hud : StationHud):
 	assocHud = hud
+	hud.assocStation = self
 
 
 func get_assoc_hud():
@@ -69,8 +72,9 @@ func get_assoc_hud():
 func on_just_left_clicked():
 	if mouseRay != {}:
 		if mouseRay["collider"].get_parent().get_parent() == self:
-			perform_station_action()
-			if assocHud:
-				assocHud.enter_station_hud()
-			enter_station_outside_action()
-			activeStation = self
+			if Item.holdingItem == null:
+				perform_station_action()
+				if assocHud:
+					assocHud.enter_station_hud()
+				enter_station_outside_action()
+				activeStation = self

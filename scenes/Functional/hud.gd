@@ -10,6 +10,7 @@ signal item_changed(ray_result : Dictionary)
 var oldRayDict = {}
 
 var itemActionPanel = preload("res://scenes/Functional/item_action_panel.tscn")
+var lastObj
 
 static var viewButtonsHidden : bool
 static var viewButtonsHiddenProg : float
@@ -37,9 +38,7 @@ func update_item_hover_hud():
 	if $"ItemDescribe".visible:
 		update_item_action_panels()
 	elif not $"ItemDescribe/ItemActionDrawPanels".get_children().is_empty():
-		# remove all panels related to drawing ItemAtion related material
-		for child in $"ItemDescribe/ItemActionDrawPanels".get_children():
-			child.queue_free()
+		reset_item_action_panels()
 
 
 func update_item_name_draw():
@@ -50,20 +49,24 @@ func update_item_name_draw():
 		itemBoxText.text = ""
 	else:
 		var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
-		if (hit_obj is Item):
-			itemBox.show()
-			itemBoxText.text = hit_obj.itemName
+		itemBox.show()
+		if Item.holdingItem != null:
+			change_name_text(itemBoxText, Item.holdingItem, Item.holdingItem.itemName)
+		elif (hit_obj is Item):
+			change_name_text(itemBoxText, hit_obj, hit_obj.itemName)
 		elif (hit_obj is Station):
-			itemBox.show()
-			itemBoxText.text = hit_obj.stationName
+			change_name_text(itemBoxText, hit_obj, hit_obj.stationName)
 		else:
 			itemBox.hide()
 
 
 func update_item_action_panels():
+	reset_item_action_panels()
 	var itemBox : Panel = $"ItemDescribe"
 	if ViewCameraReference.raycast_result in [null, {}]: return
 	var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
+	if Item.holdingItem != null:
+		hit_obj = Item.holdingItem
 	if hit_obj is Item:
 		var heightOffset = itemBox.size.y
 		var deepItemActionList = get_item_actions_deep(hit_obj)
@@ -82,10 +85,28 @@ func update_item_action_panels():
 			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
 
 
+func change_name_text(rtl : RichTextLabel, nameParent, newName : String):
+	if lastObj == null:
+		rtl.text = newName
+		lastObj = nameParent
+	else:
+		if nameParent != lastObj:
+			if newName != rtl.text:
+				rtl.text = newName
+			reset_item_action_panels()
+			lastObj = nameParent
+
+
+func reset_item_action_panels():
+	# remove all panels related to drawing ItemAtion related material
+	for child in $"ItemDescribe/ItemActionDrawPanels".get_children():
+		child.queue_free()
+
 ## Returns a list of all [ItemAction] within an [Item]
 func get_item_actions_deep(item : Item):
 	var itemActionList = []
 	var furtherItems = []
+	item.itemActionsApplied
 	for action in item.itemActionsApplied:
 		itemActionList.append(action)
 	for deepItem in item.previousItemsInvolved:

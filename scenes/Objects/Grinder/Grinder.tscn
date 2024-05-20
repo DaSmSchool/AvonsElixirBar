@@ -24,3 +24,6 @@ surface_material_override/0 = ExtResource("5_t3jfn")
 
 [node name="AnimationPlayer" parent="." index="4"]
 unique_name_in_owner = true
+
+[node name="NextPlayCooldown" type="Timer" parent="AnimationPlayer" index="0"]
+unique_name_in_owner = true

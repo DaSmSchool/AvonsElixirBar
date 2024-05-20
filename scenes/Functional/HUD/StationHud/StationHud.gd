@@ -1,6 +1,7 @@
 extends Control
 class_name StationHud
 
+@export var assocStation : Station
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

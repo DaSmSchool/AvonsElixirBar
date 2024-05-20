@@ -1,6 +1,7 @@
 extends StationHud
 class_name GrinderHud
 
+
 var stationEntering = false
 var readyToDelete = false
 
@@ -18,7 +19,8 @@ func _process(delta):
 		#queue_free()
 
 func enter_station_hud():
-	Hud.hud.get_node("StationHudControl").add_child(self)
+	if self not in Hud.hud.get_node("StationHudControl").get_children():
+		Hud.hud.get_node("StationHudControl").add_child(self)
 	stationEntering = true
 	action_buttons_timer_init()
 
@@ -45,10 +47,13 @@ func process_view_buttons():
 
 func _on_leave_pressed():
 	exit_station_hud()
+	if assocStation is Grinder:
+		assocStation.leave_station()
 
 
 func _on_mash_pressed():
-	pass # Replace with function body.
+	if assocStation is Grinder:
+		assocStation.mash_action()
 
 
 func init_action_button_control():
