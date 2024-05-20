@@ -56,20 +56,64 @@ ViewCameraReference = NodePath("../ViewCam")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wy8pr")
 
-[node name="Cauldron" parent="." instance=ExtResource("2_do6pd")]
+[node name="Items" type="Node" parent="."]
+
+[node name="potion" parent="Items" instance=ExtResource("6_fng3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 5.68849, -14.0308)
+
+[node name="powder" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
+
+[node name="powder2" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5648, 5.68598, -13.9767)
+
+[node name="powder3" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5768, 7.68849, -14.4722)
+
+[node name="powder4" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9652, 7.68849, -14.1039)
+
+[node name="powder5" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
+
+[node name="powder6" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5433, 7.68849, -13.7709)
+
+[node name="powder7" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00308923, 0, 0.00308923, 0.999995, 11.8932, 9.65665, -13.9254)
+
+[node name="powder8" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3386, 9.68849, -14.0262)
+
+[node name="powder9" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5026, 9.68849, -14.016)
+
+[node name="powder10" parent="Items" instance=ExtResource("10_r4a1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
+
+[node name="crystal" parent="Items" instance=ExtResource("11_qxj8y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7616, 5.68849, -13.9869)
+
+[node name="Stations" type="Node" parent="."]
+
+[node name="Cauldron" parent="Stations" instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4729, 3.33719, 9.27771)
 
-[node name="Cauldron2" parent="." instance=ExtResource("2_do6pd")]
+[node name="Cauldron2" parent="Stations" instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 7.278)
 
-[node name="Cauldron3" parent="." instance=ExtResource("2_do6pd")]
+[node name="Cauldron3" parent="Stations" instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 5.278)
 
-[node name="Cauldron4" parent="." instance=ExtResource("2_do6pd")]
+[node name="Cauldron4" parent="Stations" instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 3.278)
 
-[node name="Cauldron5" parent="." instance=ExtResource("2_do6pd")]
+[node name="Cauldron5" parent="Stations" instance=ExtResource("2_do6pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 1.278)
+
+[node name="Grinder" parent="Stations" node_paths=PackedStringArray("AssocView") instance=ExtResource("5_ntxo5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -10.79)
+AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView")
 
 [node name="Seat1" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
@@ -85,13 +129,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 1.04909)
 
 [node name="Seat5" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
-
-[node name="potion" parent="." instance=ExtResource("6_fng3w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 5.68849, -14.0308)
-
-[node name="Grinder" parent="." node_paths=PackedStringArray("AssocView") instance=ExtResource("5_ntxo5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -10.79)
-AssocView = NodePath("../CameraViewSpots/StationSpots/GrinderView")
 
 [node name="CameraViewSpots" type="Node" parent="."]
 
@@ -113,39 +150,6 @@ transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356,
 
 [node name="GrinderView" type="Node3D" parent="CameraViewSpots/StationSpots"]
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
-
-[node name="powder" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
-
-[node name="powder2" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5648, 5.68598, -13.9767)
-
-[node name="powder3" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5768, 7.68849, -14.4722)
-
-[node name="powder4" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9652, 7.68849, -14.1039)
-
-[node name="powder5" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
-
-[node name="powder6" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5433, 7.68849, -13.7709)
-
-[node name="powder7" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00308923, 0, 0.00308923, 0.999995, 11.8932, 9.65665, -13.9254)
-
-[node name="powder8" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3386, 9.68849, -14.0262)
-
-[node name="powder9" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5026, 9.68849, -14.016)
-
-[node name="powder10" parent="." instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
-
-[node name="crystal" parent="." instance=ExtResource("11_qxj8y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7616, 5.68849, -13.9869)
 
 [node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)

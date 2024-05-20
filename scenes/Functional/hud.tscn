@@ -100,5 +100,10 @@ grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("2_nw6ss")
 
+[node name="StationHudControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="ViewSwitchButtonControl/MoveLeftView" to="." method="_on_move_left_view_pressed"]
 [connection signal="pressed" from="ViewSwitchButtonControl/MoveRightView" to="." method="_on_move_right_view_pressed"]

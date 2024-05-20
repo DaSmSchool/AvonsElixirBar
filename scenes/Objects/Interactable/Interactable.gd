@@ -42,6 +42,7 @@ func _process(delta):
 		right_clicked.emit()
 		on_right_clicked()
 
+
 func on_just_left_clicked():
 	pass
 	

@@ -5,16 +5,25 @@ static var holdingItem : Item
 
 var itemColor : Color = Color()
 
-var itemName : String = "DefItemName"
+@export var itemName : String = "DefItemName"
 
 @export var itemCollisionParent : Node
 
 @export var itemActionsApplied = []
 
+@export var previousItemsInvolved = []
+
+@export var mutationAge = 0
+
+static var itemsNode
+
 var matTemplate = load("res://materials/toonmaterial.material")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if itemsNode == null:
+		itemsNode = get_tree().current_scene.get_node("Items")
+		print(itemsNode.get_children())
 	assert(itemCollisionParent != null, "Collision for all Items are not defined! Check the Stack Frames to see which one needs it.")
 	super._ready()
 	set_base_material()
@@ -31,6 +40,18 @@ func _process(delta):
 func set_base_material():
 	var mat : Material = matTemplate.duplicate()
 	itemCollisionParent.get_parent().set_surface_override_material(0, mat)
+
+
+func insert_to_tree():
+	var par = self.get_parent()
+	if par != null:
+		par.remove_child(self)
+	itemsNode.add_child(self)
+	par = self.get_parent()
+	print(par.is_inside_tree())
+	print(self.is_inside_tree())
+
+
 
 func give_random_color():
 	itemColor.r = randf()
@@ -88,8 +109,8 @@ func on_just_right_clicked():
 	pass
 
 
-func set_item_name(name : String):
-	itemName = name
+func set_item_name(newName : String):
+	itemName = newName
 
 
 func set_used_mat(mat : Material):

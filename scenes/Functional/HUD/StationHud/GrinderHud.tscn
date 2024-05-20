@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://vi8p03ra1b55"]
+
+[ext_resource type="Script" path="res://scenes/Functional/HUD/StationHud/GrinderHud.gd" id="1_jwkgf"]
+[ext_resource type="Theme" uid="uid://dej1jot3j84we" path="res://scenes/Functional/HUD/HudStyles/leavebutton.tres" id="2_a6evc"]
+[ext_resource type="Theme" uid="uid://ir0r1d1stdtr" path="res://scenes/Functional/HUD/HudStyles/actionbutton.tres" id="3_kpbb3"]
+
+[node name="GrinderHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jwkgf")
+
+[node name="StationActionButtonControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Leave" type="Button" parent="StationActionButtonControl"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 555.0
+offset_right = 450.0
+offset_bottom = 654.0
+grow_vertical = 0
+theme = ExtResource("2_a6evc")
+text = "Leave"
+
+[node name="Mash" type="Button" parent="StationActionButtonControl"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 790.0
+offset_top = 555.0
+offset_right = 1206.0
+offset_bottom = 654.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_kpbb3")
+text = "MASH"
+
+[node name="MoveTransitionTimer" type="Timer" parent="StationActionButtonControl"]
+one_shot = true
+
+[connection signal="pressed" from="StationActionButtonControl/Leave" to="." method="_on_leave_pressed"]
+[connection signal="pressed" from="StationActionButtonControl/Mash" to="." method="_on_mash_pressed"]

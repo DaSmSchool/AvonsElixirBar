@@ -16,8 +16,11 @@ var oldCameraTransitionRotation
 var preStationPosition
 var preStationRotation
 
+static var cam
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	cam = self
 	if camPointsParent != null:
 		camPoints = camPointsParent.get_children()
 		position = camPoints[0].position
@@ -75,8 +78,13 @@ func updateCamViewSwitch(delta):
 		
 		
 func switch_to_station_view(station : Station):
-	initTransitionToNextView()
 	viewTarget = station.AssocView
+	initTransitionToNextView()
+
+
+func leave_station_view():
+	viewTarget = camPoints[camIndex]
+	initTransitionToNextView()
 
 
 func _on_hud_left_press():

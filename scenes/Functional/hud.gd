@@ -14,9 +14,11 @@ var itemActionPanel = preload("res://scenes/Functional/item_action_panel.tscn")
 static var viewButtonsHidden : bool
 static var viewButtonsHiddenProg : float
 
+static var hud : Hud
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	hud = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,17 +81,24 @@ func update_item_action_panels():
 				print(textGet.text)
 			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
 
+
 ## Returns a list of all [ItemAction] within an [Item]
 func get_item_actions_deep(item : Item):
 	var itemActionList = []
 	var furtherItems = []
 	for action in item.itemActionsApplied:
 		itemActionList.append(action)
-		if action.assocItem != null:
-			furtherItems.append(action.assocItem)
-	for deepItem in furtherItems:
+	for deepItem in item.previousItemsInvolved:
 		itemActionList.append_array(get_item_actions_deep(deepItem))
-	return itemActionList
+	return get_unique_list(itemActionList)
+
+
+func get_unique_list(getList : Array):
+	var uniqueArray = []
+	for item in getList:
+		if !uniqueArray.has(item):
+			uniqueArray.append(item)
+	return uniqueArray
 
 
 func on_station_update(enteringStation : bool):
@@ -101,8 +110,6 @@ func process_view_buttons():
 	var viewButtonGroup : Control = $ViewSwitchButtonControl
 	var timer : Timer = $ViewSwitchButtonControl/PosSwitch
 	var timerProgress = timer.time_left/timer.wait_time
-	print(viewButtonsHidden)
-	print(1-timerProgress)
 	if viewButtonsHidden:
 		viewButtonGroup.position = viewButtonGroup.position.lerp(Vector2(0, 80), 1-timerProgress)
 	else:

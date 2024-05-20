@@ -8,6 +8,7 @@ var stationName : String = "DefStationName"
 @export var stationCollisionParent : Node
 @export var itemSpotMarker : Node3D
 @export var AssocView : Node3D
+@export var assocHud : StationHud
 static var hoveringStation : Station
 static var activeStation : Station
 
@@ -53,13 +54,23 @@ func perform_station_action():
 	push_warning("Station " + self.get_class() + " needs to have an overloaded version of perform_station_action!")
 
 
-func set_station_name(name : String):
-	stationName = name
+func set_station_name(newName : String):
+	stationName = newName
+
+
+func set_assoc_hud(hud : StationHud):
+	assocHud = hud
+
+
+func get_assoc_hud():
+	return assocHud
 
 
 func on_just_left_clicked():
 	if mouseRay != {}:
 		if mouseRay["collider"].get_parent().get_parent() == self:
 			perform_station_action()
+			if assocHud:
+				assocHud.enter_station_hud()
 			enter_station_outside_action()
 			activeStation = self

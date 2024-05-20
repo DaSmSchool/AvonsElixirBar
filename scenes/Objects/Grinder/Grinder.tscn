@@ -21,3 +21,6 @@ parent = NodePath("..")
 [node name="Pestle" parent="." index="3"]
 transform = Transform3D(0.482091, 0, 0.574534, 0, 0.75, 0, -0.574533, 0, 0.482091, -2, 0.307611, 0.329889)
 surface_material_override/0 = ExtResource("5_t3jfn")
+
+[node name="AnimationPlayer" parent="." index="4"]
+unique_name_in_owner = true

@@ -12,7 +12,7 @@ func _process(delta):
 	pass
 
 
-func init_station_hud():
+func enter_station_hud():
 	pass
 
 
