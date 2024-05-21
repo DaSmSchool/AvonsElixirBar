@@ -2,12 +2,21 @@ extends Node
 class_name ItemAction
 ## Describes an action performed onto an Item.
 
+
+enum Action {
+	EMPTY,
+	GRIND,
+	ENCHANT,
+	BOIL,
+	COMBINE
+}
+
 ## Set to true if this action hasn't actually been performed. 
 ##[br]
 ## False should be used for actions that have been valid, and performed.
 var blankAction = true
 ## The action performed.
-@export var actionType : String
+@export var actionType : int = Action.EMPTY
 ## The message used for displaying this ItemAction.
 @export var actionMessage : String
 ## How long the action was performed.
@@ -18,6 +27,7 @@ var blankAction = true
 @export var stationPerformed : Station
 ## Accuracy of the action out of 100
 @export var accuracy : int
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,7 +41,7 @@ func _process(delta):
 
 
 ## Provides the action with all action variables.
-func assign_vals(action:String, msg:String, dur:float, assoc:Item, statPerf:Station, acc:int):
+func assign_vals(action:int, msg:String, dur:float, assoc:Item, statPerf:Station, acc:int):
 	clear_blank()
 	actionType = action
 	actionMessage = msg

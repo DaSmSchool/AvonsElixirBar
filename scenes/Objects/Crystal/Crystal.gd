@@ -10,6 +10,10 @@ func _ready():
 	set_used_mat(crystalMat)
 	give_random_color()
 	set_item_name("Crystal")
+	properties = [
+		Item.Property.GRINDABLE,
+		Item.Property.ENCHANTABLE,
+	]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

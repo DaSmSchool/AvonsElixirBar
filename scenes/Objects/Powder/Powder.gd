@@ -21,7 +21,7 @@ func item_interact(itemHit : Item):
 		disassociate_station()
 		itemHit.disassociate_station()
 		
-		combineItemAction.assign_vals("ItemCombine", itemHit.itemName + " + " + self.itemName, 0, newItem, null, 100)
+		combineItemAction.assign_vals(ItemAction.Action.COMBINE, itemHit.itemName + " + " + self.itemName, 0, newItem, null, 100)
 		newItem.previousItemsInvolved.append(itemHit)
 		newItem.previousItemsInvolved.append(self)
 		itemHit.itemActionsApplied.append(combineItemAction)

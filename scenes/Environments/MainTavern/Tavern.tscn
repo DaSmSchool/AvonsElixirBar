@@ -63,12 +63,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
 [node name="powder2" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5648, 5.68598, -13.9767)
 
-[node name="powder3" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5768, 7.68849, -14.4722)
-
-[node name="powder4" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9652, 7.68849, -14.1039)
-
 [node name="powder5" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
 
@@ -111,6 +105,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 1.278)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -10.79)
 AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView")
 
+[node name="grinder" parent="Stations" node_paths=PackedStringArray("AssocView") instance=ExtResource("5_ntxo5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4092, 3.3387, -6.62991)
+AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView2")
+
 [node name="Seat1" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
 
@@ -147,10 +145,19 @@ transform = Transform3D(8.87159e-08, 0.492424, -0.870356, 2.33627e-08, 0.870356,
 [node name="GrinderView" type="Node3D" parent="CameraViewSpots/StationSpots"]
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
 
+[node name="GrinderView2" type="Node3D" parent="CameraViewSpots/StationSpots"]
+transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -5.15992)
+
 [node name="ViewCam" parent="." node_paths=PackedStringArray("camPointsParent") instance=ExtResource("4_hqwv2")]
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
 current = true
 camPointsParent = NodePath("../CameraViewSpots/CamCycle")
+
+[node name="crystal" parent="." instance=ExtResource("11_qxj8y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6705, 7.68849, -14.1526)
+
+[node name="crystal2" parent="." instance=ExtResource("11_qxj8y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9039, 7.68849, -14.0748)
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]

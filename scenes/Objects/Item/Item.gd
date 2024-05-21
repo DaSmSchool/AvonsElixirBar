@@ -1,6 +1,15 @@
 extends Interactable
 class_name Item
 
+
+enum Property {
+	GRINDABLE,
+	ENCHANTABLE,
+	COMBINABLE
+}
+
+@export var properties = []
+
 static var holdingItem : Item
 
 var itemColor : Color = Color()
@@ -8,7 +17,7 @@ var itemColor : Color = Color()
 @export var itemName : String = "DefItemName"
 @export var itemCollisionParent : Node
 @export var itemActionsApplied = []
-@export var previousItemsInvolved = []
+@export var previousItemsInvolved : Array[Item] = []
 @export var mutationAge = 1
 
 var stationIn : Station
@@ -39,6 +48,8 @@ func _process(delta):
 	if !mouseRay.is_empty():
 		holding_item_logic()
 
+func has_property(prop : int):
+	return prop in properties
 
 func set_base_material():
 	var mat : Material = matTemplate.duplicate()
@@ -75,12 +86,18 @@ func disassociate_station():
 		stationIn = null
 
 
+func associate_station(station : Station):
+	station.heldItem = self
+	stationIn = station
+
+
 func holding_item_logic():
 	if holdingItem == null:
 		position = position
 	elif holdingItem == self:
 		if (Station.hoveringStation == null):
 			position = mouseRay["position"]
+			disassociate_station()
 		elif Station.hoveringStation.heldItem in [null, self]:
 			position = Station.hoveringStation.itemSpotMarker.global_position
 			Station.hoveringStation.heldItem = self

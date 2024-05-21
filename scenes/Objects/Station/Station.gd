@@ -22,7 +22,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
-	print(heldItem)
 	if !mouseRay.is_empty():
 		var hoverObj = mouseRay["collider"].get_parent().get_parent()
 		if (hoverObj is Station):
