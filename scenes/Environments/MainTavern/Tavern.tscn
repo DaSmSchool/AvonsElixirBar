@@ -105,10 +105,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4726, 3.337, 1.278)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.36, 3.3387, -10.79)
 AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView")
 
-[node name="grinder" parent="Stations" node_paths=PackedStringArray("AssocView") instance=ExtResource("5_ntxo5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4092, 3.3387, -6.62991)
-AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView2")
-
 [node name="Seat1" parent="." instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
 
