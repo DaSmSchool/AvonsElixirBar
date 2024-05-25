@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ooskpd35pgtl"]
+
+[ext_resource type="PackedScene" uid="uid://de5noj26axclc" path="res://data/blends/Objects/Bottle/bottle.blend" id="1_ayhr8"]
+[ext_resource type="Script" path="res://scenes/Objects/Bottle/Bottle.gd" id="2_t4xu2"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="3_1kax2"]
+
+[node name="bottle" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_ayhr8")]
+script = ExtResource("2_t4xu2")
+itemName = "Bottle"
+itemCollisionParent = NodePath("Bottle /StaticBody3D")
+
+[node name="PartFull" parent="." index="1"]
+unique_name_in_owner = true
+
+[node name="Full" parent="." index="2"]
+unique_name_in_owner = true
+
+[node name="MouseInteractableComponent" parent="." index="3" node_paths=PackedStringArray("colCheck", "parent") instance=ExtResource("3_1kax2")]
+colCheck = NodePath("../Bottle /StaticBody3D")
+parent = NodePath("..")

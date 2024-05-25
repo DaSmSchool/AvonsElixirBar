@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://pyg7eggnk6i8"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Liquid/Liquid.gd" id="1_1n4i6"]
+
+[node name="Liquid" type="Node3D"]
+script = ExtResource("1_1n4i6")

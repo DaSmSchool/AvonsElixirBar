@@ -31,7 +31,6 @@ func _ready():
 	super._ready()
 	itemActionsApplied = []
 	previousItemsInvolved = []
-	itemName = "DefItemName"
 	mutationAge = 1
 	if itemsNode == null:
 		itemsNode = get_tree().current_scene.get_node("Items")
@@ -92,27 +91,38 @@ func associate_station(station : Station):
 
 
 func holding_item_logic():
+	#behavior when not held
 	if holdingItem == null:
 		position = position
+	#behavior when held
 	elif holdingItem == self:
+		#when no station being hovered
 		if (Station.hoveringStation == null):
 			position = mouseRay["position"]
 			disassociate_station()
+		#when a station is being hovered, and the hovered station has self or has no item 
+		#both item and station should be tied to mouse, so the held item should be the one that is on top of the hovered station
 		elif Station.hoveringStation.heldItem in [null, self]:
-			position = Station.hoveringStation.itemSpotMarker.global_position
+			if Station.hoveringStation.itemSpotMarker != null:
+				position = Station.hoveringStation.itemSpotMarker.global_position
+			else:
+				position = mouseRay["position"]
 			Station.hoveringStation.heldItem = self
 			stationIn = Station.hoveringStation
+		#when the hovered station has another item
 		elif Station.hoveringStation.heldItem != null:
 			position = mouseRay["position"]
+		
 		if Input.is_action_just_pressed("action"):
-			var hitNode = mouseRay["collider"].get_parent()
+			var hitNode = mouseRay["collider"].get_parent().get_parent()
 			if hitNode is Item:
 				item_interact(hitNode)
-			elif hitNode.get_parent() is Item:
-				item_interact(hitNode.get_parent())
-			
-			if visible:
+			elif hitNode is Station:
+				if Station.Property.KEEP_ITEM_HOLD_ON_CLICK not in hitNode.properties:
+					let_item_go()
+			else:
 				let_item_go()
+
 
 func let_item_go():
 	holdingItem = null
@@ -125,7 +135,9 @@ func item_interact(itemHit : Item):
 func on_just_left_clicked():
 	var colNode : CollisionShape3D = itemCollisionParent.get_node("CollisionShape3D")
 	if !mouseRay.is_empty():
-		if (mouseRay["collider"] == itemCollisionParent):
+		print(mouseRay["collider"].get_parent())
+		print(itemCollisionParent.get_parent())
+		if (mouseRay["collider"] == itemCollisionParent) and !holdingItem:
 			colNode.set_deferred("disabled", true)
 			if (holdingItem == null):
 				holdingItem = self

@@ -8,7 +8,6 @@ var powderScene = load("res://scenes/Objects/Powder/Powder.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	set_station_name("Grinder")
 	if assocHud == null:
 		set_assoc_hud(load("res://scenes/Functional/HUD/StationHud/GrinderHud.tscn").instantiate())
 

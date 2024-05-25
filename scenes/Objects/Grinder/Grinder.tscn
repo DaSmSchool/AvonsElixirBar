@@ -8,6 +8,7 @@
 
 [node name="grinder" node_paths=PackedStringArray("stationCollisionParent", "itemSpotMarker") instance=ExtResource("2_swqw4")]
 script = ExtResource("1_7qnjh")
+stationName = "Grinder"
 stationCollisionParent = NodePath("Bowl /StaticBody3D")
 itemSpotMarker = NodePath("Mark")
 

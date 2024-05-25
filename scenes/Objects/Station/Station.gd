@@ -3,7 +3,15 @@ class_name Station
 
 signal item_hovering(station:Station)
 
-var stationName : String = "DefStationName"
+
+enum Property {
+	BLANK,
+	KEEP_ITEM_HOLD_ON_CLICK
+}
+
+@export var properties = []
+
+@export var stationName : String = "DefStationName"
 
 @export var stationCollisionParent : Node
 @export var itemSpotMarker : Node3D
@@ -71,9 +79,9 @@ func get_assoc_hud():
 func on_just_left_clicked():
 	if mouseRay != {}:
 		if mouseRay["collider"].get_parent().get_parent() == self:
-			if Item.holdingItem == null:
-				perform_station_action()
-				if assocHud:
-					assocHud.enter_station_hud()
-				enter_station_outside_action()
-				activeStation = self
+			#if Item.holdingItem == null:
+			activeStation = self
+			perform_station_action()
+			if assocHud:
+				assocHud.enter_station_hud()
+			enter_station_outside_action()
