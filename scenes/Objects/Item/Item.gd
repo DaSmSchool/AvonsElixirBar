@@ -61,8 +61,6 @@ func insert_to_tree():
 		par.remove_child(self)
 	itemsNode.add_child(self)
 	par = self.get_parent()
-	print(par.is_inside_tree())
-	print(self.is_inside_tree())
 
 
 
@@ -135,8 +133,6 @@ func item_interact(itemHit : Item):
 func on_just_left_clicked():
 	var colNode : CollisionShape3D = itemCollisionParent.get_node("CollisionShape3D")
 	if !mouseRay.is_empty():
-		print(mouseRay["collider"].get_parent())
-		print(itemCollisionParent.get_parent())
 		if (mouseRay["collider"] == itemCollisionParent) and !holdingItem:
 			colNode.set_deferred("disabled", true)
 			if (holdingItem == null):

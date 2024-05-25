@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://llm8dakwt74l"]
+[gd_scene load_steps=8 format=3 uid="uid://llm8dakwt74l"]
 
 [ext_resource type="PackedScene" uid="uid://d1s4jc630yg10" path="res://data/blends/Objects/Oasis/oasis.blend" id="1_ytwh0"]
 [ext_resource type="Script" path="res://scenes/Objects/Oasis/oasis.gd" id="2_vgu86"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://bw233v3pxf1p5" path="res://materials/oasissand.material" id="4_u2uf3"]
 [ext_resource type="Material" uid="uid://cy27rhj7l7jb5" path="res://materials/palmtreebase.material" id="5_e3ny6"]
 [ext_resource type="Material" uid="uid://dn01dq5fowrlb" path="res://materials/palmtreeleaf.material" id="6_rywi7"]
+[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="7_k3be4"]
 
 [node name="oasis" node_paths=PackedStringArray("stationCollisionParent") instance=ExtResource("1_ytwh0")]
 script = ExtResource("2_vgu86")
@@ -19,3 +20,7 @@ surface_material_override/1 = ExtResource("4_u2uf3")
 [node name="Palmtree" parent="." index="1"]
 surface_material_override/0 = ExtResource("5_e3ny6")
 surface_material_override/1 = ExtResource("6_rywi7")
+
+[node name="MouseInteractableComponent" parent="." index="2" node_paths=PackedStringArray("colCheck", "parent") instance=ExtResource("7_k3be4")]
+colCheck = NodePath("../Oasis /StaticBody3D")
+parent = NodePath("..")

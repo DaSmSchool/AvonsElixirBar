@@ -9,6 +9,7 @@ class_name Bottle
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	set_base_material()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,14 +19,15 @@ func _process(delta):
 
 
 func handle_filled_status():
-	if (bottledItems.is_empty()):
-		%PartFull.hide()
-		%Full.hide()
-	elif containedLiquid:
+	if containedLiquid:
+		print("WithLiq!")
 		%Full.show()
 		%PartFull.hide()
-	else:
+	elif (!bottledItems.is_empty()):
 		%PartFull.show()
+		%Full.hide()
+	else:
+		%PartFull.hide()
 		%Full.hide()
 
 
@@ -38,7 +40,8 @@ func give_random_color():
 	pass
 
 func update_item_color():
-	var mat : Material = %Part.get_surface_override_material(0)
+	print(%Full)
+	var mat : Material = %Full.get_surface_override_material(0)
 	mat.albedo_color = itemColor
-	%Part.set_surface_override_material(0, mat)
+	%Full.set_surface_override_material(0, mat)
 	%PartFull.set_surface_override_material(0, mat)

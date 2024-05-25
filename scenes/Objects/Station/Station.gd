@@ -84,4 +84,4 @@ func on_just_left_clicked():
 			perform_station_action()
 			if assocHud:
 				assocHud.enter_station_hud()
-			enter_station_outside_action()
+				enter_station_outside_action()
