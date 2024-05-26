@@ -1,15 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://vloa7nwhjpmb"]
+[gd_scene load_steps=6 format=3 uid="uid://vloa7nwhjpmb"]
 
 [ext_resource type="PackedScene" uid="uid://ogvuupmf3bc0" path="res://data/blends/Objects/Cauldron/cauldron.blend" id="1_tquwd"]
 [ext_resource type="Script" path="res://scenes/Objects/Cauldron/cauldron.gd" id="1_vimss"]
-[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_unqkk"]
+[ext_resource type="Script" path="res://scenes/Modules/MouseInteractableComponent.gd" id="2_ynppt"]
+[ext_resource type="Material" uid="uid://13hok7q64ln0" path="res://materials/cauldron.material" id="3_qsguj"]
+[ext_resource type="Material" uid="uid://bhgqq1r3isjcm" path="res://materials/cauldronliquid.material" id="5_xfsbe"]
 
-[node name="Cauldron" type="Node3D"]
+[node name="cauldron" node_paths=PackedStringArray("stationCollisionParent") instance=ExtResource("1_tquwd")]
 script = ExtResource("1_vimss")
+stationName = "Cauldron"
+stationCollisionParent = NodePath("Cauldron /StaticBody3D")
 
-[node name="cauldron" parent="." instance=ExtResource("1_tquwd")]
+[node name="Cauldron " parent="." index="0"]
+surface_material_override/0 = ExtResource("3_qsguj")
 
-[node name="MouseInteractableComponent" parent="." node_paths=PackedStringArray("colCheck") instance=ExtResource("2_unqkk")]
-colCheck = NodePath("../cauldron/Cauldron /StaticBody3D")
+[node name="MouseInteractable" type="Node" parent="." index="1" node_paths=PackedStringArray("colCheck", "parent")]
+script = ExtResource("2_ynppt")
+colCheck = NodePath("../Cauldron /StaticBody3D")
+parent = NodePath("..")
 
-[editable path="cauldron"]
+[node name="LiquidVis" parent="." index="2"]
+visible = false
+surface_material_override/0 = ExtResource("5_xfsbe")

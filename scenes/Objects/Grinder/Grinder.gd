@@ -60,9 +60,7 @@ func convert_ground_item():
 	newPowder.position = heldItem.position
 	var groundItemAction : ItemAction = heldItem.itemActionsApplied[heldItem.itemActionsApplied.size()-1]
 	groundItemAction.assocItem = newPowder
-	heldItem.hide()
-	heldItem.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
-	heldItem.disassociate_station()
+	heldItem.remove()
 	newPowder.associate_station(self)
 	
 func leave_station():

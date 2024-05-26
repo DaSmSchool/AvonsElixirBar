@@ -21,12 +21,17 @@ func perform_station_action():
 			var prodWater = Liquid.new()
 			heldItem.containedLiquid = prodWater
 			
-			prodWater.itemName = "Water"
-			prodWater.itemColor = Color.DODGER_BLUE
-			heldItem.update_item_color()
-			
-			heldItem.itemName = "Water " + heldItem.itemName
-			
+			if heldItem.bottledItems == null:
+				prodWater.itemName = "Water"
+				prodWater.itemColor = Color.DODGER_BLUE
+				heldItem.update_item_color()
+				
+				heldItem.itemName = "Water " + heldItem.itemName
+			else:
+				prodWater.itemName = "Potion Base"
+				prodWater.itemColor = heldItem.itemColor
+				
+				heldItem.itemName = "Raw Potion"
 			Item.holdingItem = heldItem
 			heldItem.disassociate_station()
 	activeStation = null
