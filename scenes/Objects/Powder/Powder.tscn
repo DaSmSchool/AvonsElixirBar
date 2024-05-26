@@ -7,7 +7,12 @@
 
 [node name="powder" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_54yu1")]
 script = ExtResource("2_4um3h")
+properties = null
+itemName = null
 itemCollisionParent = NodePath("Powder /StaticBody3D")
+itemActionsApplied = null
+mutationAge = null
+mouseRay = null
 
 [node name="Powder " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_0t63a")

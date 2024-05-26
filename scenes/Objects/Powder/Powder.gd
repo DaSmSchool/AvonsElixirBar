@@ -5,8 +5,14 @@ class_name Powder
 var itemInst : PackedScene = load("res://scenes/Objects/Powder/Powder.tscn")
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	properties = [
+		Item.Property.COMBINABLE,
+		Item.Property.LIQUID_MIXABLE,
+		Item.Property.BOTTLE_ADDABLE
+	]
 	super._ready()
 	set_item_name("Powder")
 	
@@ -35,10 +41,10 @@ func item_interact(itemHit : Item):
 		
 		newItem.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
 		newItem.global_position = itemHit.global_position
-		itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
-		hide()
-		itemHit.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
-		itemHit.hide()
+		remove()
+		itemHit.remove()
+	if itemHit is Bottle:
+		itemHit.insert_item(self)
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

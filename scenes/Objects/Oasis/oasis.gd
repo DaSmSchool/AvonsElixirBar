@@ -22,11 +22,11 @@ func perform_station_action():
 			heldItem.containedLiquid = prodWater
 			
 			prodWater.itemName = "Water"
-			heldItem.itemColor = Color.DODGER_BLUE
+			prodWater.itemColor = Color.DODGER_BLUE
 			heldItem.update_item_color()
 			
 			heldItem.itemName = "Water " + heldItem.itemName
 			
 			Item.holdingItem = heldItem
 			heldItem.disassociate_station()
-			activeStation = null
+	activeStation = null

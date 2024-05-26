@@ -57,6 +57,10 @@ environment = SubResource("Environment_wy8pr")
 
 [node name="bottle" parent="Items" instance=ExtResource("12_vu1g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3.34659, -13)
+properties = []
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)

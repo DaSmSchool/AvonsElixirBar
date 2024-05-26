@@ -5,7 +5,9 @@ class_name Item
 enum Property {
 	GRINDABLE,
 	ENCHANTABLE,
-	COMBINABLE
+	COMBINABLE,
+	LIQUID_MIXABLE,
+	BOTTLE_ADDABLE
 }
 
 @export var properties = []
@@ -62,6 +64,10 @@ func insert_to_tree():
 	itemsNode.add_child(self)
 	par = self.get_parent()
 
+
+func remove_from_tree():
+	if get_parent() != null:
+		get_parent().remove_child(self)
 
 
 func give_random_color():
@@ -123,7 +129,8 @@ func holding_item_logic():
 
 
 func let_item_go():
-	holdingItem = null
+	if holdingItem == self:
+		holdingItem = null
 	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
 
 
@@ -157,3 +164,12 @@ func set_item_name(newName : String):
 func set_used_mat(mat : Material):
 	mat = matTemplate
 	set_base_material()
+
+
+func remove():
+	let_item_go()
+	disassociate_station()
+	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
+	hide()
+	remove_from_tree()
+	
