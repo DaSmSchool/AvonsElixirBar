@@ -24,5 +24,5 @@ func perform_station_action():
 	activeStation = null
 
 
-func mix_cauldron_liquid(liquid : Liquid):
-	containedLiquid = containedLiquid.mix(liquid)
+func add_to_cauldron(bottle : Bottle):
+	containedLiquid = containedLiquid.mix(bottle.containedLiquid)

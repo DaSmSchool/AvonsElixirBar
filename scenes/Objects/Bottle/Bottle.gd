@@ -64,9 +64,8 @@ func bottle_transfer(transferTo):
 	if transferTo is Bottle:
 		bottle_mix(transferTo)
 
-		
 	elif transferTo is Cauldron:
-		transferTo.add_bottle_contents(self)
+		transferTo.add_to_cauldron(self)
 
 
 func set_base_material():
