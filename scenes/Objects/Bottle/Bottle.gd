@@ -53,6 +53,22 @@ func insert_item(itemHit : Item):
 			itemHit.remove()
 
 
+func bottle_mix(bottle : Liquid):
+	bottle.bottledItems.append_array(bottledItems)
+	bottle.containedLiquid = bottle.containedLiquid.mix(containedLiquid)
+	
+	containedLiquid = null
+	bottledItems = []
+	
+func bottle_transfer(transferTo):
+	if transferTo is Bottle:
+		bottle_mix(transferTo)
+
+		
+	elif transferTo is Cauldron:
+		transferTo.add_bottle_contents(self)
+
+
 func set_base_material():
 	var mat : Material = matTemplate.duplicate()
 	%PartFull.set_surface_override_material(0, mat)

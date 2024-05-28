@@ -30,6 +30,7 @@ func perform_station_action():
 			else:
 				prodWater.itemName = "Potion Base"
 				prodWater.itemColor = heldItem.itemColor
+				heldItem.update_item_color()
 				
 				heldItem.itemName = "Raw Potion"
 			Item.holdingItem = heldItem

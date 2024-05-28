@@ -8,7 +8,8 @@ enum Action {
 	GRIND,
 	ENCHANT,
 	BOIL,
-	COMBINE
+	COMBINE,
+	MIX_LIQUID
 }
 
 ## Set to true if this action hasn't actually been performed. 
