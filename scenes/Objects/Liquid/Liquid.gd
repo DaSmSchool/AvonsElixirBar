@@ -17,15 +17,21 @@ func give_random_color():
 	pass
 
 
-func mix(liquid):
-	var newLiq : Liquid = scene_path.instantiate()
-	newLiq.itemColor = ColorHelper.average_color(itemColor, liquid.itemColor)
-	var mixAction = ItemAction.new()
-	mixAction.assign_vals(ItemAction.Action.MIX_LIQUID, itemName + " mixed with " + liquid.itemName, 0, newLiq, null, 100)
-	liquid.itemActionsApplied.append(mixAction)
+func mix(item):
+	if !item is Liquid and !item.has_property(Item.Property.LIQUID_MIXABLE): return
+	var newItem : Liquid = scene_path.instantiate()
+	newItem.itemColor = ColorHelper.average_color(itemColor, item.itemColor)
+	var mixAction = get_mix_item_action(item,newItem)
+	item.itemActionsApplied.append(mixAction)
 	itemActionsApplied.append(mixAction)
 	
 	
-	newLiq.previousItemsInvolved.append(liquid)
-	newLiq.previousItemsInvolved.append(self)
-	return newLiq
+	newItem.previousItemsInvolved.append(item)
+	newItem.previousItemsInvolved.append(self)
+	return newItem
+
+		
+func get_mix_item_action(item:Item, newItem:Item):
+	var mixAction = ItemAction.new()
+	mixAction.assign_vals(ItemAction.Action.MIX_LIQUID, itemName + " mixed with " + item.itemName, 0, newItem, null, 100)
+	return mixAction

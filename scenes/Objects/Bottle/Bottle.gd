@@ -20,7 +20,6 @@ func _process(delta):
 
 func handle_filled_status():
 	if containedLiquid:
-		print("WithLiq!")
 		%Full.show()
 		%PartFull.hide()
 	elif (!bottledItems.is_empty()):
@@ -60,12 +59,23 @@ func bottle_mix(bottle : Liquid):
 	containedLiquid = null
 	bottledItems = []
 	
+	
 func bottle_transfer(transferTo):
 	if transferTo is Bottle:
 		bottle_mix(transferTo)
 
 	elif transferTo is Cauldron:
 		transferTo.add_to_cauldron(self)
+		bottledItems = []
+		containedLiquid = null
+
+
+func mix_all_contained_items():
+	if !containedLiquid: return
+	for item in bottledItems:
+		if item.has_property(Item.Property.LIQUID_MIXABLE):
+			containedLiquid.mix(item)
+	update_item_color()
 
 
 func set_base_material():
@@ -95,7 +105,6 @@ func update_item_color():
 	elif itemsAvgColor and !tarColor:
 		tarColor = itemsAvgColor
 
-	print(%Full)
 	var mat : Material = %Full.get_surface_override_material(0)
 	mat.albedo_color = tarColor
 	%Full.set_surface_override_material(0, mat)

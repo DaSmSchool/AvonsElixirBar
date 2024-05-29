@@ -4,8 +4,3 @@
 
 [node name="Liquid" type="Node3D"]
 script = ExtResource("1_1n4i6")
-properties = null
-itemName = null
-itemActionsApplied = null
-mutationAge = null
-mouseRay = null

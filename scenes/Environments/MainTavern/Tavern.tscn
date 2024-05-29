@@ -60,27 +60,67 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3.34659, -13)
 
 [node name="powder" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder2" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5648, 5.68598, -13.9767)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder5" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder6" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5433, 7.68849, -13.7709)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder7" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00308923, 0, 0.00308923, 0.999995, 11.8932, 9.65665, -13.9254)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder8" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3386, 9.68849, -14.0262)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder9" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5026, 9.68849, -14.016)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="powder10" parent="Items" instance=ExtResource("10_r4a1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
+properties = []
+itemName = "DefItemName"
+itemActionsApplied = []
+mutationAge = 1
+mouseRay = {}
 
 [node name="crystal" parent="Items" instance=ExtResource("11_qxj8y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7616, 5.68849, -13.9869)

@@ -20,5 +20,6 @@ colCheck = NodePath("../Cauldron /StaticBody3D")
 parent = NodePath("..")
 
 [node name="LiquidVis" parent="." index="2"]
+unique_name_in_owner = true
 visible = false
 surface_material_override/0 = ExtResource("5_xfsbe")

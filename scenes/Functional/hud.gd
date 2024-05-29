@@ -69,7 +69,12 @@ func update_item_action_panels():
 		hit_obj = Item.holdingItem
 	if hit_obj is Item:
 		var heightOffset = itemBox.size.y
-		var deepItemActionList = get_item_actions_deep(hit_obj)
+		var deepItemActionList = []
+		if hit_obj is Bottle:
+			if hit_obj.containedLiquid:
+				deepItemActionList = get_item_actions_deep(hit_obj.containedLiquid)
+		else:
+			deepItemActionList = get_item_actions_deep(hit_obj)
 		for objInd in deepItemActionList.size():
 			var currItemAction : ItemAction = deepItemActionList[objInd]
 			var currPanel = itemActionPanel.instantiate()
@@ -83,7 +88,6 @@ func update_item_action_panels():
 				print(textGet.get_class())
 				print(textGet.text)
 			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
-
 
 func change_name_text(rtl : RichTextLabel, nameParent, newName : String):
 	if lastObj == null:

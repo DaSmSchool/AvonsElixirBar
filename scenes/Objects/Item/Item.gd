@@ -48,6 +48,8 @@ func _process(delta):
 	super._process(delta)
 	if !mouseRay.is_empty():
 		holding_item_logic()
+	if self == holdingItem:
+		print(self)
 
 func has_property(prop : int):
 	return prop in properties
