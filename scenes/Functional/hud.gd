@@ -51,9 +51,9 @@ func update_item_name_draw():
 		var hit_obj = ViewCameraReference.raycast_result["collider"].get_parent().get_parent()
 		itemBox.show()
 		if Item.holdingItem != null:
-			change_name_text(itemBoxText, Item.holdingItem, Item.holdingItem.itemName)
+			change_name_text(itemBoxText, Item.holdingItem, Item.holdingItem.display_name())
 		elif (hit_obj is Item):
-			change_name_text(itemBoxText, hit_obj, hit_obj.itemName)
+			change_name_text(itemBoxText, hit_obj, hit_obj.display_name())
 		elif (hit_obj is Station):
 			change_name_text(itemBoxText, hit_obj, hit_obj.stationName)
 		else:
@@ -72,22 +72,32 @@ func update_item_action_panels():
 		var deepItemActionList = []
 		if hit_obj is Bottle:
 			if hit_obj.containedLiquid:
-				deepItemActionList = get_item_actions_deep(hit_obj.containedLiquid)
+				deepItemActionList.append("Liquid: " + hit_obj.containedLiquid.itemName)
+				deepItemActionList.append_array(get_item_actions_deep(hit_obj.containedLiquid))
+			if hit_obj.bottledItems:
+				deepItemActionList.append("Items:")
+				for item:Item in hit_obj.bottledItems:
+					deepItemActionList.append(item.display_name())
+					deepItemActionList.append_array(get_item_actions_deep(item))
 		else:
-			deepItemActionList = get_item_actions_deep(hit_obj)
+			deepItemActionList.append_array(get_item_actions_deep(hit_obj))
+		
 		for objInd in deepItemActionList.size():
-			var currItemAction : ItemAction = deepItemActionList[objInd]
+			var currItemAction = deepItemActionList[objInd]
+			print(currItemAction)
 			var currPanel = itemActionPanel.instantiate()
 			itemBox.get_node("ItemActionDrawPanels").add_child(currPanel)
 			currPanel.position.y = heightOffset + (objInd*currPanel.size.y)
-			
-			currPanel.get_node("Text").text = currItemAction.actionMessage
-			var textGet : RichTextLabel = currPanel.get_node("Text")
-			print(textGet)
-			if currPanel.get_node("Text") != null:
-				print(textGet.get_class())
-				print(textGet.text)
-			print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
+			if currItemAction is ItemAction:
+				currPanel.get_node("Text").text = currItemAction.actionMessage
+			elif currItemAction is String:
+				currPanel.get_node("Text").text = currItemAction
+			#var textGet : RichTextLabel = currPanel.get_node("Text")
+			#print(textGet)
+			#if currPanel.get_node("Text") != null:
+				#print(textGet.get_class())
+				#print(textGet.text)
+			#print_rich("[wave amp=50.0 freq=5.0 connected=1][b]" + str(objInd) + "[/b] " + str(currPanel.position.y) + "[/wave]")
 
 func change_name_text(rtl : RichTextLabel, nameParent, newName : String):
 	if lastObj == null:

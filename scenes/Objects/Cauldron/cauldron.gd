@@ -42,10 +42,10 @@ func transfer_to_bottle(bottle : Bottle):
 	else:
 		bottle.containedLiquid = containedLiquid
 	
-	bottle.update_item_color()
 	containedLiquid = null
 	bottle.bottledItems.append_array(containedItems)
 	bottle.mix_all_contained_items()
+	bottle.update_item_color()
 	containedItems = []
 
 func add_to_cauldron(bottle : Bottle):
@@ -53,5 +53,28 @@ func add_to_cauldron(bottle : Bottle):
 		containedLiquid = containedLiquid.mix(bottle.containedLiquid)
 	else:
 		containedLiquid = bottle.containedLiquid
-		
+	
 	containedItems.append_array(bottle.bottledItems)
+	update_item_color()
+
+
+func update_item_color():
+	var tarColor : Color
+	var itemsAvgColor : Color
+	if !containedItems and !containedLiquid: return
+	
+	if containedItems:
+		itemsAvgColor = containedItems[0].itemColor
+		for item : Item in containedItems:
+			itemsAvgColor = ColorHelper.average_color(item.itemColor, itemsAvgColor)
+	if containedLiquid:
+		tarColor = containedLiquid.itemColor
+	
+	if tarColor and itemsAvgColor:
+		tarColor = ColorHelper.average_color(tarColor, itemsAvgColor)
+	elif itemsAvgColor and !tarColor:
+		tarColor = itemsAvgColor
+
+	var mat : Material = %LiquidVis.get_surface_override_material(0)
+	mat.albedo_color = tarColor
+	%LiquidVis.set_surface_override_material(0, mat)

@@ -10,6 +10,8 @@ class_name Bottle
 func _ready():
 	super._ready()
 	set_base_material()
+	itemColor = Color.WHITE
+	update_item_color()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,9 +74,15 @@ func bottle_transfer(transferTo):
 
 func mix_all_contained_items():
 	if !containedLiquid: return
-	for item in bottledItems:
-		if item.has_property(Item.Property.LIQUID_MIXABLE):
-			containedLiquid.mix(item)
+	
+	var itemInd = 0
+	while itemInd < bottledItems.size():
+		if bottledItems[itemInd].has_property(Item.Property.LIQUID_MIXABLE):
+			containedLiquid.mix(bottledItems[itemInd])
+			bottledItems.remove_at(itemInd)
+			itemInd -= 1
+		itemInd += 1
+	print("Remaining items: " + str(bottledItems))
 	update_item_color()
 
 
@@ -104,7 +112,8 @@ func update_item_color():
 		tarColor = ColorHelper.average_color(tarColor, itemsAvgColor)
 	elif itemsAvgColor and !tarColor:
 		tarColor = itemsAvgColor
-
+	
+	itemColor = tarColor
 	var mat : Material = %Full.get_surface_override_material(0)
 	mat.albedo_color = tarColor
 	%Full.set_surface_override_material(0, mat)

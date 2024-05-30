@@ -48,8 +48,6 @@ func _process(delta):
 	super._process(delta)
 	if !mouseRay.is_empty():
 		holding_item_logic()
-	if self == holdingItem:
-		print(self)
 
 func has_property(prop : int):
 	return prop in properties
@@ -76,6 +74,7 @@ func give_random_color():
 	itemColor.r = randf()
 	itemColor.g = randf()
 	itemColor.b = randf()
+	itemColor.v = (randf()/2)+0.5
 	update_item_color()
 
 
@@ -175,3 +174,5 @@ func remove():
 	hide()
 	remove_from_tree()
 	
+func display_name():
+	return "[color=#" + itemColor.to_html(false) + "]" + itemName + "[/color]"
