@@ -5,6 +5,8 @@ class_name Cauldron
 @export var containedLiquid : Liquid
 @export var containedItems : Array[Item]
 
+@export var boilRate : float = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
@@ -14,13 +16,36 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	handle_filled_cauldron()
+	handle_boil(delta)
+
 
 func handle_filled_cauldron():
 	if containedLiquid:
-		print("WithLiq!")
 		%LiquidVis.show()
 	else:
 		%LiquidVis.hide()
+
+
+func handle_boil(delta):
+	if containedLiquid:
+		%BoilProg.show()
+		if containedLiquid.boilingPoint == 0:
+			containedLiquid.boilingPoint = Item.get_boiling_point(containedLiquid)
+		if containedLiquid.itemActionsApplied.size() == 0 or containedLiquid.itemActionsApplied[containedLiquid.itemActionsApplied.size()-1].actionType != ItemAction.Action.BOIL:
+			var boilAction : ItemAction = ItemAction.new()
+			var boilAmnt = 0
+			boilAction.assign_vals(ItemAction.Action.BOIL, "Boiled: " + str(boilAmnt) + "%", 0, null, self, 100)
+			containedLiquid.itemActionsApplied.append(boilAction)
+		else:
+			var boilAction : ItemAction = containedLiquid.itemActionsApplied[containedLiquid.itemActionsApplied.size()-1]
+			if boilAction.duration >= containedLiquid.boilingPoint*2:
+				boilAction.duration = containedLiquid.boilingPoint*2
+			else:
+				boilAction.duration += boilRate * delta
+			boilAction.actionMessage = "Boiled: " + str(snapped((boilAction.duration/(containedLiquid.boilingPoint*2))*100, 0.01)) + "%"
+			%BoilProg.value = (boilAction.duration/(containedLiquid.boilingPoint*2))*100
+	else:
+		%BoilProg.hide()
 
 
 func perform_station_action():

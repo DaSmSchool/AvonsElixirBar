@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://c035mdkdvbgfv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teftn"]
+bg_color = Color(0.105882, 0.105882, 0.203922, 0.815686)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32hca"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_yksfe"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_teftn")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_32hca")
+
+[node name="BoilProg" type="ProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -15.5
+offset_right = 74.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yksfe")
+value = 50.0
+show_percentage = false

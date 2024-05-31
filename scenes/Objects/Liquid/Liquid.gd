@@ -3,6 +3,8 @@ class_name Liquid
 
 var scene_path = load("res://scenes/Objects/Liquid/Liquid.tscn")
 
+@export var boilingPoint : float
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
@@ -29,6 +31,7 @@ func mix(item):
 	newItem.previousItemsInvolved.append(item)
 	newItem.previousItemsInvolved.append(self)
 	return newItem
+
 
 		
 func get_mix_item_action(item:Item, newItem:Item):

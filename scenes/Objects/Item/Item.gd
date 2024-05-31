@@ -18,9 +18,11 @@ var itemColor : Color = Color()
 
 @export var itemName : String = "DefItemName"
 @export var itemCollisionParent : Node
-@export var itemActionsApplied = []
+@export var itemActionsApplied : Array[ItemAction] = []
 @export var previousItemsInvolved : Array[Item] = []
 @export var mutationAge = 1
+
+@export var boilTime = 2
 
 var stationIn : Station
 
@@ -134,6 +136,13 @@ func let_item_go():
 		holdingItem = null
 	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
 
+
+static func get_boiling_point(item:Item):
+	var boilPoint = item.boilTime
+	if item.previousItemsInvolved:
+		for prevItem in item.previousItemsInvolved:
+			boilPoint += get_boiling_point(prevItem)
+	return boilPoint
 
 func item_interact(itemHit : Item):
 	pass

@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://vloa7nwhjpmb"]
+[gd_scene load_steps=8 format=3 uid="uid://vloa7nwhjpmb"]
 
 [ext_resource type="PackedScene" uid="uid://ogvuupmf3bc0" path="res://data/blends/Objects/Cauldron/cauldron.blend" id="1_tquwd"]
 [ext_resource type="Script" path="res://scenes/Objects/Cauldron/cauldron.gd" id="1_vimss"]
 [ext_resource type="Script" path="res://scenes/Modules/MouseInteractableComponent.gd" id="2_ynppt"]
 [ext_resource type="Material" uid="uid://13hok7q64ln0" path="res://materials/cauldron.material" id="3_qsguj"]
 [ext_resource type="Material" uid="uid://bhgqq1r3isjcm" path="res://materials/cauldronliquid.material" id="5_xfsbe"]
+[ext_resource type="PackedScene" uid="uid://c035mdkdvbgfv" path="res://scenes/Objects/Cauldron/boil_prog.tscn" id="6_mvfjw"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uuggp"]
+viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="cauldron" node_paths=PackedStringArray("stationCollisionParent") instance=ExtResource("1_tquwd")]
 script = ExtResource("1_vimss")
@@ -23,3 +27,14 @@ parent = NodePath("..")
 unique_name_in_owner = true
 visible = false
 surface_material_override/0 = ExtResource("5_xfsbe")
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23501, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_uuggp")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" index="0"]
+transparent_bg = true
+
+[node name="BoilProg" parent="Sprite3D/SubViewport" index="0" instance=ExtResource("6_mvfjw")]
+unique_name_in_owner = true
