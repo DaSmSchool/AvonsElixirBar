@@ -23,10 +23,11 @@ func on_just_left_clicked():
 			pass
 		else:
 			var heldItemDupe : Item = jarredItem.duplicate()
+			heldItemDupe.scale = Vector3(1, 1, 1)
 			heldItemDupe.itemColor = jarredItem.itemColor
-			heldItemDupe.update_item_color()
 			heldItemDupe.itemCollisionParent = heldItemDupe.get_child(0).get_node("StaticBody3D")
 			heldItemDupe.get_node("MouseInteractableComponent").colCheck = heldItemDupe.itemCollisionParent
 			heldItemDupe.insert_to_tree()
+			heldItemDupe.update_item_color()
 			Item.holdingItem = heldItemDupe
 			heldItemDupe.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)

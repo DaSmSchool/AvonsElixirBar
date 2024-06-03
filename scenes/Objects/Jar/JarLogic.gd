@@ -24,6 +24,7 @@ func update_shelf_jars():
 		newJar.jarredItem = GameStatus.availableItems[itr]
 		newJar.displayedItem = GameStatus.availableItems[itr]
 		newJar.add_child(newJar.displayedItem)
+		newJar.displayedItem.update_item_color()
 		newJar.displayedItem.global_position = newJar.get_node("ItemSpot").global_position
 		newJar.displayedItem.scale = Vector3(0.75, 0.75, 0.75)
 
