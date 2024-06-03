@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3y6kgskh8nkp"]
+
+[ext_resource type="PackedScene" uid="uid://ckowwcb65me2x" path="res://data/blends/Objects/Jar/Jar.blend" id="1_d7ycs"]
+[ext_resource type="Script" path="res://scenes/Objects/Jar/Jar.gd" id="2_lu153"]
+[ext_resource type="Material" uid="uid://7mdmhpnncks7" path="res://materials/jarlid.material" id="3_6ytj5"]
+[ext_resource type="Script" path="res://scenes/Modules/MouseInteractableComponent.gd" id="3_jwae2"]
+
+[node name="Jar" instance=ExtResource("1_d7ycs")]
+script = ExtResource("2_lu153")
+
+[node name="Jar " parent="." index="0"]
+surface_material_override/0 = ExtResource("3_6ytj5")
+
+[node name="StaticBody3D" parent="Jar " index="0"]
+unique_name_in_owner = true
+
+[node name="ItemSpot" parent="." index="1"]
+unique_name_in_owner = true
+
+[node name="MouseInteractable" type="Node" parent="." index="2" node_paths=PackedStringArray("colCheck", "parent")]
+script = ExtResource("3_jwae2")
+colCheck = NodePath("../Jar /StaticBody3D")
+parent = NodePath("..")

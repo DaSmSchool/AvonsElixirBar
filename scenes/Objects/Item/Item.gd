@@ -12,6 +12,8 @@ enum Property {
 
 @export var properties = []
 
+@export var assocScene : PackedScene
+
 static var holdingItem : Item
 
 var itemColor : Color = Color()
@@ -42,7 +44,6 @@ func _ready():
 	assert(itemCollisionParent != null, "Collision for all Items are not defined! Check the Stack Frames to see which one needs it.")
 	
 	set_base_material()
-	give_random_color()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,6 +71,11 @@ func insert_to_tree():
 func remove_from_tree():
 	if get_parent() != null:
 		get_parent().remove_child(self)
+
+
+func generate_random():
+	give_random_color()
+	update_item_color()
 
 
 func give_random_color():

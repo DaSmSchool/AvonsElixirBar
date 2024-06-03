@@ -40,22 +40,22 @@ func _process(delta):
 		if (hasMouseOver): 
 			if (Input.is_action_pressed("action")):
 				clickResults["press_left"] = true
-				print("Clicked on " + raycastResult["collider"].name + "!")
+				#print("Clicked on " + raycastResult["collider"].name + "!")
 			else:
 				clickResults["press_left"] = false
 			if (Input.is_action_pressed("back_action")):
 				clickResults["press_right"] = true
-				print("Right Clicked on " + raycastResult["collider"].name + "!")
+				#print("Right Clicked on " + raycastResult["collider"].name + "!")
 			else:
 				clickResults["press_right"] = false
 			if (Input.is_action_just_pressed("action")):
 				clickResults["just_press_left"] = true
-				print("Just clicked on " + raycastResult["collider"].name + "!")
+				#print("Just clicked on " + raycastResult["collider"].name + "!")
 			else:
 				clickResults["just_press_left"] = false
 			if (Input.is_action_just_pressed("back_action")):
 				clickResults["just_press_right"] = true
-				print("Just right Clicked on " + raycastResult["collider"].name + "!")
+				#print("Just right Clicked on " + raycastResult["collider"].name + "!")
 			else:
 				clickResults["just_press_right"] = false
 			#print(raycastResult)

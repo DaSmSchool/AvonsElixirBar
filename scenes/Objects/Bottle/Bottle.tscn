@@ -6,8 +6,12 @@
 
 [node name="bottle" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_ayhr8")]
 script = ExtResource("2_t4xu2")
+properties = null
 itemName = "Bottle"
 itemCollisionParent = NodePath("Bottle /StaticBody3D")
+mutationAge = null
+boilTime = null
+mouseRay = null
 
 [node name="PartFull" parent="." index="1"]
 unique_name_in_owner = true

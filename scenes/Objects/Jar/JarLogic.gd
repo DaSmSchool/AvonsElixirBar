@@ -1,0 +1,36 @@
+extends Node
+class_name JarLogic
+
+
+var jarScene : PackedScene = load("res://scenes/Objects/Jar/Jar.tscn")
+var jarList : Array[Node] = []
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	jarList = get_children()
+	update_shelf_jars()
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func update_shelf_jars():
+	clear_jar_shelf()
+	print(GameStatus.availableItems)
+	for itr in GameStatus.availableItems.size():
+		var newJar : Jar = jarScene.instantiate()
+		jarList[itr].add_child(newJar)
+		newJar.global_position = jarList[itr].global_position
+		newJar.jarredItem = GameStatus.availableItems[itr]
+		newJar.displayedItem = GameStatus.availableItems[itr]
+		newJar.add_child(newJar.displayedItem)
+		newJar.displayedItem.global_position = newJar.get_node("ItemSpot").global_position
+		newJar.displayedItem.scale = Vector3(0.75, 0.75, 0.75)
+
+
+func clear_jar_shelf():
+	for jar in jarList:
+		if jar.get_children() != []:
+			for node : Node in jar.get_children():
+				node.queue_free()
+			

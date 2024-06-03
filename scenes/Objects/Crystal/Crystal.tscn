@@ -8,6 +8,8 @@
 
 [node name="crystal" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_vqoji")]
 script = ExtResource("2_8fmsm")
+itemName = "Crystal"
+mouseRay = null
 itemCollisionParent = NodePath("Crystal /StaticBody3D")
 
 [node name="Crystal " parent="." index="0"]

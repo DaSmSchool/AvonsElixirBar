@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cytiv0h6i7syx" path="res://data/blends/Objects/Potion/potion.blend" id="1_nwogf"]
 [ext_resource type="Script" path="res://scenes/Objects/Potion/Potion.gd" id="2_755d4"]
 [ext_resource type="Material" uid="uid://bh180dpu0cg00" path="res://materials/potionglass.material" id="3_7kixq"]
-[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="3_vfvgw"]
+[ext_resource type="Script" path="res://scenes/Modules/MouseInteractableComponent.gd" id="4_43k2p"]
 
 [sub_resource type="Animation" id="Animation_0d70p"]
 length = 0.001
@@ -61,7 +61,8 @@ itemCollisionParent = NodePath("Cylinder /StaticBody3D")
 [node name="Cylinder " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_7kixq")
 
-[node name="MouseInteractableComponent" parent="." index="1" node_paths=PackedStringArray("colCheck") instance=ExtResource("3_vfvgw")]
+[node name="MouseInteractableComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("colCheck")]
+script = ExtResource("4_43k2p")
 colCheck = NodePath("../Cylinder /StaticBody3D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

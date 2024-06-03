@@ -7,16 +7,24 @@ class_name Cauldron
 
 @export var boilRate : float = 1
 
+var cauldronLiquidMat = load("res://materials/cauldronliquid.material")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-
+	
+	set_base_material()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
 	handle_filled_cauldron()
 	handle_boil(delta)
+
+
+func set_base_material():
+	var mat : Material = cauldronLiquidMat.duplicate()
+	%LiquidVis.set_surface_override_material(0, mat)
 
 
 func handle_filled_cauldron():

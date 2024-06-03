@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://brn3xjjk1li3l" path="res://data/blends/Objects/Powder/powder.blend" id="1_54yu1"]
 [ext_resource type="Script" path="res://scenes/Objects/Powder/Powder.gd" id="2_4um3h"]
 [ext_resource type="Material" uid="uid://bi8ienlkwmw5a" path="res://materials/powder.material" id="3_0t63a"]
-[ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="3_xbkqd"]
+[ext_resource type="Script" path="res://scenes/Modules/MouseInteractableComponent.gd" id="4_welhr"]
 
 [node name="powder" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_54yu1")]
 script = ExtResource("2_4um3h")
@@ -12,5 +12,6 @@ itemCollisionParent = NodePath("Powder /StaticBody3D")
 [node name="Powder " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_0t63a")
 
-[node name="MouseInteractableComponent" parent="." index="1" node_paths=PackedStringArray("colCheck") instance=ExtResource("3_xbkqd")]
+[node name="MouseInteractableComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("colCheck")]
+script = ExtResource("4_welhr")
 colCheck = NodePath("../Powder /StaticBody3D")

@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/Cauldron/cauldron.tscn" id="2_do6pd"]
 [ext_resource type="Material" uid="uid://bke16plupyout" path="res://materials/tavernwood.material" id="2_fdtsa"]
 [ext_resource type="PackedScene" uid="uid://cgwvfv8xt628y" path="res://scenes/Objects/Seat/seat.tscn" id="3_bx3d4"]
+[ext_resource type="PackedScene" uid="uid://c4ceeav3tixue" path="res://scenes/Functional/GameStatus/GameStatus.tscn" id="3_q1qk5"]
 [ext_resource type="PackedScene" uid="uid://vrs7wd5qlgv8" path="res://scenes/Functional/ViewCam/view_cam.tscn" id="4_hqwv2"]
 [ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_ljkx7"]
 [ext_resource type="PackedScene" uid="uid://djievddjlpffp" path="res://scenes/Objects/Grinder/Grinder.tscn" id="5_ntxo5"]
-[ext_resource type="PackedScene" uid="uid://du6sqhyt6bxcf" path="res://scenes/Objects/Powder/Powder.tscn" id="10_r4a1q"]
+[ext_resource type="Script" path="res://scenes/Objects/Jar/JarLogic.gd" id="5_uhfn0"]
 [ext_resource type="PackedScene" uid="uid://llm8dakwt74l" path="res://scenes/Objects/Oasis/oasis.tscn" id="11_c7nud"]
-[ext_resource type="PackedScene" uid="uid://r16i2ka8jw7c" path="res://scenes/Objects/Crystal/Crystal.tscn" id="11_qxj8y"]
 [ext_resource type="PackedScene" uid="uid://ooskpd35pgtl" path="res://scenes/Objects/Bottle/Bottle.tscn" id="12_vu1g5"]
 
 [sub_resource type="Environment" id="Environment_wy8pr"]
@@ -47,49 +47,61 @@ surface_material_override/0 = ExtResource("2_fdtsa")
 [node name="Shelf3 " parent="tavern" index="9"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
+[node name="GameStatus" parent="." instance=ExtResource("3_q1qk5")]
+
 [node name="HUD" parent="." node_paths=PackedStringArray("ViewCameraReference") instance=ExtResource("5_ljkx7")]
 ViewCameraReference = NodePath("../ViewCam")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wy8pr")
 
+[node name="Jars" type="Node" parent="."]
+script = ExtResource("5_uhfn0")
+
+[node name="Jar1Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3357, 5.68849, -14.2922)
+
+[node name="Jar2Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6086, 5.68849, -14.1105)
+
+[node name="Jar3Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8716, 5.68849, -14.1615)
+
+[node name="Jar4Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0593, 5.68849, -13.9569)
+
+[node name="Jar5Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3357, 7.68849, -14.2922)
+
+[node name="Jar6Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6086, 7.68849, -14.1105)
+
+[node name="Jar7Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8716, 7.68849, -14.1615)
+
+[node name="Jar8Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0593, 7.68849, -13.9569)
+
+[node name="Jar9Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3357, 9.68849, -14.2922)
+
+[node name="Jar10Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6086, 9.68849, -14.1105)
+
+[node name="Jar11Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8716, 9.68849, -14.1615)
+
+[node name="Jar12Spot" type="Marker3D" parent="Jars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0593, 9.68849, -13.9569)
+
 [node name="Items" type="Node" parent="."]
 
 [node name="bottle" parent="Items" instance=ExtResource("12_vu1g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3.34659, -13)
-
-[node name="powder" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9067, 5.69517, -13.9395)
-
-[node name="powder2" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5648, 5.68598, -13.9767)
-
-[node name="powder5" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4074, 7.88555, -14.2598)
-
-[node name="powder6" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5433, 7.68849, -13.7709)
-
-[node name="powder7" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00308923, 0, 0.00308923, 0.999995, 11.8932, 9.65665, -13.9254)
-
-[node name="powder8" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3386, 9.68849, -14.0262)
-
-[node name="powder9" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5026, 9.68849, -14.016)
-
-[node name="powder10" parent="Items" instance=ExtResource("10_r4a1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0191, 9.68849, -13.7482)
-
-[node name="crystal" parent="Items" instance=ExtResource("11_qxj8y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7616, 5.68849, -13.9869)
-
-[node name="crystal2" parent="Items" instance=ExtResource("11_qxj8y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6705, 7.68849, -14.1526)
-
-[node name="crystal3" parent="Items" instance=ExtResource("11_qxj8y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9039, 7.68849, -14.0748)
+properties = null
+mutationAge = null
+boilTime = null
+mouseRay = null
 
 [node name="Stations" type="Node" parent="."]
 

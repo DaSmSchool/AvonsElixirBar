@@ -6,9 +6,12 @@ class_name Bottle
 
 @export var containedLiquid : Liquid
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	assocScene = load("res://scenes/Objects/Bottle/Bottle.tscn")
 	set_base_material()
 	itemColor = Color.WHITE
 	update_item_color()
