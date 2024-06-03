@@ -4,6 +4,7 @@ class_name GameStatus
 static var powderScene = load("res://scenes/Objects/Powder/Powder.tscn")
 static var crystalScene = load("res://scenes/Objects/Crystal/Crystal.tscn")
 static var bottleScene = load("res://scenes/Objects/Bottle/Bottle.tscn")
+static var featherScene = load("res://scenes/Objects/Feather/Feather.tscn")
 
 static var availableItems : Array[Item] = []
 
@@ -13,7 +14,8 @@ static var essentialItems : Array[Item] = [
 
 ##Pool of items that are used as templates for the available items
 var iterableScenes : Array[PackedScene] = [
-	crystalScene
+	crystalScene,
+	featherScene
 ]
 
 var itemAmnt = 2
