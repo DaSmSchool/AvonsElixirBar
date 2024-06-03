@@ -18,7 +18,7 @@ var iterableScenes : Array[PackedScene] = [
 	featherScene
 ]
 
-var itemAmnt = 2
+var itemAmnt = 3
 
 var currentDay = 1
 

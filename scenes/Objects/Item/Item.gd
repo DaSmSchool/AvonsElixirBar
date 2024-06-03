@@ -51,6 +51,13 @@ func _process(delta):
 	super._process(delta)
 	if !mouseRay.is_empty():
 		holding_item_logic()
+	if self == holdingItem:
+		if self is Bottle and (self as Bottle).containedLiquid:
+			
+			print((self as Bottle).containedLiquid.itemName + " mutationAge: " + str((self as Bottle).containedLiquid.mutationAge))
+		else:
+			print(itemName + " mutationAge: " + str(mutationAge))
+
 
 func has_property(prop : int):
 	return prop in properties

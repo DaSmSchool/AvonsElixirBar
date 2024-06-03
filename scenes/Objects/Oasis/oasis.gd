@@ -31,8 +31,9 @@ func perform_station_action():
 				prodWater.itemName = "Potion Base"
 				prodWater.itemColor = heldItem.itemColor
 				heldItem.update_item_color()
-				
+				heldItem.mix_all_contained_items()
 				heldItem.itemName = "Raw Potion"
+				
 			Item.holdingItem = heldItem
 			heldItem.disassociate_station()
 	activeStation = null

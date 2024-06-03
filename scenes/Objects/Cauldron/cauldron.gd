@@ -44,6 +44,7 @@ func handle_boil(delta):
 			var boilAmnt = 0
 			boilAction.assign_vals(ItemAction.Action.BOIL, "Boiled: " + str(boilAmnt) + "%", 0, null, self, 100)
 			containedLiquid.itemActionsApplied.append(boilAction)
+			containedLiquid.mutationAge += 1
 		else:
 			var boilAction : ItemAction = containedLiquid.itemActionsApplied[containedLiquid.itemActionsApplied.size()-1]
 			if boilAction.duration >= containedLiquid.boilingPoint*2:

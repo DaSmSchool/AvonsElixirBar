@@ -98,6 +98,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0593, 9.68849, -13.9569)
 
 [node name="bottle" parent="Items" instance=ExtResource("12_vu1g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3.34659, -13)
+properties = []
+mutationAge = 1
+boilTime = 2
+mouseRay = {}
 
 [node name="Stations" type="Node" parent="."]
 

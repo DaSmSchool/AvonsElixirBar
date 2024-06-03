@@ -43,13 +43,15 @@ func item_interact(itemHit : Item):
 func insert_item(itemHit : Item):
 	if (itemHit.has_property(Item.Property.LIQUID_MIXABLE)):
 		if containedLiquid:
-			var combItemAction = ItemAction.new()
-			combItemAction.assign_vals(ItemAction.Action.COMBINE, "Mixed with " + itemHit.itemName, 0, containedLiquid, null, 100)
-			containedLiquid.previousItemsInvolved.append(itemHit)
-			containedLiquid.itemColor = ColorHelper.average_color(containedLiquid.itemColor, itemHit.itemColor)
+			containedLiquid = containedLiquid.mix(itemHit)
+			#var combItemAction = ItemAction.new()
+			#combItemAction.assign_vals(ItemAction.Action.COMBINE, "Mixed with " + itemHit.itemName, 0, containedLiquid, null, 100)
+			#containedLiquid.previousItemsInvolved.append(itemHit)
+			#containedLiquid.itemColor = ColorHelper.average_color(containedLiquid.itemColor, itemHit.itemColor)
 			update_item_color()
+			
 			itemHit.remove()
-			itemHit.itemActionsApplied.append(combItemAction)
+			#itemHit.itemActionsApplied.append(combItemAction)
 	if itemHit.has_property(Item.Property.BOTTLE_ADDABLE):
 		if !(itemHit.has_property(Item.Property.LIQUID_MIXABLE) and containedLiquid):
 			bottledItems.append(itemHit)

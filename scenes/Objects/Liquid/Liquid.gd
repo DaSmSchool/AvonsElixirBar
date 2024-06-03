@@ -19,7 +19,7 @@ func give_random_color():
 	pass
 
 
-func mix(item):
+func mix(item : Item):
 	if !item is Liquid and !item.has_property(Item.Property.LIQUID_MIXABLE): return
 	var newItem : Liquid = scene_path.instantiate()
 	newItem.itemColor = ColorHelper.average_color(itemColor, item.itemColor)
@@ -30,6 +30,7 @@ func mix(item):
 	
 	newItem.previousItemsInvolved.append(item)
 	newItem.previousItemsInvolved.append(self)
+	newItem.mutationAge = max(item.mutationAge, mutationAge) + 1
 	return newItem
 
 

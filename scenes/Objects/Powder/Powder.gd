@@ -41,6 +41,7 @@ func item_interact(itemHit : Item):
 		
 		newItem.itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
 		newItem.global_position = itemHit.global_position
+		newItem.mutationAge = max(mutationAge, itemHit.mutationAge) + 1
 		remove()
 		itemHit.remove()
 	if itemHit is Bottle:

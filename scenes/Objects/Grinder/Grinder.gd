@@ -41,6 +41,7 @@ func item_mash():
 			var newGrindAction = ItemAction.new()
 			heldItem.itemActionsApplied.append(newGrindAction)
 			newGrindAction.assign_vals(ItemAction.Action.GRIND, "Ground: " + str(grindComplete), 0, null, self, grindComplete)
+			heldItem.mutationAge += 1
 		else:
 			print("overloadact")
 			latestItemAction.accuracy += grindAmnt
@@ -60,6 +61,7 @@ func convert_ground_item():
 	newPowder.position = heldItem.position
 	var groundItemAction : ItemAction = heldItem.itemActionsApplied[heldItem.itemActionsApplied.size()-1]
 	groundItemAction.assocItem = newPowder
+	newPowder.mutationAge = heldItem.mutationAge
 	heldItem.remove()
 	newPowder.associate_station(self)
 	
