@@ -199,3 +199,4 @@ func remove():
 	
 func display_name():
 	return "[color=#" + itemColor.to_html(false) + "]" + itemName + "[/color]"
+	

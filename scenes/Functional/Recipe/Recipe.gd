@@ -85,12 +85,14 @@ static func item_from_ingredients(ingredients : Array[Item], maxMutation):
 			else:
 				Oasis.add_water(focusItem)
 		else:
-			focusItem.get
-		if focusItem is Crystal:
-			
-			Grinder.apply_grind(focusItem, null)
-			focusItem.itemActionsApplied[focusItem.itemActionsApplied.size()-1].accuracy = 100
-			Grinder.convert_ground_item(focusItem, null)
+			var chosen_property = focusItem.properties.pick_random()
+			if chosen_property == Item.Property.GRINDABLE:
+				Grinder.apply_grind(focusItem, null)
+				focusItem.itemActionsApplied[focusItem.itemActionsApplied.size()-1].accuracy = 100
+				Grinder.convert_ground_item(focusItem, null)
+			elif chosen_property == Item.Property.COMBINABLE:
+				var otherItem = get_similar_item(focusItem, ingredients, focusItem)
+				
 
 static func get_item_with_property(items : Array[Item], property : int):
 	if items.is_empty(): return null
@@ -102,6 +104,16 @@ static func get_item_with_property(items : Array[Item], property : int):
 		passArray.erase(chosenItem)
 		return get_item_with_property(passArray, property)
 
+static func get_similar_item(targetItem : Item, array : Array[Item], exclude : Item):
+	if !array: return null
+	array = array.duplicate()
+	array.erase(exclude)
+	if !array: return null
+	var chosenItem : Item = array.pick_random()
+	if chosenItem.get_script() != targetItem.get_script():
+		get_similar_item(targetItem, array, chosenItem)
+	else:
+		return chosenItem
 
 static func get_non_max_mut_item(items : Array[Item], maxMutation : int):
 	if items.is_empty(): return null
@@ -113,6 +125,11 @@ static func get_non_max_mut_item(items : Array[Item], maxMutation : int):
 		passArray.erase(chosenItem)
 		return get_non_max_mut_item(passArray, maxMutation)
 
+
+static func get_bottle(items : Array[Item]):
+	for item in items:
+		if item is Bottle: return item
+	assert(false, "No bottle generated!")
 
 static func check_if_max_reached(ingredients : Array[Item], maxMutation):
 	for item in ingredients:
