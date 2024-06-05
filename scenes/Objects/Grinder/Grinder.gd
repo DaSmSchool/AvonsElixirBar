@@ -3,7 +3,7 @@ class_name Grinder
 
 @export var grindAmnt : float = 20
 
-var powderScene = load("res://scenes/Objects/Powder/Powder.tscn")
+static var powderScene = load("res://scenes/Objects/Powder/Powder.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,32 +38,36 @@ func item_mash():
 		if latestItemAction.actionType != ItemAction.Action.GRIND or latestItemAction.actionType == 0:
 			print("newgrind")
 			var grindComplete = grindAmnt
-			var newGrindAction = ItemAction.new()
-			heldItem.itemActionsApplied.append(newGrindAction)
-			newGrindAction.assign_vals(ItemAction.Action.GRIND, "Ground: " + str(grindComplete), 0, null, self, grindComplete)
-			heldItem.mutationAge += 1
+			apply_grind(heldItem, self)
 		else:
 			print("overloadact")
 			latestItemAction.accuracy += grindAmnt
 			if latestItemAction.accuracy >= 100:
-				convert_ground_item()
+				convert_ground_item(heldItem, self)
 			latestItemAction.accuracy = min(latestItemAction.accuracy, 100)
 			latestItemAction.actionMessage = "Ground: " + str(latestItemAction.accuracy)
 
 
-func convert_ground_item():
+static func convert_ground_item(item : Item, station : Station):
 	
 	var newPowder : Powder = powderScene.instantiate()
 	newPowder.insert_to_tree()
-	newPowder.itemColor = heldItem.itemColor
+	newPowder.itemColor = item.itemColor
 	newPowder.update_item_color()
-	newPowder.itemName = heldItem.itemName + " Powder"
-	newPowder.position = heldItem.position
-	var groundItemAction : ItemAction = heldItem.itemActionsApplied[heldItem.itemActionsApplied.size()-1]
+	newPowder.itemName = item.itemName + " Powder"
+	newPowder.position = item.position
+	var groundItemAction : ItemAction = item.itemActionsApplied[item.itemActionsApplied.size()-1]
 	groundItemAction.assocItem = newPowder
-	newPowder.mutationAge = heldItem.mutationAge
-	heldItem.remove()
-	newPowder.associate_station(self)
+	newPowder.mutationAge = item.mutationAge
+	item.remove()
+	newPowder.associate_station(station)
+	
+	
+static func apply_grind(item : Item, station : Station):
+	var newGrindAction = ItemAction.new()
+	item.itemActionsApplied.append(newGrindAction)
+	newGrindAction.assign_vals(ItemAction.Action.GRIND, "Ground: " + str(100), 0, null, station, 0)
+	item.mutationAge += 1
 	
 func leave_station():
 	%AnimationPlayer.play_backwards("Pickup")

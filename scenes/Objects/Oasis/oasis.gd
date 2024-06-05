@@ -14,26 +14,27 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 
+static func add_water(item : Item):
+	var prodWater = Liquid.new()
+	item.containedLiquid = prodWater
+	
+	if item.bottledItems == null:
+		prodWater.itemName = "Water"
+		prodWater.itemColor = Color.DODGER_BLUE
+		item.update_item_color()
+		
+		item.itemName = "Water " + item.itemName
+	else:
+		prodWater.itemName = "Potion Base"
+		prodWater.itemColor = item.itemColor
+		item.mix_all_contained_items()
+		item.itemName = "Raw Potion"
+		item.update_item_color()
 
 func perform_station_action():
 	if heldItem is Bottle:
 		if heldItem.containedLiquid == null:
-			var prodWater = Liquid.new()
-			heldItem.containedLiquid = prodWater
-			
-			if heldItem.bottledItems == null:
-				prodWater.itemName = "Water"
-				prodWater.itemColor = Color.DODGER_BLUE
-				heldItem.update_item_color()
-				
-				heldItem.itemName = "Water " + heldItem.itemName
-			else:
-				prodWater.itemName = "Potion Base"
-				prodWater.itemColor = heldItem.itemColor
-				heldItem.update_item_color()
-				heldItem.mix_all_contained_items()
-				heldItem.itemName = "Raw Potion"
-				
+			add_water(heldItem)
 			Item.holdingItem = heldItem
 			heldItem.disassociate_station()
 	activeStation = null

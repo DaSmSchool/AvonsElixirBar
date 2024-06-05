@@ -106,8 +106,9 @@ func disassociate_station():
 
 
 func associate_station(station : Station):
-	station.heldItem = self
-	stationIn = station
+	if station:
+		station.heldItem = self
+		stationIn = station
 
 
 func holding_item_logic():
