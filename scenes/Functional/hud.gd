@@ -120,7 +120,7 @@ func reset_item_action_panels():
 func get_item_actions_deep(item : Item):
 	var itemActionList = []
 	var furtherItems = []
-	item.itemActionsApplied
+	#item.itemActionsApplied
 	for action in item.itemActionsApplied:
 		itemActionList.append(action)
 	for deepItem in item.previousItemsInvolved:

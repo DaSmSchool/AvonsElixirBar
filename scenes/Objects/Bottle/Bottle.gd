@@ -120,6 +120,7 @@ func update_item_color():
 	
 	itemColor = tarColor
 	var mat : Material = %Full.get_surface_override_material(0)
-	mat.albedo_color = tarColor
-	%Full.set_surface_override_material(0, mat)
-	%PartFull.set_surface_override_material(0, mat)
+	if mat:
+		mat.albedo_color = tarColor
+		%Full.set_surface_override_material(0, mat)
+		%PartFull.set_surface_override_material(0, mat)

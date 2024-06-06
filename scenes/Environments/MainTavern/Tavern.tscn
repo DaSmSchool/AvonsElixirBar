@@ -47,8 +47,6 @@ surface_material_override/0 = ExtResource("2_fdtsa")
 [node name="Shelf3 " parent="tavern" index="9"]
 surface_material_override/0 = ExtResource("2_fdtsa")
 
-[node name="GameStatus" parent="." instance=ExtResource("3_q1qk5")]
-
 [node name="HUD" parent="." node_paths=PackedStringArray("ViewCameraReference") instance=ExtResource("5_ljkx7")]
 ViewCameraReference = NodePath("../ViewCam")
 
@@ -166,6 +164,8 @@ transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.
 transform = Transform3D(0.507538, 0.609264, -0.609264, 0, 0.707107, 0.707107, 0.861629, -0.358884, 0.358884, 17.822, 7.301, -9.198)
 current = true
 camPointsParent = NodePath("../CameraViewSpots/CamCycle")
+
+[node name="GameStatus" parent="." instance=ExtResource("3_q1qk5")]
 
 [connection signal="left_press" from="HUD" to="ViewCam" method="_on_hud_left_press"]
 [connection signal="right_press" from="HUD" to="ViewCam" method="_on_hud_right_press"]

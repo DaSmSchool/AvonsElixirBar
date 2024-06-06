@@ -10,7 +10,6 @@
 script = ExtResource("2_8fmsm")
 itemName = "Crystal"
 itemCollisionParent = NodePath("Crystal /StaticBody3D")
-mouseRay = null
 
 [node name="Crystal " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_bxcib")

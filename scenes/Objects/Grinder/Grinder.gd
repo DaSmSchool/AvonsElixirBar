@@ -61,6 +61,7 @@ static func convert_ground_item(item : Item, station : Station):
 	newPowder.mutationAge = item.mutationAge
 	item.remove()
 	newPowder.associate_station(station)
+	return newPowder
 	
 	
 static func apply_grind(item : Item, station : Station):

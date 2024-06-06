@@ -4,3 +4,6 @@
 
 [node name="Item" type="Node3D"]
 script = ExtResource("1_vgcnn")
+itemName = "DefItemName"
+mutationAge = 1
+boilTime = 2

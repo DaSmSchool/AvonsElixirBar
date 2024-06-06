@@ -10,7 +10,7 @@ enum Property {
 	BOTTLE_ADDABLE
 }
 
-@export var properties = []
+@export var properties : Array
 
 @export var assocScene : PackedScene
 
@@ -18,13 +18,13 @@ static var holdingItem : Item
 
 var itemColor : Color = Color()
 
-@export var itemName : String = "DefItemName"
+@export var itemName : String
 @export var itemCollisionParent : Node
-@export var itemActionsApplied : Array[ItemAction] = []
-@export var previousItemsInvolved : Array[Item] = []
-@export var mutationAge = 1
+@export var itemActionsApplied : Array[ItemAction]
+@export var previousItemsInvolved : Array[Item]
+@export var mutationAge : int
 
-@export var boilTime = 2
+@export var boilTime : int
 
 var stationIn : Station
 
@@ -61,6 +61,11 @@ func _process(delta):
 
 func has_property(prop : int):
 	return prop in properties
+	
+func set_properties(props : Array):
+	properties = []
+	for prop in props:
+		properties.append(prop)
 
 func set_base_material():
 	var mat : Material = matTemplate.duplicate()

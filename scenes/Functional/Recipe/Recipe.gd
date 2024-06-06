@@ -24,8 +24,7 @@ func _process(delta):
 
 
 static func generate_potion_recipe(difficulty) -> Recipe:
-	var finalRecipe : Recipe
-	var finalItem : Item
+	var finalRecipe : Recipe = Recipe.new()
 	finalRecipe.difficulty = difficulty
 	
 	var baseIngredientAmnt : int
@@ -45,7 +44,7 @@ static func generate_potion_recipe(difficulty) -> Recipe:
 	
 	baseIngredients = get_ingredients_needed(baseIngredientAmnt)
 	
-	finalItem = item_from_ingredients(baseIngredients, maxMutationAge)
+	finalRecipe.finalItem = item_from_ingredients(baseIngredients, maxMutationAge)
 	
 	
 	
@@ -57,19 +56,34 @@ static func get_ingredients_needed(ingAmnt):
 	var availableIngs : Array[Item] = []
 	
 	for itemSet in int(GameStatus.availableItems.size()/ingAmnt)+1:
-		availableIngs = GameStatus.availableItems
+		availableIngs = GameStatus.availableItems.duplicate()
+		
 		if assembleIngredients.size() < ingAmnt:
-			var chosenIng = availableIngs.pick_random()
+			var chosenIng : Item = availableIngs.pick_random()
+			while chosenIng is Bottle:
+				availableIngs.erase(chosenIng)
+				chosenIng = availableIngs.pick_random()
+			chosenIng.insert_to_tree()
+			chosenIng.get_parent().remove_child(chosenIng)
 			availableIngs.erase(chosenIng)
 			assembleIngredients.append(chosenIng)
 	assembleIngredients.append_array(GameStatus.essentialItems)
-	
+	print(assembleIngredients)
 	return assembleIngredients
 
 
 static func item_from_ingredients(ingredients : Array[Item], maxMutation):
+	ingredients = ingredients.duplicate()
+	item_ingredients_loop(ingredients, maxMutation)
+	final_boil_process(ingredients)
+	return get_bottle(ingredients)
+	
+	
+static func item_ingredients_loop(ingredients : Array[Item], maxMutation):
+	print(ingredients)
 	var focusItem : Item
-	while !check_if_max_reached(ingredients, maxMutation):
+	while !check_if_max_reached(ingredients, maxMutation) and !(ingredients.size() == 1) and !(get_non_max_mut_array(ingredients, maxMutation).size() == 1 and ingredients[0] is Bottle and ingredients[0].containedLiquid):
+		
 		if focusItem:
 			focusItem = get_random_excluded(ingredients, focusItem)
 			if focusItem.mutationAge > maxMutation:
@@ -85,14 +99,68 @@ static func item_from_ingredients(ingredients : Array[Item], maxMutation):
 			else:
 				Oasis.add_water(focusItem)
 		else:
+			print(focusItem.itemName)
+			print(focusItem.properties)
 			var chosen_property = focusItem.properties.pick_random()
 			if chosen_property == Item.Property.GRINDABLE:
 				Grinder.apply_grind(focusItem, null)
 				focusItem.itemActionsApplied[focusItem.itemActionsApplied.size()-1].accuracy = 100
-				Grinder.convert_ground_item(focusItem, null)
+				ingredients.append(Grinder.convert_ground_item(focusItem, null))
+				ingredients.erase(focusItem)
 			elif chosen_property == Item.Property.COMBINABLE:
 				var otherItem = get_similar_item(focusItem, ingredients, focusItem)
-				
+				if otherItem:
+					var newCombine : Item = Powder.combine_two_items(focusItem, otherItem, "Blend")
+					ingredients.erase(focusItem)
+					ingredients.erase(otherItem)
+					ingredients.append(newCombine)
+			elif chosen_property == Item.Property.LIQUID_MIXABLE:
+				var bottle : Bottle = get_bottle(ingredients)
+				if bottle.containedLiquid:
+					bottle.containedLiquid.mix(focusItem)
+					ingredients.erase(focusItem)
+			elif chosen_property == Item.Property.BOTTLE_ADDABLE:
+				var bottle = get_bottle(ingredients)
+				if bottle:
+					bottle.insert_item(focusItem)
+					ingredients.erase(focusItem)
+
+
+static func final_boil_process(ingredients : Array[Item]):
+	var itr = 0
+	while itr < ingredients.size():
+		if ingredients[itr].has_property(Item.Property.LIQUID_MIXABLE):
+			var bottle : Bottle = get_bottle(ingredients)
+			if bottle.containedLiquid:
+				bottle.containedLiquid.mix(ingredients[itr])
+				ingredients.remove_at(itr)
+				itr -= 1
+		elif ingredients[itr].has_property(Item.Property.BOTTLE_ADDABLE):
+			var bottle = get_bottle(ingredients)
+			if bottle:
+				bottle.insert_item(ingredients[itr])
+				ingredients.remove_at(itr)
+				itr -= 1
+		itr += 1
+	var bottle = get_bottle(ingredients)
+	var boilingPoint = Item.get_boiling_point(bottle.containedLiquid)
+	var boilAction : ItemAction = ItemAction.new()
+	var boilAmnt = 0
+	boilAction.assign_vals(ItemAction.Action.BOIL, "Boiled: " + str(boilAmnt) + "%", boilingPoint*2, null, null, 100)
+	bottle.containedLiquid.itemActionsApplied.append(boilAction)
+	bottle.containedLiquid.mutationAge += 1
+
+
+static func get_non_max_mut_array(ingredients : Array[Item], maxMutation):
+	var retArray : Array[Item] = ingredients.duplicate()
+	var itr = 0
+	while itr < retArray.size():
+		if retArray[itr].mutationAge >= maxMutation:
+			retArray.remove_at(itr)
+			itr -= 1
+		itr += 1
+	return retArray
+
 
 static func get_item_with_property(items : Array[Item], property : int):
 	if items.is_empty(): return null
@@ -103,6 +171,7 @@ static func get_item_with_property(items : Array[Item], property : int):
 		var passArray = items.duplicate()
 		passArray.erase(chosenItem)
 		return get_item_with_property(passArray, property)
+
 
 static func get_similar_item(targetItem : Item, array : Array[Item], exclude : Item):
 	if !array: return null
@@ -115,6 +184,7 @@ static func get_similar_item(targetItem : Item, array : Array[Item], exclude : I
 	else:
 		return chosenItem
 
+
 static func get_non_max_mut_item(items : Array[Item], maxMutation : int):
 	if items.is_empty(): return null
 	var chosenItem : Item = items.pick_random()
@@ -126,10 +196,12 @@ static func get_non_max_mut_item(items : Array[Item], maxMutation : int):
 		return get_non_max_mut_item(passArray, maxMutation)
 
 
-static func get_bottle(items : Array[Item]):
+static func get_bottle(items : Array[Item]) -> Bottle:
 	for item in items:
 		if item is Bottle: return item
 	assert(false, "No bottle generated!")
+	return null
+
 
 static func check_if_max_reached(ingredients : Array[Item], maxMutation):
 	for item in ingredients:
@@ -137,9 +209,42 @@ static func check_if_max_reached(ingredients : Array[Item], maxMutation):
 			return false
 	return true
 
+
 static func get_random_excluded(list : Array, item : Variant):
 	var newList : Array = list.duplicate()
 	newList.erase(item)
 	if list.is_empty():
 		return null
 	return newList.pick_random()
+
+
+static func unique_array(array : Array):
+	var newArr = []
+	for itemItr in array.size():
+		var canAdd = true
+		for checkItr in array.size():
+			if itemItr != checkItr and array[checkItr].get_instance_id() == array[itemItr].get_instance_id():
+				canAdd == false
+		if canAdd:
+			newArr.append(array[itemItr])
+	return newArr
+
+
+static func print_recipe(item : Item):
+	print_recipe_item(item)
+	if item is Bottle and item.containedLiquid:
+		print_recipe(item.containedLiquid)
+	for prevItem in item.previousItemsInvolved:
+		print_recipe(prevItem)
+	
+	
+static func print_recipe_item(item : Item):
+	print("Item: " + item.itemName)
+	print("ItemActions:")
+	for itemAction in item.itemActionsApplied:
+		print("(" + str(itemAction) + ", " + itemAction.actionMessage + ")")
+	print("Previous Items")
+	for prevItem : Item in item.previousItemsInvolved:
+		print("(" + str(prevItem) + ", " + prevItem.itemName + ")")
+	print("Mutation Age:")
+	print(item.mutationAge)

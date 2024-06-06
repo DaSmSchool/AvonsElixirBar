@@ -34,7 +34,7 @@ static func add_water(item : Item):
 func perform_station_action():
 	if heldItem is Bottle:
 		if heldItem.containedLiquid == null:
-			add_water(heldItem)
+			Oasis.add_water(heldItem)
 			Item.holdingItem = heldItem
 			heldItem.disassociate_station()
 	activeStation = null
