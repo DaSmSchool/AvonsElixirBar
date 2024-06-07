@@ -41,7 +41,8 @@ func _ready():
 	if itemsNode == null:
 		itemsNode = get_tree().current_scene.get_node("Items")
 		print(itemsNode.get_children())
-	assert(itemCollisionParent != null, "Collision for all Items are not defined! Check the Stack Frames to see which one needs it.")
+	if !(self is Liquid):
+		assert(itemCollisionParent != null, "Collision for all Items are not defined! Check the Stack Frames to see which one needs it.")
 	
 	set_base_material()
 
@@ -153,7 +154,8 @@ func holding_item_logic():
 func let_item_go():
 	if holdingItem == self:
 		holdingItem = null
-	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
+	if itemCollisionParent:
+		itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", false)
 
 
 static func get_boiling_point(item:Item):
@@ -198,7 +200,8 @@ func set_used_mat(mat : Material):
 func remove():
 	let_item_go()
 	disassociate_station()
-	itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
+	if itemCollisionParent:
+		itemCollisionParent.get_node("CollisionShape3D").set_deferred("disabled", true)
 	hide()
 	remove_from_tree()
 	

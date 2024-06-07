@@ -4,4 +4,6 @@
 
 [node name="Liquid" type="Node3D"]
 script = ExtResource("1_1n4i6")
+itemName = "DefLiquidName"
+mutationAge = 1
 boilTime = 5

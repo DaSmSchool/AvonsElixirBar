@@ -124,22 +124,29 @@ static func item_ingredients_loop(ingredients : Array[Item], maxMutation):
 				ingredients.append(Grinder.convert_ground_item(focusItem, null))
 				ingredients.erase(focusItem)
 			elif chosen_property == Item.Property.COMBINABLE:
-				var otherItem = get_similar_item(focusItem, ingredients, focusItem)
+				var otherItem : Item = get_similar_item(focusItem, ingredients, focusItem)
 				if otherItem:
 					var newCombine : Item = Powder.combine_two_items(focusItem, otherItem, "Blend")
 					ingredients.erase(focusItem)
 					ingredients.erase(otherItem)
 					ingredients.append(newCombine)
+					focusItem.remove()
+					otherItem.remove()
 			elif chosen_property == Item.Property.LIQUID_MIXABLE:
 				var bottle : Bottle = get_bottle(ingredients)
 				if bottle.containedLiquid:
 					bottle.containedLiquid = bottle.containedLiquid.mix(focusItem)
 					ingredients.erase(focusItem)
+					
+					focusItem.remove()
 			elif chosen_property == Item.Property.BOTTLE_ADDABLE:
 				var bottle = get_bottle(ingredients)
 				if bottle:
 					bottle.insert_item(focusItem)
 					ingredients.erase(focusItem)
+		
+		while null in ingredients:
+			ingredients.erase(null)
 
 
 static func final_boil_process(ingredients : Array[Item]):

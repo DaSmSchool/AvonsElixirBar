@@ -5,6 +5,12 @@ var scene_path = load("res://scenes/Objects/Liquid/Liquid.tscn")
 
 @export var boilingPoint : float
 
+
+func _init():
+	insert_to_tree()
+	remove()
+	boilTime = 5
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
@@ -31,6 +37,7 @@ func mix(item : Item):
 	newItem.previousItemsInvolved.append(item)
 	newItem.previousItemsInvolved.append(self)
 	newItem.mutationAge = max(item.mutationAge, mutationAge) + 1
+	newItem.itemName = "Raw Potion"
 	return newItem
 
 
@@ -39,3 +46,7 @@ func get_mix_item_action(item:Item, newItem:Item):
 	var mixAction = ItemAction.new()
 	mixAction.assign_vals(ItemAction.Action.MIX_LIQUID, itemName + " mixed with " + item.itemName, 0, newItem, null, 100)
 	return mixAction
+	
+
+func set_base_material():
+	pass
