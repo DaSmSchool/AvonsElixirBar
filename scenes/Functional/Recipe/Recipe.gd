@@ -42,6 +42,7 @@ static func generate_potion_recipe(difficulty) -> Recipe:
 		baseIngredientAmnt = 4
 		maxMutationAge = 5
 	
+
 	baseIngredients = get_ingredients_needed(baseIngredientAmnt)
 	
 	finalRecipe.finalItem = item_from_ingredients(baseIngredients, maxMutationAge)
@@ -55,19 +56,33 @@ static func get_ingredients_needed(ingAmnt):
 	var assembleIngredients : Array[Item] = []
 	var availableIngs : Array[Item] = []
 	
-	for itemSet in int(GameStatus.availableItems.size()/ingAmnt)+1:
-		availableIngs = GameStatus.availableItems.duplicate()
+	var copyArr = GameStatus.availableItems.duplicate()
+	
+	for itemSet in int(copyArr.size()/ingAmnt)+1:
+		availableIngs = copyArr.duplicate()
+		
 		
 		if assembleIngredients.size() < ingAmnt:
 			var chosenIng : Item = availableIngs.pick_random()
 			while chosenIng is Bottle:
 				availableIngs.erase(chosenIng)
 				chosenIng = availableIngs.pick_random()
-			chosenIng.insert_to_tree()
-			chosenIng.get_parent().remove_child(chosenIng)
+			
+			var itemCopy : Item = chosenIng.duplicate()
+			itemCopy.itemColor = chosenIng.itemColor
+				
+			itemCopy.insert_to_tree()
+			itemCopy.get_parent().remove_child(chosenIng)
 			availableIngs.erase(chosenIng)
-			assembleIngredients.append(chosenIng)
-	assembleIngredients.append_array(GameStatus.essentialItems)
+			assembleIngredients.append(itemCopy)
+	#assembleIngredients.append_array(GameStatus.essentialItems)
+	
+	for item in GameStatus.essentialItems:
+		var essItem : Item = item.duplicate()
+		essItem.insert_to_tree()
+		essItem.get_parent().remove_child(essItem)
+		assembleIngredients.append(essItem)
+	
 	print(assembleIngredients)
 	return assembleIngredients
 
@@ -89,13 +104,14 @@ static func item_ingredients_loop(ingredients : Array[Item], maxMutation):
 			if focusItem.mutationAge > maxMutation:
 				get_non_max_mut_item(ingredients, maxMutation)
 		else:
-			focusItem = ingredients.pick_random()
+			focusItem = get_bottle(ingredients)
 		
 		if focusItem is Bottle:
 			if focusItem.containedLiquid:
 				var targetItem = get_item_with_property(ingredients, Item.Property.LIQUID_MIXABLE)
 				if targetItem:
-					focusItem.containedLiquid.mix(targetItem)
+					focusItem.containedLiquid = focusItem.containedLiquid.mix(targetItem)
+					ingredients.erase(targetItem)
 			else:
 				Oasis.add_water(focusItem)
 		else:
@@ -117,7 +133,7 @@ static func item_ingredients_loop(ingredients : Array[Item], maxMutation):
 			elif chosen_property == Item.Property.LIQUID_MIXABLE:
 				var bottle : Bottle = get_bottle(ingredients)
 				if bottle.containedLiquid:
-					bottle.containedLiquid.mix(focusItem)
+					bottle.containedLiquid = bottle.containedLiquid.mix(focusItem)
 					ingredients.erase(focusItem)
 			elif chosen_property == Item.Property.BOTTLE_ADDABLE:
 				var bottle = get_bottle(ingredients)
@@ -132,7 +148,7 @@ static func final_boil_process(ingredients : Array[Item]):
 		if ingredients[itr].has_property(Item.Property.LIQUID_MIXABLE):
 			var bottle : Bottle = get_bottle(ingredients)
 			if bottle.containedLiquid:
-				bottle.containedLiquid.mix(ingredients[itr])
+				bottle.containedLiquid = bottle.containedLiquid.mix(ingredients[itr])
 				ingredients.remove_at(itr)
 				itr -= 1
 		elif ingredients[itr].has_property(Item.Property.BOTTLE_ADDABLE):
@@ -145,9 +161,10 @@ static func final_boil_process(ingredients : Array[Item]):
 	var bottle = get_bottle(ingredients)
 	var boilingPoint = Item.get_boiling_point(bottle.containedLiquid)
 	var boilAction : ItemAction = ItemAction.new()
-	var boilAmnt = 0
+	var boilAmnt = 100
 	boilAction.assign_vals(ItemAction.Action.BOIL, "Boiled: " + str(boilAmnt) + "%", boilingPoint*2, null, null, 100)
 	bottle.containedLiquid.itemActionsApplied.append(boilAction)
+	bottle.containedLiquid.itemName = "Potion"
 	bottle.containedLiquid.mutationAge += 1
 
 
@@ -230,21 +247,35 @@ static func unique_array(array : Array):
 	return newArr
 
 
-static func print_recipe(item : Item):
+static func print_recipe(item : Item, previousItemsPrinted = []):
+	if item in previousItemsPrinted: return
 	print_recipe_item(item)
+	previousItemsPrinted.append(item)
 	if item is Bottle and item.containedLiquid:
-		print_recipe(item.containedLiquid)
+		print_recipe(item.containedLiquid, previousItemsPrinted)
 	for prevItem in item.previousItemsInvolved:
-		print_recipe(prevItem)
+		print_recipe(prevItem, previousItemsPrinted)
 	
+	for itemAction in item.itemActionsApplied:
+		if itemAction.assocItem and !(itemAction.assocItem in previousItemsPrinted):
+			print_recipe(itemAction.assocItem, previousItemsPrinted)
 	
 static func print_recipe_item(item : Item):
-	print("Item: " + item.itemName)
+	print_rich("Item: " + item.display_name())
+	if item is Bottle:
+		if item.containedLiquid:
+			print_rich("Contained Liquid: " + item.containedLiquid.display_name())
+		else:
+			print_rich("No Contained Liquid!")
+		if item.bottledItems:
+			print("Bottled Items:")
+		for botItem in item.bottledItems:
+			print_rich("(" + str(botItem) + ", " + botItem.display_name() + ")")
 	print("ItemActions:")
 	for itemAction in item.itemActionsApplied:
-		print("(" + str(itemAction) + ", " + itemAction.actionMessage + ")")
+		print_rich("(" + str(itemAction) + ", " + itemAction.actionMessage + ")")
 	print("Previous Items")
 	for prevItem : Item in item.previousItemsInvolved:
-		print("(" + str(prevItem) + ", " + prevItem.itemName + ")")
+		print_rich("(" + str(prevItem) + ", " + prevItem.display_name() + ")")
 	print("Mutation Age:")
 	print(item.mutationAge)

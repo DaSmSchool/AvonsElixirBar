@@ -27,11 +27,14 @@ func _ready():
 	init_available_items()
 	print(availableItems)
 	generate_recipes()
+	JarLogic.update_shelf_jars()
 	
 
 func generate_recipes():
 	var recipeCount = currentDay * recipePerDay
-	for currRecipeItr in recipeCount - Recipe.recipeList.size():
+	var initSize = Recipe.recipeList.size()
+	for currRecipeItr in recipeCount - initSize:
+		print(availableItems)
 		var currRecipe = Recipe.generate_potion_recipe(floor(randf_range(0, 2.25)) as int)
 		Recipe.recipeList.append(currRecipe)
 		print("\n\nRecipe Printing time!\n\n")

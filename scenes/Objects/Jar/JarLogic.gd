@@ -2,19 +2,19 @@ extends Node
 class_name JarLogic
 
 
-var jarScene : PackedScene = load("res://scenes/Objects/Jar/Jar.tscn")
-var jarList : Array[Node] = []
+static var jarScene : PackedScene = preload("res://scenes/Objects/Jar/Jar.tscn")
+static var jarList : Array[Node] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	jarList = get_children()
-	update_shelf_jars()
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func update_shelf_jars():
+static func update_shelf_jars():
 	clear_jar_shelf()
 	print(GameStatus.availableItems)
 	for itr in GameStatus.availableItems.size():
@@ -29,7 +29,7 @@ func update_shelf_jars():
 		newJar.displayedItem.scale = Vector3(0.75, 0.75, 0.75)
 
 
-func clear_jar_shelf():
+static func clear_jar_shelf():
 	for jar in jarList:
 		if jar.get_children() != []:
 			for node : Node in jar.get_children():

@@ -134,13 +134,9 @@ _bundled = {
 
 [node name="Feather" node_paths=PackedStringArray("itemCollisionParent") instance=ExtResource("1_5lbty")]
 script = ExtResource("2_nc0vi")
-properties = null
 assocScene = SubResource("PackedScene_nty5i")
 itemName = "Feather"
 itemCollisionParent = NodePath("Feather /StaticBody3D")
-mutationAge = null
-boilTime = null
-mouseRay = null
 
 [node name="Feather " parent="." index="0"]
 surface_material_override/0 = ExtResource("3_kqtrx")

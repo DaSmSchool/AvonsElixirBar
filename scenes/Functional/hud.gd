@@ -117,7 +117,7 @@ func reset_item_action_panels():
 		child.queue_free()
 
 ## Returns a list of all [ItemAction] within an [Item]
-func get_item_actions_deep(item : Item):
+static func get_item_actions_deep(item : Item):
 	var itemActionList = []
 	var furtherItems = []
 	#item.itemActionsApplied
@@ -128,7 +128,7 @@ func get_item_actions_deep(item : Item):
 	return get_unique_list(itemActionList)
 
 
-func get_unique_list(getList : Array):
+static func get_unique_list(getList : Array):
 	var uniqueArray = []
 	for item in getList:
 		if !uniqueArray.has(item):
