@@ -59,6 +59,7 @@ static func convert_ground_item(item : Item, station : Station):
 	var groundItemAction : ItemAction = item.itemActionsApplied[item.itemActionsApplied.size()-1]
 	groundItemAction.assocItem = newPowder
 	newPowder.mutationAge = item.mutationAge
+	newPowder.previousItemsInvolved.append(item)
 	item.remove()
 	newPowder.associate_station(station)
 	return newPowder

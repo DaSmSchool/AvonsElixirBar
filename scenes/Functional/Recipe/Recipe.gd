@@ -7,12 +7,37 @@ static var recipeList : Array[Recipe] = []
 
 var finalItem : Item
 var difficulty
+var potionName : String
+var initIngredientsNeeded : Array
 
 enum RecipeDifficulty {
 	EASY,
 	MEDIUM,
 	HARD
 }
+
+static var potionNames = [
+	"Mana Potion", 
+	"Strength Potion", 
+	"Weakness Potion", 
+	"Intelligence Potion", 
+	"Invisibility Potion", 
+	"Healing Potion", 
+	"Poisonous Potion", 
+	"Love Potion", 
+	"Potion of Hatred",  
+	"Sleeping Potion", 
+	"Night Vision Potion", 
+	"Jumping Potion", 
+	"Speed Potion", 
+	"Potion of Sluggishness", 
+	"Luck Potion", 
+	"Potion of Misfortune",
+	"Happiness Potion", 
+	"Sadness Potion"
+]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -42,8 +67,12 @@ static func generate_potion_recipe(difficulty) -> Recipe:
 		baseIngredientAmnt = 4
 		maxMutationAge = 5
 	
+	finalRecipe.potionName = get_unused_name(potionNames)
+	if !finalRecipe.potionName:
+		finalRecipe.potionName = "I ran out of potion names"
 
 	baseIngredients = get_ingredients_needed(baseIngredientAmnt)
+	finalRecipe.initIngredientsNeeded = baseIngredients.duplicate()
 	
 	finalRecipe.finalItem = item_from_ingredients(baseIngredients, maxMutationAge)
 	
@@ -185,6 +214,19 @@ static func get_non_max_mut_array(ingredients : Array[Item], maxMutation):
 		itr += 1
 	return retArray
 
+
+static func get_unused_name(nameList : Array, usedNames = []):
+	if !nameList: return null
+	if !usedNames:
+		for recipe in recipeList:
+			usedNames.append(recipe.potionName)
+		
+	var chosenName = nameList.pick_random()
+	if chosenName in usedNames:
+		var regenList = nameList.duplicate()
+		regenList.erase(chosenName)
+		return get_unused_name(regenList, usedNames)
+	return chosenName
 
 static func get_item_with_property(items : Array[Item], property : int):
 	if items.is_empty(): return null

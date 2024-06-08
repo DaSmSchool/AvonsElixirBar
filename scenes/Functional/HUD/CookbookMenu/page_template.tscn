@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://c552h4k2i0bay"]
+
+[ext_resource type="Script" path="res://scenes/Functional/HUD/CookbookMenu/page_template.gd" id="1_6wt0b"]
+[ext_resource type="Theme" uid="uid://ceghqmeig43dn" path="res://scenes/Functional/HUD/CookbookMenu/cookbooktheme.tres" id="1_cknf8"]
+
+[node name="PageTemplate" type="Control"]
+layout_mode = 3
+anchor_left = -8.525
+anchor_top = -5.5
+anchor_right = -8.525
+anchor_bottom = -5.5
+offset_right = 40.0
+offset_bottom = 480.0
+script = ExtResource("1_6wt0b")
+
+[node name="RecipeTitle" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+offset_right = 338.0
+offset_bottom = 40.0
+theme = ExtResource("1_cknf8")
+bbcode_enabled = true
+text = "DefTitle"
+fit_content = true
+scroll_active = false
+
+[node name="IngredientsList" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+offset_top = 40.0
+offset_right = 338.0
+offset_bottom = 119.0
+theme = ExtResource("1_cknf8")
+bbcode_enabled = true
+text = "Ingredients:"
+fit_content = true
+scroll_active = false
+
+[node name="RecipeLines" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 119.0
+offset_right = 40.0
+offset_bottom = 159.0
+
+[node name="RecipeLine" type="RichTextLabel" parent="RecipeLines"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+offset_right = 338.0
+offset_bottom = 31.0
+theme = ExtResource("1_cknf8")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "DefTitle"
+fit_content = true
+scroll_active = false

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgju5vqgqvhl7"]
+[gd_scene load_steps=6 format=3 uid="uid://bgju5vqgqvhl7"]
 
 [ext_resource type="Script" path="res://scenes/Functional/HUD/CookbookMenu/cookbook_menu.gd" id="1_d304a"]
+[ext_resource type="Theme" uid="uid://ceghqmeig43dn" path="res://scenes/Functional/HUD/CookbookMenu/cookbooktheme.tres" id="1_dyn1d"]
 [ext_resource type="Texture2D" uid="uid://dh656faqrl4aa" path="res://data/sprites/mainGameUI/cookbookOverhead.png" id="2_5jhq4"]
+[ext_resource type="Texture2D" uid="uid://b5eiqg56rypp6" path="res://data/sprites/mainGameUI/PageFlipArrow.png" id="4_p18xr"]
+[ext_resource type="PackedScene" uid="uid://c552h4k2i0bay" path="res://scenes/Functional/HUD/CookbookMenu/page_template.tscn" id="5_lf7u6"]
 
 [node name="CookbookMenu" type="Control"]
 layout_mode = 3
@@ -10,9 +13,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_dyn1d")
 script = ExtResource("1_d304a")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="SubControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CookbookImg" type="TextureRect" parent="SubControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,3 +46,64 @@ offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_5jhq4")
+
+[node name="FlipLeft" type="TextureButton" parent="SubControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -15.5
+anchor_top = 9.5
+anchor_right = -15.5
+anchor_bottom = 9.5
+offset_left = 6.10352e-05
+offset_top = -221.0
+offset_right = 222.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture_normal = ExtResource("4_p18xr")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="FlipRight" type="TextureButton" parent="SubControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 16.5
+anchor_top = 9.5
+anchor_right = 16.5
+anchor_bottom = 9.5
+offset_left = -222.0
+offset_top = -222.0
+offset_right = -6.10352e-05
+grow_vertical = 0
+texture_normal = ExtResource("4_p18xr")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="LeftPageContents" type="Control" parent="SubControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = -8.525
+anchor_top = -5.5
+anchor_right = -8.525
+anchor_bottom = -5.5
+offset_left = 3.05176e-05
+offset_top = 1.52588e-05
+offset_right = 40.0
+offset_bottom = 480.0
+
+[node name="RightPageContents" type="Control" parent="SubControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 1.125
+anchor_top = -5.5
+anchor_right = 1.125
+anchor_bottom = -5.5
+offset_top = 1.52588e-05
+offset_right = 40.0
+offset_bottom = 480.0
+
+[node name="PageTemplate" parent="SubControl" instance=ExtResource("5_lf7u6")]
+unique_name_in_owner = true
+layout_mode = 1
