@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx2ucvr633psv"]
+[gd_scene load_steps=6 format=3 uid="uid://dx2ucvr633psv"]
 
 [ext_resource type="Script" path="res://scenes/Functional/hud.gd" id="1_v2gw6"]
 [ext_resource type="Texture2D" uid="uid://daa753xwn7oif" path="res://data/sprites/mainGameUI/cookbook.png" id="2_nw6ss"]
+[ext_resource type="Script" path="res://scenes/Functional/CookbookButton.gd" id="3_ntpe7"]
+[ext_resource type="PackedScene" uid="uid://bgju5vqgqvhl7" path="res://scenes/Functional/HUD/CookbookMenu/cookbook_menu.tscn" id="4_07l85"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0s3y"]
 bg_color = Color(0.105882, 0.105882, 0.203922, 0.815686)
@@ -98,12 +100,21 @@ offset_bottom = 384.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.25, 0.25)
+toggle_mode = true
 texture_normal = ExtResource("2_nw6ss")
+script = ExtResource("3_ntpe7")
 
 [node name="StationHudControl" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CookbookMenu" parent="." instance=ExtResource("4_07l85")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 720.0
+offset_bottom = 720.0
+
 [connection signal="pressed" from="ViewSwitchButtonControl/MoveLeftView" to="." method="_on_move_left_view_pressed"]
 [connection signal="pressed" from="ViewSwitchButtonControl/MoveRightView" to="." method="_on_move_right_view_pressed"]
+[connection signal="toggled" from="CookbookButton" to="CookbookButton" method="_on_toggled"]

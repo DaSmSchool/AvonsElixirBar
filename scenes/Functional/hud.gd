@@ -24,6 +24,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print("Pos: " + str(%CookbookMenu.position.y))
 	if oldRayDict != ViewCameraReference.raycast_result:
 		item_changed.emit(ViewCameraReference.raycast_result)
 		update_item_hover_hud()
@@ -163,3 +164,4 @@ func _on_move_left_view_pressed():
 
 func _on_move_right_view_pressed():
 	emit_signal("right_press")
+

@@ -28,6 +28,7 @@ func _ready():
 	print(availableItems)
 	generate_recipes()
 	JarLogic.update_shelf_jars()
+	CookbookMenu.generate_pages()
 	
 
 func generate_recipes():

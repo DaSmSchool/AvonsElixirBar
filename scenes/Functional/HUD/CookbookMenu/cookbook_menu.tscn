@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_dyn1d")
 script = ExtResource("1_d304a")
 metadata/_edit_lock_ = true
@@ -39,13 +40,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -512.0
-offset_right = 512.0
-offset_bottom = 512.0
+offset_left = -405.0
+offset_top = -305.0
+offset_right = 419.0
+offset_bottom = 291.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_5jhq4")
+stretch_mode = 3
 
 [node name="FlipLeft" type="TextureButton" parent="SubControl"]
 unique_name_in_owner = true
@@ -107,3 +109,6 @@ offset_bottom = 480.0
 [node name="PageTemplate" parent="SubControl" instance=ExtResource("5_lf7u6")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[connection signal="pressed" from="SubControl/FlipLeft" to="." method="_on_flip_left_pressed"]
+[connection signal="pressed" from="SubControl/FlipRight" to="." method="_on_flip_right_pressed"]
