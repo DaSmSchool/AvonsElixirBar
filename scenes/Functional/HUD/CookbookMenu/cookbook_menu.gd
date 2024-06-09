@@ -51,12 +51,17 @@ func switch_displayed_pages(pageChangeAmnt):
 	if currentPageSet*2 < storedPages.size():
 		var copyLeftPage = storedPages[(currentPageSet*2)]
 		for copyChild in copyLeftPage.get_children():
-			%LeftPageContents.add_child(copyChild)
+			var dupeChild = copyChild.duplicate()
+			%LeftPageContents.add_child(dupeChild)
+			if copyChild == copyLeftPage.get_children()[copyLeftPage.get_children().size()-1]:
+				for instr in copyChild.get_children():
+					var instrDupe = instr.duplicate()
+					dupeChild.add_child(instrDupe)
 			
 	if (currentPageSet*2)+1 < storedPages.size():
 		var copyRightPage = storedPages[(currentPageSet*2)+1]
 		for copyChild in copyRightPage.get_children():
-			%RightPageContents.add_child(copyChild)
+			%RightPageContents.add_child(copyChild.duplicate())
 
 
 static func shift_page(newRecipe : bool):

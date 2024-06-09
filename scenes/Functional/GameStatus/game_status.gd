@@ -29,6 +29,7 @@ func _ready():
 	generate_recipes()
 	JarLogic.update_shelf_jars()
 	CookbookMenu.generate_pages()
+	Hud.hud.get_node("CookbookMenu").switch_displayed_pages(0)
 	
 
 func generate_recipes():

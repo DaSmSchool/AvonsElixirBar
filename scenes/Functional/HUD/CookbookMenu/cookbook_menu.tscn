@@ -16,7 +16,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_dyn1d")
 script = ExtResource("1_d304a")
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="SubControl" type="Control" parent="."]
@@ -109,6 +108,10 @@ offset_bottom = 480.0
 [node name="PageTemplate" parent="SubControl" instance=ExtResource("5_lf7u6")]
 unique_name_in_owner = true
 layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = -169.88
+offset_bottom = -110.4
 
 [connection signal="pressed" from="SubControl/FlipLeft" to="." method="_on_flip_left_pressed"]
 [connection signal="pressed" from="SubControl/FlipRight" to="." method="_on_flip_right_pressed"]
