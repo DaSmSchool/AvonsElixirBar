@@ -21,12 +21,13 @@ var iterableScenes : Array[PackedScene] = [
 var itemAmnt = 3
 
 var currentDay = 1
-var recipePerDay = 2
+var recipePerDay = 4
 
 func _ready():
 	init_available_items()
 	print(availableItems)
 	generate_recipes()
+	Item.holdingItem = null
 	JarLogic.update_shelf_jars()
 	CookbookMenu.generate_pages()
 	Hud.hud.get_node("CookbookMenu").switch_displayed_pages(0)

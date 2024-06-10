@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 	bookTransitionProgress += delta
 	
 	bookTransitionProgress = min(PI/2, bookTransitionProgress)
-	print(bookTransitionProgress)
 	
 	if inBook:
 		%CookbookMenu.position.y = lerpf(%CookbookMenu.position.y, 0, sin(bookTransitionProgress))
@@ -24,3 +23,4 @@ func _process(delta: float) -> void:
 func _on_toggled(toggled_on: bool) -> void:
 	inBook = toggled_on
 	bookTransitionProgress = 0
+	%CookbookMenu.switch_displayed_pages(0)
