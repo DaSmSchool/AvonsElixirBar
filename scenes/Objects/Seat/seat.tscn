@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgwvfv8xt628y"]
+[gd_scene load_steps=6 format=3 uid="uid://cgwvfv8xt628y"]
 
 [ext_resource type="PackedScene" uid="uid://bu4ncxtjhy8st" path="res://data/blends/Objects/Seat/seat.blend" id="1_x87mq"]
 [ext_resource type="Material" uid="uid://cwak8h4rgpoix" path="res://materials/seatwood.material" id="2_d2g2j"]
+[ext_resource type="Script" path="res://scenes/Objects/Seat/Seat.gd" id="2_dh7at"]
 [ext_resource type="PackedScene" uid="uid://myyeagfbtaeb" path="res://scenes/Modules/MouseInteractableComponent.tscn" id="2_vo7ny"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu00i"]
@@ -12,7 +13,9 @@ albedo_color = Color(0.207843, 0.207843, 0.207843, 1)
 roughness = 0.0
 rim_enabled = true
 
-[node name="Seat" instance=ExtResource("1_x87mq")]
+[node name="Seat" node_paths=PackedStringArray("seatSpot") instance=ExtResource("1_x87mq")]
+script = ExtResource("2_dh7at")
+seatSpot = NodePath("SeatPosition")
 
 [node name="Seat " parent="." index="0"]
 surface_material_override/0 = ExtResource("2_d2g2j")

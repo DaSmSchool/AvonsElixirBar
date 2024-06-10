@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2dndps1rjvde"]
+[gd_scene load_steps=14 format=3 uid="uid://c2dndps1rjvde"]
 
 [ext_resource type="PackedScene" uid="uid://c8bsix4p1vn25" path="res://data/blends/Environments/tavern.blend" id="1_1ak4i"]
 [ext_resource type="PackedScene" uid="uid://vloa7nwhjpmb" path="res://scenes/Objects/Cauldron/cauldron.tscn" id="2_do6pd"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dx2ucvr633psv" path="res://scenes/Functional/hud.tscn" id="5_ljkx7"]
 [ext_resource type="PackedScene" uid="uid://djievddjlpffp" path="res://scenes/Objects/Grinder/Grinder.tscn" id="5_ntxo5"]
 [ext_resource type="Script" path="res://scenes/Objects/Jar/JarLogic.gd" id="5_uhfn0"]
+[ext_resource type="PackedScene" uid="uid://dys0ukw64uyy7" path="res://scenes/Objects/Person/person.tscn" id="9_yf4st"]
 [ext_resource type="PackedScene" uid="uid://llm8dakwt74l" path="res://scenes/Objects/Oasis/oasis.tscn" id="11_c7nud"]
 [ext_resource type="PackedScene" uid="uid://ooskpd35pgtl" path="res://scenes/Objects/Bottle/Bottle.tscn" id="12_vu1g5"]
 
@@ -121,19 +122,27 @@ AssocView = NodePath("../../CameraViewSpots/StationSpots/GrinderView")
 [node name="oasis" parent="Stations" instance=ExtResource("11_c7nud")]
 transform = Transform3D(-0.998643, 0, -0.0520746, 0, 1, 0, 0.0520746, 0, -0.998643, 20.3077, 3.3387, -6.71923)
 
-[node name="Seat1" parent="." instance=ExtResource("3_bx3d4")]
+[node name="People" type="Node" parent="."]
+
+[node name="person" parent="People" node_paths=PackedStringArray("assocSeat") instance=ExtResource("9_yf4st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.29142, -0.160821, 10.4827)
+assocSeat = NodePath("../../Seats/Seat3")
+
+[node name="Seats" type="Node" parent="."]
+
+[node name="Seat1" parent="Seats" instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -10.9509)
 
-[node name="Seat2" parent="." instance=ExtResource("3_bx3d4")]
+[node name="Seat2" parent="Seats" instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -6.95091)
 
-[node name="Seat3" parent="." instance=ExtResource("3_bx3d4")]
+[node name="Seat3" parent="Seats" instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, -2.95091)
 
-[node name="Seat4" parent="." instance=ExtResource("3_bx3d4")]
+[node name="Seat4" parent="Seats" instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 1.04909)
 
-[node name="Seat5" parent="." instance=ExtResource("3_bx3d4")]
+[node name="Seat5" parent="Seats" instance=ExtResource("3_bx3d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33082, 0, 5.04909)
 
 [node name="CameraViewSpots" type="Node" parent="."]

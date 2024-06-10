@@ -115,5 +115,3 @@ offset_bottom = -110.4
 
 [connection signal="pressed" from="SubControl/FlipLeft" to="." method="_on_flip_left_pressed"]
 [connection signal="pressed" from="SubControl/FlipRight" to="." method="_on_flip_right_pressed"]
-
-[editable path="SubControl/PageTemplate"]

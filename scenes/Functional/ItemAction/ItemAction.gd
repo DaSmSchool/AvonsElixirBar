@@ -9,7 +9,9 @@ enum Action {
 	ENCHANT,
 	BOIL,
 	COMBINE,
-	MIX_LIQUID
+	MIX_LIQUID,
+	BOTTLE_ADD,
+	ADD_WATER_TO_BOTTLE
 }
 
 ## Set to true if this action hasn't actually been performed. 

@@ -328,3 +328,51 @@ static func print_recipe_item(item : Item):
 		print_rich("(" + str(prevItem) + ", " + prevItem.display_name() + ")")
 	print("Mutation Age:")
 	print(item.mutationAge)
+
+
+static func verify_recipe(item : Item, recipe : Recipe):
+	var score = 0
+	score += verify_item_scan(item, recipe.finalItem)
+	return score
+
+static func verify_item_scan(item : Item, compareItem : Item, verifiedItems = []):
+	if item == null or item in verifiedItems: return 0
+	var score = 0
+	verifiedItems.append(item)
+	
+	if item is Bottle:
+		var result = verify_item_scan(item.containedLiquid, compareItem, verifiedItems)
+		if result == null:
+			return null
+		else: score += result
+		
+		var bottled : Array = item.bottledItems.duplicate().sort()
+		var bottledCheck : Array = compareItem.bottledItems.duplicate().sort()
+		if bottled != bottledCheck:
+			return null
+	
+	for itemAction in item.itemActionsApplied:
+		if !itemAction in compareItem.itemActionsApplied:
+			return null
+	for itemAction in compareItem.itemActionsApplied:
+		if !itemAction in item.itemActionsApplied:
+			return null
+	for itemAction in compareItem.itemActionsApplied:
+		var result = verify_item_scan(itemAction.assocItem, compareItem, verifiedItems)
+		if result == null:
+			return null
+		else: score += result
+		
+	for prevItem in item.previousItemsInvolved:
+		if !prevItem in compareItem.previousItemsInvolved:
+			return null
+	for prevItem in compareItem.previousItemsInvolved:
+		if !prevItem in item.previousItemsInvolved:
+			return null
+	for prevItem in compareItem.previousItemsInvolved:
+		var result = verify_item_scan(prevItem, compareItem, verifiedItems)
+		if result == null:
+			return null
+		else: score += result
+	
+	return 5

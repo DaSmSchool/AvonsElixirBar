@@ -142,6 +142,10 @@ func holding_item_logic():
 		
 		if Input.is_action_just_pressed("action"):
 			var hitNode = mouseRay["collider"].get_parent().get_parent()
+			
+			if mouseRay["collider"].get_parent() is Person:
+				mouseRay["collider"].get_parent().person_clicked(self)
+			
 			if hitNode is Item:
 				item_interact(hitNode)
 			elif hitNode is Station:

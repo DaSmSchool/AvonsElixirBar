@@ -8,18 +8,19 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func add_line(line: String):
-	if %RecipeLines.get_children().size() > 0:
-		var lastRecipeLine = %RecipeLines.get_children().back()
-		if not lastRecipeLine.text:
-			lastRecipeLine.get_parent().remove_child(lastRecipeLine)
-
-	var newRecipeLine = RichTextLabel.new()
-	newRecipeLine.text = line
-	%RecipeLines.add_child(newRecipeLine)
-	
-	await Hud.hud.get_tree().process_frame
-	
-	format_line(newRecipeLine)
+	#if %RecipeLines.get_children().size() > 0:
+		#var lastRecipeLine = %RecipeLines.get_children().back()
+		#if not lastRecipeLine.text:
+			#lastRecipeLine.get_parent().remove_child(lastRecipeLine)
+#
+	#var newRecipeLine = RichTextLabel.new()
+	#newRecipeLine.text = line
+	#%RecipeLines.add_child(newRecipeLine)
+	#
+	#await Hud.hud.get_tree().process_frame
+	#
+	#format_line(newRecipeLine)
+	pass
 
 func can_add_to_page(rtl: RichTextLabel) -> bool:
 	print(%RecipeTitle.get_content_height())

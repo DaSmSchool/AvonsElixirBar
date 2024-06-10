@@ -33,9 +33,9 @@ unique_name_in_owner = true
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
-offset_top = 40.0
+offset_top = 90.0
 offset_right = 338.0
-offset_bottom = 119.0
+offset_bottom = 169.0
 theme = ExtResource("1_cknf8")
 bbcode_enabled = true
 text = "Ingredients:"
@@ -45,9 +45,8 @@ scroll_active = false
 [node name="RecipeLines" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_top = 119.0
 offset_right = 40.0
-offset_bottom = 159.0
+offset_bottom = 40.0
 
 [node name="RecipeLine" type="RichTextLabel" parent="RecipeLines"]
 unique_name_in_owner = true
