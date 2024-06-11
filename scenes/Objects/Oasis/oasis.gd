@@ -18,7 +18,7 @@ static func add_water(item : Item):
 	var prodWater = Liquid.new()
 	item.containedLiquid = prodWater
 	
-	if item.bottledItems:
+	if !item.bottledItems:
 		prodWater.itemName = "Water"
 		prodWater.itemColor = Color.DODGER_BLUE
 		item.update_item_color()

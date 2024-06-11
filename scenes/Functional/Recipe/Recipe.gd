@@ -331,9 +331,10 @@ static func print_recipe_item(item : Item):
 
 
 static func verify_recipe(item : Item, recipe : Recipe):
-	var score = 0
-	score += verify_item_scan(item, recipe.finalItem)
-	return score
+	var score = verify_item_scan(item, recipe.finalItem)
+	if score:
+		return "pass"
+	return "fail"
 
 static func verify_item_scan(item : Item, compareItem : Item, verifiedItems = []):
 	if item == null or item in verifiedItems: return 0
@@ -341,38 +342,85 @@ static func verify_item_scan(item : Item, compareItem : Item, verifiedItems = []
 	verifiedItems.append(item)
 	
 	if item is Bottle:
-		var result = verify_item_scan(item.containedLiquid, compareItem, verifiedItems)
+		var result = verify_item_scan(item.containedLiquid, compareItem.containedLiquid, verifiedItems)
 		if result == null:
 			return null
 		else: score += result
 		
-		var bottled : Array = item.bottledItems.duplicate().sort()
-		var bottledCheck : Array = compareItem.bottledItems.duplicate().sort()
-		if bottled != bottledCheck:
-			return null
+		
+		if item.bottledItems.size() != compareItem.bottledItems.size(): return null
+		var itr1 = 0
+		var itr2 = 0
+		var iAArray : Array[ItemAction] = item.bottledItems.duplicate()
+		var cIAARRAY : Array[ItemAction] = compareItem.bottledItems.duplicate()
+		while iAArray.size() and itr2 < cIAARRAY.size():
+			if iAArray[itr1].itemColor.is_equal_approx(cIAARRAY[itr2].itemColor):
+				iAArray.remove_at(itr1)
+				cIAARRAY.remove_at(itr2)
+				itr2 = 0
+			else:
+				itr2+=1
+		if iAArray.size(): return null
+		else:
+			for itemAction in compareItem.itemActionsApplied:
+				var ind = compareItem.itemActionsApplied.find(itemAction)
+				var resultBottled = verify_item_scan(itemAction.assocItem, compareItem.itemActionsApplied[ind].assocItem, verifiedItems)
+				if resultBottled == null:
+					return null
+				else: score += result
+		
+		#var bottled : Array = item.bottledItems.duplicate().sort()
+		#var bottledCheck : Array = compareItem.bottledItems.duplicate().sort()
+		#if bottled != bottledCheck:
+			#return null
 	
-	for itemAction in item.itemActionsApplied:
-		if !itemAction in compareItem.itemActionsApplied:
-			return null
-	for itemAction in compareItem.itemActionsApplied:
-		if !itemAction in item.itemActionsApplied:
-			return null
-	for itemAction in compareItem.itemActionsApplied:
-		var result = verify_item_scan(itemAction.assocItem, compareItem, verifiedItems)
-		if result == null:
-			return null
-		else: score += result
+	if compareItem.itemActionsApplied.size() != item.itemActionsApplied.size(): return null
+	var itr1 = 0
+	var itr2 = 0
+	var iAArray : Array[ItemAction] = item.itemActionsApplied.duplicate()
+	var cIAARRAY : Array[ItemAction] = compareItem.itemActionsApplied.duplicate()
+	while iAArray.size() and itr2 < cIAARRAY.size():
+		if iAArray[itr1].actionType == cIAARRAY[itr2].actionType:
+			iAArray.remove_at(itr1)
+			cIAARRAY.remove_at(itr2)
+			itr2 = 0
+		else:
+			itr2+=1
+	if iAArray.size(): return null
+	else:
+		for itemAction in compareItem.itemActionsApplied:
+			var ind = compareItem.itemActionsApplied.find(itemAction)
+			var result = verify_item_scan(itemAction.assocItem, compareItem.itemActionsApplied[ind].assocItem, verifiedItems)
+			if result == null:
+				return null
+			else: score += result
 		
-	for prevItem in item.previousItemsInvolved:
-		if !prevItem in compareItem.previousItemsInvolved:
-			return null
-	for prevItem in compareItem.previousItemsInvolved:
-		if !prevItem in item.previousItemsInvolved:
-			return null
-	for prevItem in compareItem.previousItemsInvolved:
-		var result = verify_item_scan(prevItem, compareItem, verifiedItems)
-		if result == null:
-			return null
-		else: score += result
+	#for prevItem in item.previousItemsInvolved:
+		#if !prevItem in compareItem.previousItemsInvolved:
+			#return null
+	#for prevItem in compareItem.previousItemsInvolved:
+		#if !prevItem in item.previousItemsInvolved:
+			#return null
+	
+	if compareItem.previousItemsInvolved.size() != item.previousItemsInvolved.size(): return null
+	itr1 = 0
+	itr2 = 0
+	var pIArray : Array[Item] = item.previousItemsInvolved.duplicate()
+	var cPIARRAY : Array[Item] = compareItem.previousItemsInvolved.duplicate()
+	while pIArray.size() and itr2 < cPIARRAY.size():
+		if pIArray[itr1].itemColor.is_equal_approx(cPIARRAY[itr2].itemColor):
+			pIArray.remove_at(itr1)
+			cPIARRAY.remove_at(itr2)
+			itr2 = 0
+		else:
+			itr2+=1
+	if pIArray.size(): return null
+	else:
+		for prevItem in compareItem.previousItemsInvolved:
+			var ind = compareItem.previousItemsInvolved.find(prevItem)
+			var result = verify_item_scan(prevItem, compareItem.previousItemsInvolved[ind], verifiedItems)
+			if result == null:
+				return null
+			else: score += result
 	
 	return 5

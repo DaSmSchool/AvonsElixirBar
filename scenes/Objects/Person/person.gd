@@ -24,4 +24,4 @@ func person_clicked(item : Item):
 	if Item.holdingItem is Bottle:
 		if Item.holdingItem.containedLiquid:
 			var score = Recipe.verify_recipe(Item.holdingItem, askingRecipe)
-			
+			print(score)
