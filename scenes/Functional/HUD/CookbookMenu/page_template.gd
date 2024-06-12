@@ -47,9 +47,10 @@ func format_line(rtl: RichTextLabel):
 		rtl.show()
 		
 func format_recipe_header(recipe: Recipe):
-	var ingList = %IngredientsList
-	var recTitle = %RecipeTitle
-	var recLines = %RecipeLines
-	
-	ingList.position.y = recTitle.position.y + recTitle.size.y
-	recLines.position.y = ingList.position.y + ingList.size.y
+	#var ingList = %IngredientsList
+	#var recTitle = %RecipeTitle
+	#var recLines = %RecipeLines
+	#
+	#ingList.position.y = recTitle.position.y + recTitle.size.y
+	#recLines.position.y = ingList.position.y + ingList.size.y
+	pass

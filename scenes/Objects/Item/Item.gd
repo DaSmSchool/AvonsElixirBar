@@ -176,7 +176,7 @@ func on_just_left_clicked():
 	var colNode : CollisionShape3D = itemCollisionParent.get_node("CollisionShape3D")
 	if !mouseRay.is_empty():
 		if (mouseRay["collider"] == itemCollisionParent) and !holdingItem:
-			colNode.set_deferred("disabled", true)
+			#colNode.set_deferred("disabled", true)
 			if (holdingItem == null):
 				holdingItem = self
 				if stationIn != null:
